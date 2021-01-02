@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+	<meta name="keywords" content="HTML, CSS, JavaScript, PHP, MySql">
+	<meta name="author" content="Carlos Alexandre">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta charset="utf-8">
+
+	<!-- Bootstrap Css -->
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+	<!-- Font Awesome -->
+	<script src="https://kit.fontawesome.com/90bfac5e12.js" crossorigin="anonymous"></script>
+
+	<!-- Estilo Css -->
+	<?php 
+		if (isset($this->view->css)) {
+			foreach ($this->view->css as $indice => $estilo) {
+				echo "<link rel='stylesheet' type='text/css' href='/css/". $estilo .".css'>";
+			}
+		}
+	?>
+
+	<title><?= isset($this->view->title) ? $this->view->title : 'Miniframework'; ?></title>
+	<link rel="icon" href="">
+
+	<!-- Jquery -->
+	<script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+
+	<!-- Bootstrap JS -->
+	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+</head>
+<body>
+
+	<?= $this->content() ?>
+
+	<?php
+		if (isset($this->view->js)) {
+			foreach ($this->view->js as $indice => $script) {
+				echo "<script src='/js/". $script .".js'></script>";
+			}
+		}
+	?>
+</body>
+</html>
