@@ -1,0 +1,114 @@
+body {
+  font-size: 16px;
+  font-family: Arial; }
+
+header {
+  background: #645951;
+  padding: 15px;
+  color: white; }
+  header #navegation-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: row; }
+  header a:hover {
+    text-decoration: none; }
+  header .brand {
+    color: white; }
+    header .brand .logo-receipt {
+      font-size: 1.6rem;
+      margin-right: 5px; }
+    header .brand .logo-text {
+      font-size: 1.6rem;
+      display: inline;
+      font-family: 'Libre Baskerville', serif; }
+  header .content-user-menu {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    gap: 0.8rem;
+    font-size: 0.9rem; }
+    header .content-user-menu #menu {
+      margin-right: 2rem; }
+      header .content-user-menu #menu .list-no {
+        list-style: none;
+        padding: 0;
+        margin: 0; }
+      header .content-user-menu #menu .menu-group {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: row;
+        gap: 0.5rem; }
+      header .content-user-menu #menu .item-menu {
+        overflow-x: hidden;
+        display: block;
+        padding: 0.1rem;
+        margin: 0.2rem;
+        position: relative; }
+        header .content-user-menu #menu .item-menu a {
+          margin: 0.4rem;
+          color: #ffffffed;
+          font-weight: 500;
+          letter-spacing: 0.7px; }
+        header .content-user-menu #menu .item-menu a:hover {
+          color: white; }
+        header .content-user-menu #menu .item-menu a:hover:before,
+        header .content-user-menu #menu .item-menu a.active:before {
+          content: '';
+          display: block;
+          background: #62d914;
+          height: 1px;
+          width: 100%;
+          position: absolute;
+          left: 0;
+          bottom: 0;
+          animation: Line-Link-Menu 0.35s ease forwards; }
+        header .content-user-menu #menu .item-menu a.active:before {
+          background: #4bff33; }
+    header .content-user-menu #menu-user {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: row;
+      gap: 1rem; }
+      header .content-user-menu #menu-user a {
+        border-radius: 20px;
+        padding: 6px 10px;
+        width: 135px;
+        margin: 0;
+        color: #ffffffed;
+        font-size: 0.9rem; }
+      header .content-user-menu #menu-user a:hover {
+        color: white;
+        -webkit-transition: all .5s ease;
+        -moz-transition: all .5s ease;
+        -ms-transition: all .5s ease;
+        -o-transition: all .5s ease;
+        transition: all .5s ease; }
+      header .content-user-menu #menu-user .cadastro {
+        background: #0b07ae; }
+      header .content-user-menu #menu-user .cadastro:hover {
+        background: #0c0a57; }
+      header .content-user-menu #menu-user .login {
+        border: 1px solid #D6B610; }
+      header .content-user-menu #menu-user .login:hover {
+        background: #D6B610; }
+      header .content-user-menu #menu-user .content-user {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: row;
+        background: #282824;
+        border-radius: 25px;
+        cursor: pointer;
+        padding: 10px 20px;
+        gap: 7px; }
+        header .content-user-menu #menu-user .content-user .icon-user {
+          font-size: 1.2rem; }
+        header .content-user-menu #menu-user .content-user .icon-down {
+          position: relative;
+          left: 3px; }
+
+/*# sourceMappingURL=estilo.css.map */

@@ -11,5 +11,11 @@ class IndexController extends Action {
 		$this->render('index');
 	}
 	
+	public function dashboard() {
+		$this->view->css = [];
+		$this->view->js = [];
+
+		$this->render('dashboard');
+	}
 }
 ?>

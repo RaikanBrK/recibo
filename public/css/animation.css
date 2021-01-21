@@ -1,0 +1,7 @@
+@keyframes Line-Link-Menu {
+  0% {
+    transform: translateX(-100%); }
+  100% {
+    transform: translateX(0%); } }
+
+/*# sourceMappingURL=animation.css.map */

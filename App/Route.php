@@ -10,6 +10,12 @@ class Route extends Bootstrap {
 			'action' => 'index'
 		);
 
+		$routes['dashboard'] = array(
+			'route' => '/dashboard',
+			'controller' => 'indexController',
+			'action' => 'dashboard'
+		);
+
 		$this->setRoutes($routes);
 	}
 }

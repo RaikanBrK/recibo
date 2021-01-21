@@ -13,7 +13,9 @@
 	<script src="https://kit.fontawesome.com/90bfac5e12.js" crossorigin="anonymous"></script>
 
 	<!-- Estilo Css -->
-	<?php 
+	<link rel="stylesheet" href="/css/animation.css">
+	<link rel="stylesheet" href="/css/estilo.css">
+	<?php
 		if (isset($this->view->css)) {
 			foreach ($this->view->css as $indice => $estilo) {
 				echo "<link rel='stylesheet' type='text/css' href='/css/". $estilo .".css'>";
@@ -21,7 +23,7 @@
 		}
 	?>
 
-	<title><?= isset($this->view->title) ? $this->view->title : 'Miniframework'; ?></title>
+	<title>Recibo - <?= isset($this->view->title) ? $this->view->title : 'Miniframework'; ?></title>
 	<link rel="icon" href="">
 
 	<!-- Jquery -->
@@ -33,9 +35,55 @@
 
 </head>
 <body>
+	<?php $valid = true; ?>
+
+	<header>
+		<nav class="container-fluid" id="navegation-header">
+			<a href="/" class="brand">
+				<i class="fas fa-receipt logo-receipt"></i>
+				<h3 class="logo-text">Recibo Online</h3>
+			</a>
+
+			<div class="content-user-menu">
+				<div id="menu">
+					<ul class="list-no menu-group">
+						<li class="item-menu">
+							<a href="/dashboard" class="active">Dashboard</a>
+						</li>
+
+						<li class="item-menu">
+							<a href="/dashboard">Modelos de Recibo</a>
+						</li>
+
+						<?php if($valid) { ?>
+							<li class="item-menu">
+								<a href="/dashboard">Ultimos Recibos</a>
+							</li>
+						<?php } ?>
+					</ul>
+				</div>
+
+				<div id="menu-user">
+
+					<?php
+						if ($valid) {
+					?>
+						<div class="content-user" id="userContentHeader">
+							<i class="fas fa-user icon-user"></i>
+							<i class="fas fa-sort-down icon-down"></i>
+						</div>
+					<?php } else { ?>
+						<a href="/cadastro" class="btn cadastro">Cadastrar-se</a>
+						<a href="/login" class="btn login">Logar-se</a>
+					<?php } ?>
+				</div>
+			</div>
+		</nav>
+	</header>
 
 	<?= $this->content() ?>
 
+	<script src="/js/script.js"></script>
 	<?php
 		if (isset($this->view->js)) {
 			foreach ($this->view->js as $indice => $script) {
