@@ -5,7 +5,9 @@ body {
 header {
   background: #645951;
   padding: 15px;
-  color: white; }
+  color: white;
+  position: sticky;
+  top: 0; }
   header #navegation-header {
     display: flex;
     justify-content: space-between;
@@ -29,12 +31,12 @@ header {
     flex-direction: row;
     gap: 0.8rem;
     font-size: 0.9rem; }
+    header .content-user-menu .list-no {
+      list-style: none;
+      padding: 0;
+      margin: 0; }
     header .content-user-menu #menu {
       margin-right: 2rem; }
-      header .content-user-menu #menu .list-no {
-        list-style: none;
-        padding: 0;
-        margin: 0; }
       header .content-user-menu #menu .menu-group {
         display: flex;
         justify-content: center;
@@ -72,15 +74,16 @@ header {
       justify-content: center;
       align-items: center;
       flex-direction: row;
-      gap: 1rem; }
-      header .content-user-menu #menu-user a {
+      gap: 1rem;
+      position: relative; }
+      header .content-user-menu #menu-user a.btn {
         border-radius: 20px;
         padding: 6px 10px;
         width: 135px;
         margin: 0;
         color: #ffffffed;
         font-size: 0.9rem; }
-      header .content-user-menu #menu-user a:hover {
+      header .content-user-menu #menu-user a.btn:hover {
         color: white;
         -webkit-transition: all .5s ease;
         -moz-transition: all .5s ease;
@@ -110,5 +113,29 @@ header {
         header .content-user-menu #menu-user .content-user .icon-down {
           position: relative;
           left: 3px; }
+      header .content-user-menu #menu-user .content-suport-user {
+        display: block;
+        position: absolute;
+        top: 2rem;
+        right: 0; }
+        header .content-user-menu #menu-user .content-suport-user .menu-suport {
+          margin-top: 15px;
+          background: #330232;
+          min-width: 250px; }
+          header .content-user-menu #menu-user .content-suport-user .menu-suport #linksSuport {
+            display: flex;
+            justify-content: center;
+            align-items: start;
+            flex-direction: column; }
+            header .content-user-menu #menu-user .content-suport-user .menu-suport #linksSuport li {
+              width: 100%; }
+              header .content-user-menu #menu-user .content-suport-user .menu-suport #linksSuport li a {
+                color: #72ea13ed;
+                display: block;
+                letter-spacing: 0.8px;
+                padding: 15px 20px;
+                font-size: 0.9rem; }
+              header .content-user-menu #menu-user .content-suport-user .menu-suport #linksSuport li a:hover {
+                background: #00bcd46e; }
 
 /*# sourceMappingURL=estilo.css.map */
