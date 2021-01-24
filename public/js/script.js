@@ -15,6 +15,10 @@ $(document).ready(() => {
 		) {
 			$('.content-suport-user').slideUp('slow');
 		}
-	})
+	});
+
+	$('#hamburguer').click(function() {
+		$(this).toggleClass('burgerActive');
+	});
 
 });

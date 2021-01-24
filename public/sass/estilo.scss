@@ -8,13 +8,130 @@ body {
 
 header {
 	background: $header-bg;
-	padding: 5px;
+	padding: 5px 1rem;
 	color: $header-color;
 	position: sticky;
 	top: 0;
+	font-size: 0.9rem;
+	display: grid;
+	grid-template-areas: "nav nav user";
+    grid-template-columns: 1fr auto;
 
 	#navegation-header {
 		@include flex(space-between);
+		padding: 0;
+		margin: 0;
+		grid-area: nav;
+	}
+
+	#menu-user {
+		@include flex();
+		gap: 1rem;
+		grid-area: user;
+		position: relative;
+
+		a.btn {
+			border-radius: 20px;
+			padding: 6px 10px;
+			width: 135px;
+			margin: 0;
+			color: $link-color;
+			font-size: 0.9rem;
+		}
+
+		a.btn:hover {
+			color: white;
+
+			-webkit-transition: all .5s ease;
+			   -moz-transition: all .5s ease;
+			    -ms-transition: all .5s ease;
+			     -o-transition: all .5s ease;
+			        transition: all .5s ease;
+		}
+
+		.cadastro {
+			background: #0b07ae;
+		}
+
+		.cadastro:hover {
+			background: #0c0a57;
+		}
+
+		.login {
+			border: 1px solid #D6B610;
+		}
+
+		.login:hover {
+			background: #D6B610;
+		}
+
+		.content-user {
+		    @include flex();
+
+		    border-radius: 25px;
+		    cursor: pointer;
+		    padding: 7px 10px;
+		    gap: 7px;
+
+			.icon-user {
+				font-size: 1.6rem;
+			}
+
+			.icon-down {
+				position: relative;
+				left: 3px;
+			}
+
+			#img-user {
+				width: 25px;
+				height: 25px;
+				border-radius: 50%;
+				object-fit: cover;
+			}
+		}
+
+		.content-suport-user {
+			z-index: 5;
+			display: none;
+			position: absolute;
+			top: 2rem;
+			right: 0;
+
+			.menu-suport {
+				margin-top: 15px;
+				background: #330232;
+				min-width: 250px;
+
+				#linksSuport {
+					@include flex(center, start, column);
+
+					li {
+						width: 100%;
+
+						a {
+							color: $link-color;
+							display: block;
+							letter-spacing: 0.8px;
+							padding: 12px 15px;
+							font-size: 0.9rem;
+						}
+
+						a:hover {
+							color: $link-color-hover;
+						    background: #8D07F6;
+						}
+
+						a:focus {
+							background: #b04cff;
+						}
+
+						a:active {
+							background: #6009a4;
+						}
+					}
+				}
+			}
+		}
 	}
 
 	a:hover {
@@ -22,6 +139,7 @@ header {
 	}
 
 	.brand {
+		grid-area: logo;
 		color: #eae9e9;
 
 		.logo-receipt {
@@ -40,155 +158,121 @@ header {
 		color: white;
 	}
 
-	.content-user-menu {
-		@include flex();
-		gap: 0.8rem;
-		font-size: 0.9rem;
+	.list-no {
+		list-style: none;
+		padding: 0;
+		margin: 0;
+	}
 
-		.list-no {
-			list-style: none;
-			padding: 0;
-			margin: 0;
-		}
+	#menu {
+		margin-right: 2rem;
 
-		#menu {
-			margin-right: 2rem;
-
-			.menu-group {
-				@include flex();
-				gap: 0.5rem;
-			}
-
-			.item-menu {
-				// overflow-x: hidden;
-				display: block;
-				padding: 0.1rem;
-    			margin: 0.2rem;
-				position: relative;
-
-				a {
-				    margin: 0.4rem;
-				    color: $link-color;
-				    font-weight: 500;
-				    letter-spacing: 0.7px;
-				}
-
-				a:hover {
-					color: $link-color-hover;
-				}
-
-				a.active {
-					color: white;
-				}
-			}
-		}
-
-		#menu-user {
+		.menu-group {
 			@include flex();
-			gap: 1rem;
+			gap: 0.5rem;
+		}
+
+		.item-menu {
+			// overflow-x: hidden;
+			display: block;
+			padding: 0.1rem;
+			margin: 0.2rem;
 			position: relative;
 
-			a.btn {
-				border-radius: 20px;
-				padding: 6px 10px;
-				width: 135px;
-				margin: 0;
-				color: $link-color;
-				font-size: 0.9rem;
+			a {
+			    margin: 0.4rem;
+			    color: $link-color;
+			    font-weight: 500;
+			    letter-spacing: 0.7px;
 			}
 
-			a.btn:hover {
+			a:hover {
+				color: $link-color-hover;
+			}
+
+			a.active {
 				color: white;
-
-				-webkit-transition: all .5s ease;
-				   -moz-transition: all .5s ease;
-				    -ms-transition: all .5s ease;
-				     -o-transition: all .5s ease;
-				        transition: all .5s ease;
-			}
-
-			.cadastro {
-				background: #0b07ae;
-			}
-
-			.cadastro:hover {
-				background: #0c0a57;
-			}
-
-			.login {
-				border: 1px solid #D6B610;
-			}
-
-			.login:hover {
-				background: #D6B610;
-			}
-
-			.content-user {
-			    @include flex();
-
-			    border-radius: 25px;
-			    cursor: pointer;
-			    padding: 7px 10px;
-			    gap: 7px;
-
-				.icon-user {
-					font-size: 1.6rem;
-				}
-
-				.icon-down {
-					position: relative;
-					left: 3px;
-				}
-
-				#img-user {
-					width: 25px;
-					height: 25px;
-					border-radius: 50%;
-					object-fit: cover;
-				}
-			}
-
-			.content-suport-user {
-				display: none;
-				position: absolute;
-				top: 2rem;
-				right: 0;
-
-				.menu-suport {
-					margin-top: 15px;
-					background: #330232;
-					min-width: 250px;
-
-					#linksSuport {
-						@include flex(center, start, column);
-
-						li {
-							width: 100%;
-
-							a {
-								color: $link-color;
-								display: block;
-								letter-spacing: 0.8px;
-								padding: 12px 15px;
-								font-size: 0.9rem;
-							}
-
-							a:hover {
-								color: $link-color-hover;
-							    background: #8D07F6;
-							}
-
-							a:focus {
-								background: #b04cff;
-							}
-
-							a:active {
-								background: #6009a4;
-							}
-						}
-					}
-				}
 			}
 		}
+		grid-area: menu;
+	}
+
+	#hamburguer {
+		min-width: 38px;
+		height: 30px;
+		// background: #333;
+		border: 1px solid #218bae75;
+
+		border-radius: 10%;
+
+		position: relative;
+	}
+
+	#hamburguer:after {
+		content: "";
+
+		position: absolute;
+		top: 30%;
+		left: 15%;
+
+		width: 70%;
+		height: 10%;
+
+		border-radius: 20px;
+		background: white;
+
+		-webkit-transition: all 1s ease;
+		   -moz-transition: all 1s ease;
+		    -ms-transition: all 1s ease;
+		     -o-transition: all 1s ease;
+		        transition: all 1s ease;
+	}
+
+	#hamburguer:before {
+		content: "";
+
+		position: absolute;
+		top: 60%;
+		left: 45%;
+
+		width: 40%;
+		height: 10%;
+
+		border-radius: 20px;
+		background: white;
+
+		-webkit-transition: all 1s ease;
+		   -moz-transition: all 1s ease;
+		    -ms-transition: all 1s ease;
+		     -o-transition: all 1s ease;
+		        transition: all 1s ease;
+	}
+
+	#hamburguer.burgerActive:after {
+		-webkit-transform: rotate(225deg);
+		   -moz-transform: rotate(225deg);
+		    -ms-transform: rotate(225deg);
+		     -o-transform: rotate(225deg);
+		        transform: rotate(225deg);
+
+		width: 70%;
+		height: 10%;
+
+        top: 45%;
+		left: 15%;
+	}
+
+	#hamburguer.burgerActive:before {
+		-webkit-transform: rotate(-405deg);
+		   -moz-transform: rotate(-405deg);
+		    -ms-transform: rotate(-405deg);
+		     -o-transform: rotate(-405deg);
+		        transform: rotate(-405deg);
+
+        width: 70%;
+		height: 10%;
+
+        top: 45%;
+		left: 15%;
 	}
 }

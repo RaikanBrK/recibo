@@ -4,18 +4,105 @@ body {
 
 header {
   background: #1d1d1f;
-  padding: 5px;
+  padding: 5px 1rem;
   color: white;
   position: sticky;
-  top: 0; }
+  top: 0;
+  font-size: 0.9rem;
+  display: grid;
+  grid-template-areas: "nav nav user";
+  grid-template-columns: 1fr auto; }
   header #navegation-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    flex-direction: row; }
+    flex-direction: row;
+    padding: 0;
+    margin: 0;
+    grid-area: nav; }
+  header #menu-user {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    gap: 1rem;
+    grid-area: user;
+    position: relative; }
+    header #menu-user a.btn {
+      border-radius: 20px;
+      padding: 6px 10px;
+      width: 135px;
+      margin: 0;
+      color: #ccd3d3;
+      font-size: 0.9rem; }
+    header #menu-user a.btn:hover {
+      color: white;
+      -webkit-transition: all .5s ease;
+      -moz-transition: all .5s ease;
+      -ms-transition: all .5s ease;
+      -o-transition: all .5s ease;
+      transition: all .5s ease; }
+    header #menu-user .cadastro {
+      background: #0b07ae; }
+    header #menu-user .cadastro:hover {
+      background: #0c0a57; }
+    header #menu-user .login {
+      border: 1px solid #D6B610; }
+    header #menu-user .login:hover {
+      background: #D6B610; }
+    header #menu-user .content-user {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: row;
+      border-radius: 25px;
+      cursor: pointer;
+      padding: 7px 10px;
+      gap: 7px; }
+      header #menu-user .content-user .icon-user {
+        font-size: 1.6rem; }
+      header #menu-user .content-user .icon-down {
+        position: relative;
+        left: 3px; }
+      header #menu-user .content-user #img-user {
+        width: 25px;
+        height: 25px;
+        border-radius: 50%;
+        object-fit: cover; }
+    header #menu-user .content-suport-user {
+      z-index: 5;
+      display: none;
+      position: absolute;
+      top: 2rem;
+      right: 0; }
+      header #menu-user .content-suport-user .menu-suport {
+        margin-top: 15px;
+        background: #330232;
+        min-width: 250px; }
+        header #menu-user .content-suport-user .menu-suport #linksSuport {
+          display: flex;
+          justify-content: center;
+          align-items: start;
+          flex-direction: column; }
+          header #menu-user .content-suport-user .menu-suport #linksSuport li {
+            width: 100%; }
+            header #menu-user .content-suport-user .menu-suport #linksSuport li a {
+              color: #ccd3d3;
+              display: block;
+              letter-spacing: 0.8px;
+              padding: 12px 15px;
+              font-size: 0.9rem; }
+            header #menu-user .content-suport-user .menu-suport #linksSuport li a:hover {
+              color: #fffffff2;
+              background: #8D07F6; }
+            header #menu-user .content-suport-user .menu-suport #linksSuport li a:focus {
+              background: #b04cff; }
+            header #menu-user .content-suport-user .menu-suport #linksSuport li a:active {
+              background: #6009a4; }
   header a:hover {
     text-decoration: none; }
   header .brand {
+    grid-area: logo;
     color: #eae9e9; }
     header .brand .logo-receipt {
       font-size: 1.6rem;
@@ -26,115 +113,86 @@ header {
       font-family: 'Libre Baskerville', serif; }
   header .brand:hover {
     color: white; }
-  header .content-user-menu {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: row;
-    gap: 0.8rem;
-    font-size: 0.9rem; }
-    header .content-user-menu .list-no {
-      list-style: none;
-      padding: 0;
-      margin: 0; }
-    header .content-user-menu #menu {
-      margin-right: 2rem; }
-      header .content-user-menu #menu .menu-group {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        flex-direction: row;
-        gap: 0.5rem; }
-      header .content-user-menu #menu .item-menu {
-        display: block;
-        padding: 0.1rem;
-        margin: 0.2rem;
-        position: relative; }
-        header .content-user-menu #menu .item-menu a {
-          margin: 0.4rem;
-          color: #ccd3d3;
-          font-weight: 500;
-          letter-spacing: 0.7px; }
-        header .content-user-menu #menu .item-menu a:hover {
-          color: #fffffff2; }
-        header .content-user-menu #menu .item-menu a.active {
-          color: white; }
-    header .content-user-menu #menu-user {
+  header .list-no {
+    list-style: none;
+    padding: 0;
+    margin: 0; }
+  header #menu {
+    margin-right: 2rem;
+    grid-area: menu; }
+    header #menu .menu-group {
       display: flex;
       justify-content: center;
       align-items: center;
       flex-direction: row;
-      gap: 1rem;
+      gap: 0.5rem; }
+    header #menu .item-menu {
+      display: block;
+      padding: 0.1rem;
+      margin: 0.2rem;
       position: relative; }
-      header .content-user-menu #menu-user a.btn {
-        border-radius: 20px;
-        padding: 6px 10px;
-        width: 135px;
-        margin: 0;
+      header #menu .item-menu a {
+        margin: 0.4rem;
         color: #ccd3d3;
-        font-size: 0.9rem; }
-      header .content-user-menu #menu-user a.btn:hover {
-        color: white;
-        -webkit-transition: all .5s ease;
-        -moz-transition: all .5s ease;
-        -ms-transition: all .5s ease;
-        -o-transition: all .5s ease;
-        transition: all .5s ease; }
-      header .content-user-menu #menu-user .cadastro {
-        background: #0b07ae; }
-      header .content-user-menu #menu-user .cadastro:hover {
-        background: #0c0a57; }
-      header .content-user-menu #menu-user .login {
-        border: 1px solid #D6B610; }
-      header .content-user-menu #menu-user .login:hover {
-        background: #D6B610; }
-      header .content-user-menu #menu-user .content-user {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        flex-direction: row;
-        border-radius: 25px;
-        cursor: pointer;
-        padding: 7px 10px;
-        gap: 7px; }
-        header .content-user-menu #menu-user .content-user .icon-user {
-          font-size: 1.6rem; }
-        header .content-user-menu #menu-user .content-user .icon-down {
-          position: relative;
-          left: 3px; }
-        header .content-user-menu #menu-user .content-user #img-user {
-          width: 25px;
-          height: 25px;
-          border-radius: 50%;
-          object-fit: cover; }
-      header .content-user-menu #menu-user .content-suport-user {
-        display: none;
-        position: absolute;
-        top: 2rem;
-        right: 0; }
-        header .content-user-menu #menu-user .content-suport-user .menu-suport {
-          margin-top: 15px;
-          background: #330232;
-          min-width: 250px; }
-          header .content-user-menu #menu-user .content-suport-user .menu-suport #linksSuport {
-            display: flex;
-            justify-content: center;
-            align-items: start;
-            flex-direction: column; }
-            header .content-user-menu #menu-user .content-suport-user .menu-suport #linksSuport li {
-              width: 100%; }
-              header .content-user-menu #menu-user .content-suport-user .menu-suport #linksSuport li a {
-                color: #ccd3d3;
-                display: block;
-                letter-spacing: 0.8px;
-                padding: 12px 15px;
-                font-size: 0.9rem; }
-              header .content-user-menu #menu-user .content-suport-user .menu-suport #linksSuport li a:hover {
-                color: #fffffff2;
-                background: #8D07F6; }
-              header .content-user-menu #menu-user .content-suport-user .menu-suport #linksSuport li a:focus {
-                background: #b04cff; }
-              header .content-user-menu #menu-user .content-suport-user .menu-suport #linksSuport li a:active {
-                background: #6009a4; }
+        font-weight: 500;
+        letter-spacing: 0.7px; }
+      header #menu .item-menu a:hover {
+        color: #fffffff2; }
+      header #menu .item-menu a.active {
+        color: white; }
+  header #hamburguer {
+    min-width: 38px;
+    height: 30px;
+    border: 1px solid #218bae75;
+    border-radius: 10%;
+    position: relative; }
+  header #hamburguer:after {
+    content: "";
+    position: absolute;
+    top: 30%;
+    left: 15%;
+    width: 70%;
+    height: 10%;
+    border-radius: 20px;
+    background: white;
+    -webkit-transition: all 1s ease;
+    -moz-transition: all 1s ease;
+    -ms-transition: all 1s ease;
+    -o-transition: all 1s ease;
+    transition: all 1s ease; }
+  header #hamburguer:before {
+    content: "";
+    position: absolute;
+    top: 60%;
+    left: 45%;
+    width: 40%;
+    height: 10%;
+    border-radius: 20px;
+    background: white;
+    -webkit-transition: all 1s ease;
+    -moz-transition: all 1s ease;
+    -ms-transition: all 1s ease;
+    -o-transition: all 1s ease;
+    transition: all 1s ease; }
+  header #hamburguer.burgerActive:after {
+    -webkit-transform: rotate(225deg);
+    -moz-transform: rotate(225deg);
+    -ms-transform: rotate(225deg);
+    -o-transform: rotate(225deg);
+    transform: rotate(225deg);
+    width: 70%;
+    height: 10%;
+    top: 45%;
+    left: 15%; }
+  header #hamburguer.burgerActive:before {
+    -webkit-transform: rotate(-405deg);
+    -moz-transform: rotate(-405deg);
+    -ms-transform: rotate(-405deg);
+    -o-transform: rotate(-405deg);
+    transform: rotate(-405deg);
+    width: 70%;
+    height: 10%;
+    top: 45%;
+    left: 15%; }
 
 /*# sourceMappingURL=estilo.css.map */
