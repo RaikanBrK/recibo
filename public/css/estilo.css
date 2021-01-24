@@ -3,8 +3,8 @@ body {
   font-family: Arial; }
 
 header {
-  background: #645951;
-  padding: 15px;
+  background: #1d1d1f;
+  padding: 5px;
   color: white;
   position: sticky;
   top: 0; }
@@ -16,7 +16,7 @@ header {
   header a:hover {
     text-decoration: none; }
   header .brand {
-    color: white; }
+    color: #eae9e9; }
     header .brand .logo-receipt {
       font-size: 1.6rem;
       margin-right: 5px; }
@@ -24,6 +24,8 @@ header {
       font-size: 1.6rem;
       display: inline;
       font-family: 'Libre Baskerville', serif; }
+  header .brand:hover {
+    color: white; }
   header .content-user-menu {
     display: flex;
     justify-content: center;
@@ -44,31 +46,19 @@ header {
         flex-direction: row;
         gap: 0.5rem; }
       header .content-user-menu #menu .item-menu {
-        overflow-x: hidden;
         display: block;
         padding: 0.1rem;
         margin: 0.2rem;
         position: relative; }
         header .content-user-menu #menu .item-menu a {
           margin: 0.4rem;
-          color: #ffffffed;
+          color: #ccd3d3;
           font-weight: 500;
           letter-spacing: 0.7px; }
         header .content-user-menu #menu .item-menu a:hover {
+          color: #fffffff2; }
+        header .content-user-menu #menu .item-menu a.active {
           color: white; }
-        header .content-user-menu #menu .item-menu a:hover:before,
-        header .content-user-menu #menu .item-menu a.active:before {
-          content: '';
-          display: block;
-          background: #62d914;
-          height: 1px;
-          width: 100%;
-          position: absolute;
-          left: 0;
-          bottom: 0;
-          animation: Line-Link-Menu 0.35s ease forwards; }
-        header .content-user-menu #menu .item-menu a.active:before {
-          background: #4bff33; }
     header .content-user-menu #menu-user {
       display: flex;
       justify-content: center;
@@ -81,7 +71,7 @@ header {
         padding: 6px 10px;
         width: 135px;
         margin: 0;
-        color: #ffffffed;
+        color: #ccd3d3;
         font-size: 0.9rem; }
       header .content-user-menu #menu-user a.btn:hover {
         color: white;
@@ -103,18 +93,22 @@ header {
         justify-content: center;
         align-items: center;
         flex-direction: row;
-        background: #282824;
         border-radius: 25px;
         cursor: pointer;
-        padding: 10px 20px;
+        padding: 7px 10px;
         gap: 7px; }
         header .content-user-menu #menu-user .content-user .icon-user {
-          font-size: 1.2rem; }
+          font-size: 1.6rem; }
         header .content-user-menu #menu-user .content-user .icon-down {
           position: relative;
           left: 3px; }
+        header .content-user-menu #menu-user .content-user #img-user {
+          width: 25px;
+          height: 25px;
+          border-radius: 50%;
+          object-fit: cover; }
       header .content-user-menu #menu-user .content-suport-user {
-        display: block;
+        display: none;
         position: absolute;
         top: 2rem;
         right: 0; }
@@ -130,12 +124,17 @@ header {
             header .content-user-menu #menu-user .content-suport-user .menu-suport #linksSuport li {
               width: 100%; }
               header .content-user-menu #menu-user .content-suport-user .menu-suport #linksSuport li a {
-                color: #72ea13ed;
+                color: #ccd3d3;
                 display: block;
                 letter-spacing: 0.8px;
-                padding: 15px 20px;
+                padding: 12px 15px;
                 font-size: 0.9rem; }
               header .content-user-menu #menu-user .content-suport-user .menu-suport #linksSuport li a:hover {
-                background: #00bcd46e; }
+                color: #fffffff2;
+                background: #8D07F6; }
+              header .content-user-menu #menu-user .content-suport-user .menu-suport #linksSuport li a:focus {
+                background: #b04cff; }
+              header .content-user-menu #menu-user .content-suport-user .menu-suport #linksSuport li a:active {
+                background: #6009a4; }
 
 /*# sourceMappingURL=estilo.css.map */

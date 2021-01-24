@@ -1,7 +1,8 @@
-$header-bg-padrao: #645951;
+$header-bg-padrao: #1d1d1f;
 $header-color-padrao: white;
 
-$header-link-color: #ffffffed;
+$header-link-color: #ccd3d3;
+$header-link-color-hover: #fffffff2;
 
 // Background do Header;
 $header-bg: $header-bg-padrao;
@@ -11,3 +12,6 @@ $header-color: $header-color-padrao;
 
 // Color do link do Header;
 $link-color: $header-link-color;
+
+// Color do link do Header no estado hover;
+$link-color-hover: $header-link-color-hover;

@@ -39,20 +39,20 @@
 
 	<header>
 		<nav class="container-fluid" id="navegation-header">
-			<a href="/" class="brand">
-				<i class="fas fa-receipt logo-receipt"></i>
-				<h3 class="logo-text">Recibo Online</h3>
+			<a href="/dashboard" class="brand">
+				<i class="fas fa-receipt logo-receipt" title="Ícone recibo"></i>
+				<h3 class="logo-text" title="Recibo online">Recibo Online</h3>
 			</a>
 
 			<div class="content-user-menu">
 				<div id="menu">
 					<ul class="list-no menu-group">
 						<li class="item-menu">
-							<a href="/dashboard" class="active">Dashboard</a>
+							<a href="/dashboard" class="active" title="Dashboard">Dashboard</a>
 						</li>
 
 						<li class="item-menu">
-							<a href="/dashboard">Modelos de Recibo</a>
+							<a href="/modelos_recibo" title="Todos os modelos de recibo">Modelos de Recibo</a>
 						</li>
 
 						<?php if($valid) { ?>
@@ -69,7 +69,8 @@
 						if ($valid) {
 					?>
 						<div class="content-user" id="userContentHeader">
-							<i class="fas fa-user icon-user"></i>
+							<!-- <i class="fas fa-user-circle icon-user" title="Ícone do usuário"></i> -->
+							<img src="/img/taylor.jpg" id="img-user">
 							<i class="fas fa-sort-down icon-down"></i>
 						</div>
 
@@ -77,19 +78,34 @@
 							<div class="menu-suport">
 								<ul class="list-no" id="linksSuport">
 									<li>
-										<a href="">Configurações</a>
+										<a href="/">
+											<i class="fas fa-cog"></i>
+											Minha Conta
+										</a>
 									</li>
 									<li>
-										<a href="">Minha Conta</a>
+										<a href="/">
+											<i class="fas fa-star"></i>
+											Meus Favoritos
+										</a>
 									</li>
 									<li>
-										<a href="">Meus Favoritos</a>
+										<a href="/">
+											<i class="fas fa-archive"></i>
+											Minha Coleção
+										</a>
 									</li>
 									<li>
-										<a href="">Minhas Coleções</a>
+										<a href="/">
+											<i class="fas fa-sliders-h"></i>
+											Configurações
+										</a>
 									</li>
 									<li>
-										<a href="">Adquirir o Premiew</a>
+										<a href="/">
+											<i class="fas fa-trophy"></i>
+											Adquirir o Premiew
+										</a>
 									</li>
 								</ul>
 							</div>

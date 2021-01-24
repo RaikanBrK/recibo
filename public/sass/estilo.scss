@@ -8,7 +8,7 @@ body {
 
 header {
 	background: $header-bg;
-	padding: 15px;
+	padding: 5px;
 	color: $header-color;
 	position: sticky;
 	top: 0;
@@ -22,7 +22,7 @@ header {
 	}
 
 	.brand {
-		color: white;
+		color: #eae9e9;
 
 		.logo-receipt {
 			font-size: 1.6rem;
@@ -34,6 +34,10 @@ header {
 			display: inline;
 			font-family: 'Libre Baskerville', serif;
 		}
+	}
+
+	.brand:hover {
+		color: white;
 	}
 
 	.content-user-menu {
@@ -56,7 +60,7 @@ header {
 			}
 
 			.item-menu {
-				overflow-x: hidden;
+				// overflow-x: hidden;
 				display: block;
 				padding: 0.1rem;
     			margin: 0.2rem;
@@ -70,24 +74,11 @@ header {
 				}
 
 				a:hover {
+					color: $link-color-hover;
+				}
+
+				a.active {
 					color: white;
-				}
-
-				a:hover:before,
-				a.active:before {
-					content: '';
-					display: block;
-					background: #62d914;
-					height: 1px;
-					width: 100%;
-					position: absolute;
-					left: 0;
-					bottom: 0;
-					animation: Line-Link-Menu 0.35s ease forwards;
-				}
-
-				a.active:before {
-					background: #4bff33;
 				}
 			}
 		}
@@ -135,25 +126,30 @@ header {
 			.content-user {
 			    @include flex();
 
-				background: #282824;
 			    border-radius: 25px;
 			    cursor: pointer;
-			    padding: 10px 20px;
+			    padding: 7px 10px;
 			    gap: 7px;
 
 				.icon-user {
-					font-size: 1.2rem;
+					font-size: 1.6rem;
 				}
 
 				.icon-down {
 					position: relative;
 					left: 3px;
 				}
+
+				#img-user {
+					width: 25px;
+					height: 25px;
+					border-radius: 50%;
+					object-fit: cover;
+				}
 			}
 
 			.content-suport-user {
-				// display: none;
-				display: block;
+				display: none;
 				position: absolute;
 				top: 2rem;
 				right: 0;
@@ -164,22 +160,30 @@ header {
 					min-width: 250px;
 
 					#linksSuport {
-						// padding: 10px;
 						@include flex(center, start, column);
 
 						li {
 							width: 100%;
 
 							a {
-								color: #72ea13ed;
+								color: $link-color;
 								display: block;
 								letter-spacing: 0.8px;
-								padding: 15px 20px;
+								padding: 12px 15px;
 								font-size: 0.9rem;
 							}
 
 							a:hover {
-								background: #00bcd46e;
+								color: $link-color-hover;
+							    background: #8D07F6;
+							}
+
+							a:focus {
+								background: #b04cff;
+							}
+
+							a:active {
+								background: #6009a4;
 							}
 						}
 					}
