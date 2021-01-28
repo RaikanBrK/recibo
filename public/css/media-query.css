@@ -39,6 +39,10 @@
     left: 0;
     background: linear-gradient(to right, #369c00, #ecec0e61);
   }
+
+  .icon-select {
+    color: yellow;
+  }
 }
 
 /*# sourceMappingURL=media-query.css.map */

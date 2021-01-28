@@ -110,7 +110,7 @@ header {
 		bottom: -6.5px;
 	}
 
-	#checeBurguer:checked ~ label .hamburguer {
+	.hamburguer.burguerActive {
 		-webkit-transform: rotate(45deg);
 		   -moz-transform: rotate(45deg);
 		    -ms-transform: rotate(45deg);
@@ -118,7 +118,7 @@ header {
 		        transform: rotate(45deg);
 	}
 
-	#checeBurguer:checked ~ label .hamburguer:before {
+	.hamburguer.burguerActive:before {
 		top: 0;
 		-webkit-transform: rotate(90deg);
 		   -moz-transform: rotate(90deg);
@@ -127,7 +127,7 @@ header {
 		        transform: rotate(90deg);
 	}
 
-	#checeBurguer:checked ~ label .hamburguer:after {
+	.hamburguer.burguerActive:after {
 		bottom: 0;
 		-webkit-transform: rotate(90deg);
 		   -moz-transform: rotate(90deg);
