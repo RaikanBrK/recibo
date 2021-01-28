@@ -1,6 +1,14 @@
 @import '_variaveis.scss';
 @import '_mixin.scss';
 
+*,
+*:before,
+*:after {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
 body {
 	font-size: 16px;
 	font-family: Arial;
@@ -16,6 +24,10 @@ header {
 	display: grid;
 	grid-template-areas: "nav nav user";
     grid-template-columns: 1fr auto;
+
+    label {
+    	margin-bottom: 0px;
+    }
 
 	#navegation-header {
 		@include flex(space-between);
@@ -194,85 +206,82 @@ header {
 				color: white;
 			}
 		}
-		grid-area: menu;
 	}
 
 	#hamburguer {
-		min-width: 38px;
+		background: #fff;
+		width: 35px;
 		height: 30px;
-		// background: #333;
-		border: 1px solid #218bae75;
+		padding: 0;
+		margin: 0;
+		border-radius: 8px;
+	}
 
-		border-radius: 10%;
+	.hamburguer {
+		display: block;
+		background: black;
+		width: 70%;
+		height: 2px;
+
+		top: 13.5px;
+		left: 4.45px;
 
 		position: relative;
+		-webkit-transition: all 0.5s ease-in-out;
+		-moz-transition: all 0.5s ease-in-out;
+		-ms-transition: all 0.5s ease-in-out;
+		-o-transition: all 0.5s ease-in-out;
+		transition: all 0.5s ease-in-out;
 	}
 
-	#hamburguer:after {
+	.hamburguer:before,
+	.hamburguer:after {
 		content: "";
 
-		position: absolute;
-		top: 30%;
-		left: 15%;
-
-		width: 70%;
-		height: 10%;
-
-		border-radius: 20px;
-		background: white;
-
-		-webkit-transition: all 1s ease;
-		   -moz-transition: all 1s ease;
-		    -ms-transition: all 1s ease;
-		     -o-transition: all 1s ease;
-		        transition: all 1s ease;
-	}
-
-	#hamburguer:before {
-		content: "";
+		background: black;
+		display: block;
+		width: 100%;
+		height: 100%;
 
 		position: absolute;
-		top: 60%;
-		left: 45%;
-
-		width: 40%;
-		height: 10%;
-
-		border-radius: 20px;
-		background: white;
-
-		-webkit-transition: all 1s ease;
-		   -moz-transition: all 1s ease;
-		    -ms-transition: all 1s ease;
-		     -o-transition: all 1s ease;
-		        transition: all 1s ease;
+		-webkit-transition: all 0.5s ease-in-out;
+		   -moz-transition: all 0.5s ease-in-out;
+		    -ms-transition: all 0.5s ease-in-out;
+		     -o-transition: all 0.5s ease-in-out;
+		        transition: all 0.5s ease-in-out;
 	}
 
-	#hamburguer.burgerActive:after {
-		-webkit-transform: rotate(225deg);
-		   -moz-transform: rotate(225deg);
-		    -ms-transform: rotate(225deg);
-		     -o-transform: rotate(225deg);
-		        transform: rotate(225deg);
-
-		width: 70%;
-		height: 10%;
-
-        top: 45%;
-		left: 15%;
+	.hamburguer:before {
+		top: -6.5px;
 	}
 
-	#hamburguer.burgerActive:before {
-		-webkit-transform: rotate(-405deg);
-		   -moz-transform: rotate(-405deg);
-		    -ms-transform: rotate(-405deg);
-		     -o-transform: rotate(-405deg);
-		        transform: rotate(-405deg);
+	.hamburguer:after {
+		bottom: -6.5px;
+	}
 
-        width: 70%;
-		height: 10%;
+	#checeBurguer:checked ~ label .hamburguer {
+		-webkit-transform: rotate(45deg);
+		   -moz-transform: rotate(45deg);
+		    -ms-transform: rotate(45deg);
+		     -o-transform: rotate(45deg);
+		        transform: rotate(45deg);
+	}
 
-        top: 45%;
-		left: 15%;
+	#checeBurguer:checked ~ label .hamburguer:before {
+		top: 0;
+		-webkit-transform: rotate(90deg);
+		   -moz-transform: rotate(90deg);
+		    -ms-transform: rotate(90deg);
+		     -o-transform: rotate(90deg);
+		        transform: rotate(90deg);
+	}
+
+	#checeBurguer:checked ~ label .hamburguer:after {
+		bottom: 0;
+		-webkit-transform: rotate(90deg);
+		   -moz-transform: rotate(90deg);
+		    -ms-transform: rotate(90deg);
+		     -o-transform: rotate(90deg);
+		        transform: rotate(90deg);
 	}
 }
