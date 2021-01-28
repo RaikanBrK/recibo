@@ -20,9 +20,7 @@
 		if (isset($this->view->css)) {
 			foreach ($this->view->css as $indice => $estilo) {
 				$fileStyle = '/css/'. $estilo .'.css';
-				if (file_exists($fileStyle)) {
-					echo "<link rel='stylesheet' type='text/css' href=' " . $fileStyle . " '>";
-				}
+				echo "<link rel='stylesheet' type='text/css' href='". $fileStyle ."'>";
 			}
 		}
 	?>
@@ -150,9 +148,7 @@
 		if (isset($this->view->js)) {
 			foreach ($this->view->js as $indice => $script) {
 				$fileScript = '/js/'. $script .'.js';
-				if (file_exists($fileScript)) {
-					echo "<script src=' " .$fileScript. " '></script>";
-				}
+				echo "<script src='".$fileScript."'></script>";
 			}
 		}
 	?>
