@@ -6,13 +6,25 @@ class Route extends Bootstrap {
 	protected function initRoutes() {
 		$routes['home'] = array(
 			'route' => '/',
-			'controller' => 'indexController',
+			'controller' => 'IndexController',
 			'action' => 'index'
 		);
 
 		$routes['dashboard'] = array(
 			'route' => '/dashboard',
-			'controller' => 'indexController',
+			'controller' => 'IndexController',
+			'action' => 'dashboard'
+		);
+
+		$routes['modelos_recibo'] = array(
+			'route' => '/modelos_recibo',
+			'controller' => 'IndexController',
+			'action' => 'dashboard'
+		);
+
+		$routes['recibos'] = array(
+			'route' => '/recibos',
+			'controller' => 'IndexController',
 			'action' => 'dashboard'
 		);
 

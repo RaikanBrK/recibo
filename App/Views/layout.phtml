@@ -15,12 +15,14 @@
 	<!-- Estilo Css -->
 	<link rel="stylesheet" href="/css/animation.css">
 	<link rel="stylesheet" href="/css/estilo.css">
-	<!-- <link rel="stylesheet" href="/css/estilo1.css"> -->
 	<link rel="stylesheet" href="/css/media-query.css">
 	<?php
 		if (isset($this->view->css)) {
 			foreach ($this->view->css as $indice => $estilo) {
-				echo "<link rel='stylesheet' type='text/css' href='/css/". $estilo .".css'>";
+				$fileStyle = '/css/'. $estilo .'.css';
+				if (file_exists($fileStyle)) {
+					echo "<link rel='stylesheet' type='text/css' href=' " . $fileStyle . " '>";
+				}
 			}
 		}
 	?>
@@ -41,15 +43,13 @@
 
 	<header>
 		<nav class="navbar navbar-expand-md">
-			<a href="/" class="brand">
+			<a href="/dashboard" class="brand">
 				<i class="fas fa-receipt logo-receipt" title="Ícone recibo"></i>
 				<h3 class="logo-text" title="Recibo online">Recibo Online</h3>
 			</a>
 
 			<div id="menu-user" class="order-md-1 mr-2 mr-md-0">
-				<?php
-				if ($valid) {
-					?>
+				<?php if ($valid) { ?>
 					<div class="content-user" id="userContentHeader">
 						<!-- <i class="fas fa-user-circle icon-user" title="Ícone do usuário"></i> -->
 						<img src="/img/taylor.jpg" id="img-user">
@@ -98,28 +98,46 @@
 				<?php } ?>
 			</div>
 
-			<input type="checkbox" id="checeBurguer" class="d-none">
-			<label for="checeBurguer">
-				<div class="navbar-toggler ml-auto" id="hamburguer" type="button" data-toggle="collapse" data-target="#menu" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-					<span class="hamburguer"></span>
-		  		</div>
-			</label>
+			<div class="navbar-toggler" id="hamburguer" type="button" data-toggle="collapse" data-target="#menu" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="hamburguer"></span>
+	  		</div>
 
 			<div id="menu" class="collapse navbar-collapse">
 				<ul class="list-no menu-group ml-auto navbar-nav">
-					<li class="item-menu">
-						<a href="/dashboard" class=" active" title="Dashboard">Dashboard</a>
-					</li>
+					<?php
+						$itensMenu = [
+							[
+								"dir" => "/dashboard",
+								"text" => "Dashboard",
+							],
+							[
+								"dir" => "/modelos_recibo",
+								"text" => "Modelos de Recibo",
+								"title" => "Todos os modelos do recibo",
+							],
+							[
+								"dir" => "/recibos",
+								"text" => "Últimos Recibos",
+								"login" => true,
+							],
+						];
 
-					<li class="item-menu ">
-						<a href="/modelos_recibo" class="" title="Todos os modelos de recibo">Modelos de Recibo</a>
-					</li>
-
-					<?php if($valid) { ?>
-						<li class="item-menu ">
-							<a href="/dashboard" class="">Ultimos Recibos</a>
-						</li>
-					<?php } ?>
+						$url = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
+						foreach ($itensMenu as $item) {
+							if ($valid || !isset($item['login'])) {
+				 			?>
+							    <li class="item-menu">
+									<a
+										href="<?= $item['dir'] ?>"
+										title="<?= $item['title'] ?? $item['text'] ?>"
+										class="<?= $url == $item['dir'] ? 'active' : '' ?>"
+									>
+									<?= $item['text'] ?>
+									</a>
+								</li>
+							<?php }
+						}
+					?>
 				</ul>
 			</div>
 		</nav>
@@ -131,7 +149,10 @@
 	<?php
 		if (isset($this->view->js)) {
 			foreach ($this->view->js as $indice => $script) {
-				echo "<script src='/js/". $script .".js'></script>";
+				$fileScript = '/js/'. $script .'.js';
+				if (file_exists($fileScript)) {
+					echo "<script src=' " .$fileScript. " '></script>";
+				}
 			}
 		}
 	?>
