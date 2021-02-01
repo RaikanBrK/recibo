@@ -1,3 +1,23 @@
+@media (min-width: 576px) {
+  .container {
+    max-width: 620px;
+  }
+}
+@media (min-width: 768px) {
+  .container {
+    max-width: 750px;
+  }
+}
+@media (min-width: 992px) {
+  .container {
+    max-width: 970px;
+  }
+}
+@media (min-width: 1200px) {
+  .container {
+    max-width: 1290px;
+  }
+}
 @media (max-width: 767.98px) {
   header {
     padding: 0 0.4rem;

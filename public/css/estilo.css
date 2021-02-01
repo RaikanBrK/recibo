@@ -11,6 +11,30 @@ body {
   font-family: Arial;
 }
 
+.list-no {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.container {
+  width: 100%;
+  min-height: 40vh;
+  background: white;
+  padding: 10px;
+  margin-top: 2.3rem;
+}
+.container .title-container {
+  font-size: 1.2rem;
+  color: black;
+  font-weight: 500;
+  margin-bottom: 0.7rem;
+}
+
+.content {
+  padding: 10px 15px;
+}
+
 header {
   background: #1d1d1f;
   padding: 0 1rem;
@@ -18,6 +42,7 @@ header {
   position: sticky;
   top: 0;
   font-size: 0.9rem;
+  z-index: 10;
   /* Classes mais gerais */
   /* Logo */
   /* Hamburguer */
@@ -26,11 +51,6 @@ header {
 }
 header label {
   margin-bottom: 0px;
-}
-header .list-no {
-  list-style: none;
-  padding: 0;
-  margin: 0;
 }
 header a:hover {
   text-decoration: none;
@@ -65,7 +85,7 @@ header .hamburguer {
   width: 70%;
   height: 2px;
   top: 13.5px;
-  left: 4.45px;
+  left: 5.25px;
   position: relative;
   -webkit-transition: all 0.5s ease-in-out;
   -moz-transition: all 0.5s ease-in-out;
@@ -176,7 +196,6 @@ header #menu-user .content-user #img-user {
   object-fit: cover;
 }
 header #menu-user .content-suport-user {
-  z-index: 5;
   display: none;
   position: absolute;
   top: 2.3rem;

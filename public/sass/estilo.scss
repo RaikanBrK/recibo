@@ -14,6 +14,31 @@ body {
 	font-family: Arial;
 }
 
+.list-no {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+
+.container {
+	width: 100%;
+	min-height: 40vh;
+	background: white;
+	padding: 10px;
+	margin-top: 2.3rem;
+
+	.title-container {
+		font-size: 1.2rem;
+		color: black;
+		font-weight: 500;
+		margin-bottom: 0.7rem;
+	}
+}
+
+.content {
+	padding: 10px 15px;
+}
+
 header {
 	background: $header-bg;
 	padding: 0 1rem;
@@ -21,17 +46,12 @@ header {
 	position: sticky;
 	top: 0;
 	font-size: 0.9rem;
+	z-index: 10;
 
     /* Classes mais gerais */
 	label {
     	margin-bottom: 0px;
     }
-
-    .list-no {
-		list-style: none;
-		padding: 0;
-		margin: 0;
-	}
 
 	a:hover {
 		text-decoration: none;
@@ -75,7 +95,7 @@ header {
 		height: 2px;
 
 		top: 13.5px;
-		left: 4.45px;
+		left: 5.25px;
 
 		position: relative;
 		-webkit-transition: all 0.5s ease-in-out;
@@ -203,7 +223,6 @@ header {
 		}
 
 		.content-suport-user {
-			z-index: 5;
 			display: none;
 			position: absolute;
 			top: 2.3rem;

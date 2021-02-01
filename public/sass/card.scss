@@ -1,0 +1,128 @@
+@import '_variaveis.scss';
+@import '_mixin.scss';
+
+$card: 'card-item';
+
+.cards {
+	padding: 0 0.7rem;
+
+	.#{$card} {
+		background: #FFFFFB;
+	    padding: 10px 10px 5px;
+	    height: 100%;
+        transition: all 0.3s ease;
+	    box-shadow: 1px 1px 4px #686666;
+
+	    &:hover {
+	    	box-shadow: 2px 2px 7px #3d3d3d;
+	    }
+
+		.card-img {
+		    width: 90%;
+		    margin: 0 auto;
+		    display: block;
+		    border: 1px solid #0000002e;
+		    height: 135px;
+		    object-fit: fill;
+		}
+
+		.#{$card}-body {
+
+			.#{$card}-category {
+				a {
+					color: #716e6e;
+					font-size: 0.7rem;
+
+					&:hover {
+						color: #69a648;
+					}
+				}
+			}
+
+			.#{$card}-desc {
+				.card-item-title {
+					font-size: 0.9rem;
+					cursor: pointer;
+					padding: 2px 0;
+					margin: 2px 0 0;
+					font-weight: 500;
+					color: #262626;
+					text-decoration: none;
+					display: block;
+
+					&:hover {
+						color: #117a8b;
+					}
+
+					&:after {
+						content: "";
+						background: #c9c9d4;
+						margin-top: 4px;
+						height: 2px;
+						display: block;
+						position: relative;
+					}
+				}
+			}
+		}
+
+		.#{$card}-footer {
+			@include flex(space-between, center);
+			margin-top: 10px;
+
+			.icons {
+				display: flex;
+				gap: 0.9rem;
+
+
+				.icon-suport {
+					font-size: 1rem;
+				}
+
+				.evaluation .icon-suport {
+					color: #ffc107;
+				}
+
+				.favorit {
+					cursor: pointer;
+
+					.icon-suport {
+						color: red;
+					}
+				}
+
+				.number-suport-icon {
+					font-size: 1rem;
+				}
+			}
+
+			.other {
+				@include flex();
+
+				.other-title {
+					font-size: 0.95rem;
+					margin: 0;
+					color: #595959;
+					text-decoration: none;
+
+					&:hover {
+						color: black;
+					}
+
+					& > .success-card {
+						font-size: 1.25rem;
+						color: #28a745;
+					}
+				}
+
+				.preco-card {
+					color: #16ab39;
+				}
+			}
+		}
+	}
+}
+
+.cards > * {
+	margin-bottom: 2.3rem;
+}
