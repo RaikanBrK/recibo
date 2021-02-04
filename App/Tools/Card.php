@@ -5,6 +5,9 @@ use MF\Model\Container;
 class Card {
 	protected $cards;
 	protected $query;
+	protected $responsividade = 'col-sm-6 col-lg-4 col-xl-3';
+	protected $limit;
+	protected $offset;
 
 	public function __get($attr) {
 		return $this->$attr;
@@ -17,12 +20,28 @@ class Card {
 	public function gerarCards() {
 		$cards = $this->__get('cards');
 		$query = "";
+		$numQuery = 0;
 
 		forEach($cards as $indice => $card) {
+			if (!is_null($this->offset)) {
+				if ($indice < $this->offset) {
+					continue;
+				}
+			}
+			$numQuery++;
+
+			if (!is_null($this->limit)) {
+				if ($this->limit < $numQuery) {
+					break;
+				}
+			}
+
 			$query .= "
-				<div class='col-sm-6 col-lg-4 col-xl-3'>
+				<div class='" . $this->responsividade . "'>
 					<div class='card-item'>
-						<img src='/img/" . $card['img'] . "' alt='recibo-1' class='card-img light-zoom'>
+						<a href='/dashboard'>
+							<img src='/img/" . $card['img'] . "' alt='recibo-1' class='card-img'>
+						</a>
 						<div class='card-item-body'>
 							<div class='card-item-category'>
 								<a href='/modelos_recibo?category=underline'>Underline,</a>
@@ -63,7 +82,7 @@ class Card {
 		if (is_null($this->query)) {
 			$this->gerarCards();
 		}
-		
+
 		echo $this->query;
 	}
 

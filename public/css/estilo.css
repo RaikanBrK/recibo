@@ -9,6 +9,7 @@
 body {
   font-size: 16px;
   font-family: Arial;
+  background-color: #f2f2f2;
 }
 
 .list-no {
@@ -20,9 +21,8 @@ body {
 .container {
   width: 100%;
   min-height: 40vh;
-  background: white;
   padding: 10px;
-  margin-top: 2.3rem;
+  margin-top: 2.1rem;
 }
 .container .title-container {
   font-size: 1.2rem;

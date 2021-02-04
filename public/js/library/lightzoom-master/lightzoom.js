@@ -38,7 +38,7 @@ $.fn.lightzoom = function(options) {
     });
 
     faker=function(event,obj) {
-        console.log(obj);
+        // console.log(obj);
         document.getElementById('glass').targ=obj;
         var mx = event.pageX;
         var my = event.pageY;

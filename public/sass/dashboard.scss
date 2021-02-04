@@ -1,0 +1,157 @@
+@import '_variaveis.scss';
+@import '_mixin.scss';
+
+.list-hist {
+	background-color: #e56565;
+	padding: 10px;
+	box-shadow: 1px 1px 4px #686666;
+
+	li {
+		width: 100%;
+		position: relative;
+		margin-top: 10px;
+
+		&:first-child {
+			margin-top: 0;
+		}
+
+		&:last-child > a {
+			border-bottom: none;
+		}
+
+		a {
+			@include flex(space-between);
+
+			color: #e6dfdf;
+			padding: 3px 5px;
+			border-bottom: 1px dotted black;
+			text-decoration: none;
+			font-size: 1rem;
+
+			&:hover {
+				color: white;
+			}
+
+			.date-receipt {
+				font-size: 0.75rem;
+			}
+		}
+	}
+}
+
+.bg-custom {
+	padding: 1.2rem;
+
+	.container {
+		margin-top: 0;
+	}
+}
+
+#bestModels {
+	background: #FFB3B3;
+}
+
+#planos {
+	background-image: url('../img/teste-figma-bg.png');
+	background-size: cover;
+	color: white;
+	padding: 1rem 0;
+	margin-bottom: 3rem;
+
+	.content {
+		@include flex(center, center, column);
+
+		.content-trofeu {
+			background-color: #5C3C34;
+			padding: 1rem;
+			border-radius: 50%;
+
+			.trofeu {
+				width: 175px;
+				height: 175px;
+			}
+		}
+
+		.title-plano {
+			font-size: 1.5rem;
+			margin: 20px 0 16px;
+		}
+
+		.desc-plano {
+			width: 70%;
+			max-width: 600px;
+			text-align: center;
+			color: #ccc;
+
+			p {
+				margin: 0;
+			}
+		}
+
+		.more-planos {
+			@include flex();
+			background: #560388;
+			color: #d1c7c7;
+			margin-top: 1.3rem;
+
+			width: 25%;
+			height: 50px;
+
+			max-width: 190px;
+			min-width: 139px;
+
+			border-radius: 50px;
+
+			text-decoration: none;
+
+			-webkit-transition: all .25s ease;
+			   -moz-transition: all .25s ease;
+			    -ms-transition: all .25s ease;
+			     -o-transition: all .25s ease;
+			        transition: all .25s ease;
+
+			&:hover {
+				color: white;
+				background: #6f08ac;
+			}
+		}
+	}
+}
+
+
+
+// Media querys
+
+@media (max-width: 575.98px) {
+	#planos {
+		font-size: 0.75rem;
+
+		.content {
+			.content-trofeu .trofeu {
+				width: 120px;
+				height: 120px;
+			}
+
+			.title-plano {
+				font-size: 1.25rem;
+			}
+
+			.desc-plano {
+				width: 90%;
+			}
+		}
+	}
+}
+
+@media (max-width: 767.98px) {
+	#planos .content {
+		.content-trofeu .trofeu {
+			width: 150px;
+			height: 150px;
+		}
+
+		.more-planos {
+			width: 40%;
+		}
+	}
+}

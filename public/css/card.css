@@ -5,6 +5,7 @@
   background: #FFFFFB;
   padding: 10px 10px 5px;
   height: 100%;
+  margin: auto;
   transition: all 0.3s ease;
   box-shadow: 1px 1px 4px #686666;
 }
@@ -16,7 +17,7 @@
   margin: 0 auto;
   display: block;
   border: 1px solid #0000002e;
-  height: 135px;
+  height: 200px;
   object-fit: fill;
 }
 .cards .card-item .card-item-body .card-item-category a {

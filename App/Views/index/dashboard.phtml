@@ -3,8 +3,115 @@
 		<h2 class="title-container">Modelos usados recentemente</h2>
 		<div class="row cards">
 			<?php
+				$this->view->card->__set('responsividade', 'col-sm-6 col-lg-4');
+				$this->view->card->__set('limit', 3);
+				$this->view->card->gerarCards();
 				$this->view->card->renderCards();
 			?>
+		</div>
+	</div>
+</div>
+
+<div class="container">
+	<div class="content">
+		<div class="row">
+			<div class="col-md-8 order-2 order-md-1">
+				<h2 class="title-container">Meus favoritos</h2>
+		<div class="row cards">
+			<?php
+						$this->view->card->__set('responsividade', 'col-md-6');
+				$this->view->card->__set('limit', 4);
+				$this->view->card->gerarCards();
+				$this->view->card->renderCards();
+			?>
+		</div>
+			</div>
+			<div class="col-md-4 order-1 order-md-2 mb-5 mb-md-0">
+				<h2 class="title-container">Meu histórico de recibos</h2>
+				<ul class="list-no list-hist">
+					<?php for ($i = 1; $i <= 9; $i++) { ?>
+					<li>
+						<a href="/">
+							<div class="info-receipt">
+								<i class="far fa-file-alt icon-hist mr-2"></i>
+								<span class="title-receipt">Modelo <?= $i ?></span>
+							</div>
+							<span class="date-receipt">02/02/2021</span>
+						</a>
+					</li>
+					<?php } ?>
+					<li>
+						<a href="/recibos" class="text-center d-block p-0">
+							Veja mais
+						</a>
+					</li>
+					<!-- <li>
+						<a href="/recibos" class="text-center d-block p-0">
+							Você não tem recibos no histórico
+						</a>
+					</li> -->
+				</ul>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+
+<div id="bestModels" class="bg-custom">
+	<div class="container">
+		<div class="content">
+			<h2 class="title-container">Melhores Modelos</h2>
+			<div class="row cards">
+				<?php
+					// $this->view->card->__set('responsividade', 'col-sm-6 col-lg-4 col-xl-3');
+					$this->view->card->__set('responsividade', 'col-sm-6 col-lg-4');
+					$this->view->card->__set('limit', 3);
+					$this->view->card->gerarCards();
+					$this->view->card->renderCards();
+				?>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="container">
+	<div class="content">
+		<h2 class="title-container">Novos Modelos</h2>
+		<div class="row cards">
+			<?php
+				$this->view->card->__set('responsividade', 'col-sm-6 col-lg-4');
+			// $this->view->card->__set('responsividade', 'col-sm-6 col-lg-4 col-xl-3');
+			$this->view->card->__set('limit', 9);
+			$this->view->card->gerarCards();
+			$this->view->card->renderCards();
+			?>
+		</div>
+	</div>
+</div>
+
+<div id="planos" class="bg-custom">
+	<div class="container mt-0">
+		<div class="content">
+			<!-- <h2 class="title-container">Melhores Modelos</h2> -->
+			<div class="content-trofeu">
+				<img src="/img/trofeu.png" alt="" class="trofeu">
+			</div>
+
+			<h3 class="title-plano">Adquira novos benefícios</h3>
+
+			<div class="desc-plano">
+
+				<p>
+					Adquira novos benefícios apartir de 16,99 reais por mês.
+				</p>
+
+				<p>
+					Tenha mais espaço no histórico, sem anuncios, crie e edite modelos e muito mais.
+				</p>
+			</div>
+
+			<a href="/planos" class="btn more-planos">Vejas os planos</a>
 		</div>
 	</div>
 </div>
