@@ -1,3 +1,14 @@
+<?php
+	function logo() {
+		echo '
+			<a href="/dashboard" class="brand">
+				<i class="fas fa-receipt logo-receipt" title="Ícone recibo"></i>
+				<h3 class="logo-text" title="Recibo online">Recibo Online</h3>
+			</a>
+		';
+	}
+?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -45,12 +56,9 @@
 <body>
 	<?php $valid = true; ?>
 
-	<header>
-		<nav class="navbar navbar-expand-md">
-			<a href="/dashboard" class="brand">
-				<i class="fas fa-receipt logo-receipt" title="Ícone recibo"></i>
-				<h3 class="logo-text" title="Recibo online">Recibo Online</h3>
-			</a>
+	<header class="container-fluid">
+		<nav class="navbar navbar-expand-md content-container">
+			<?= logo() ?>
 
 			<div id="menu-user" class="order-md-1 mr-2 mr-md-0">
 				<?php if ($valid) { ?>
@@ -149,6 +157,88 @@
 	</header>
 
 	<?= $this->content() ?>
+
+	<footer class="container-fluid">
+		<div class="row content-container p-3">
+			<div class="col-lg-3 col-md-4 col-sm-6 content-item-container">
+				<?= logo() ?>
+
+				<div class="content-footer-focus">
+					<ul class="list-item-footer list-no">
+						<li class="item-footer">
+							<a href="/blog/">Blog</a>
+						</li>
+						<li class="item-footer">
+							<a href="/termos-de-uso">Termos de uso</a>
+						</li>
+						<li class="item-footer">
+							<a href="/termos-de-privacidade">Termos de privacidade</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+			<div class="col-lg-3 col-md-4 col-sm-6 content-item-container">
+				<h3 class="title-item-footer">Blog - Últimas nóticias</h3>
+				<ul class="list-item-footer">
+					<li class="item-footer">
+						<a href="/blog/1">Top 10 melhores modelos do último mês - 01/02/2021</a>
+					</li>
+					<li class="item-footer">
+						<a href="/blog/1">Vantagens ao pagar o plano premium</a>
+					</li>
+				</ul>
+			</div>
+			<div class="col-lg-3 col-md-4 col-sm-6 content-item-container">
+				<h3 class="title-item-footer">Suporte</h3>
+				<ul class="list-item-footer">
+					<li class="item-footer">
+						<a href="/chat">Chat Online</a>
+					</li>
+					<li class="item-footer">
+						<span class="link-footer">recibo@recibo.com.br</span>
+					</li>
+					<li class="item-footer">
+						<span class="link-footer">+55 (11) 97968-2861</span>
+					</li>
+				</ul>
+			</div>
+			<div class="col-lg-3 col-md-4 col-sm-6 content-item-container">
+				<h3 class="title-item-footer">Redes Sociais</h3>
+				<div class="row list-item-footer">
+					<div class="col-6 col-lg-12 item-footer">
+						<a href="https://www.facebook.com" target="_banck" class="link-footer">
+							<i class="fab fa-facebook-square icon-suport-footer"></i>
+							Facebook
+						</a>
+					</div>
+					<div class="col-6 col-lg-12 item-footer">
+						<a href="https://www.facebook.com" target="_banck" class="link-footer">
+							<i class="fab fa-linkedin icon-suport-footer"></i>
+							Linkedin
+						</a>
+					</div>
+					<div class="col-6 col-lg-12 item-footer">
+						<a href="https://www.facebook.com" target="_banck" class="link-footer">
+							<i class="fab fa-youtube icon-suport-footer"></i>
+							Youtube
+						</a>
+					</div>
+					<div class="col-6 col-lg-12 item-footer">
+						<a href="https://www.facebook.com" target="_banck" class="link-footer">
+							<i class="fab fa-github icon-suport-footer"></i>
+							Github
+						</a>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="content-container">
+			<h2 class="info-add-footer">
+				Copyright <i class="fas fa-copyright"></i> <?= Date('Y') ?> Recibo Online. Direitos reservados.
+			</h2>
+		</div>
+	</footer>
 
 	<script src="/js/script.js"></script>
 	<?php

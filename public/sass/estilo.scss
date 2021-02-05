@@ -23,7 +23,6 @@ body {
 
 .container {
 	width: 100%;
-	min-height: 40vh;
 	padding: 10px;
 	margin-top: 2.1rem;
 
@@ -35,8 +34,33 @@ body {
 	}
 }
 
+.container-fluid > .content-container {
+	margin: auto;
+}
+
 .content {
 	padding: 10px 15px;
+}
+
+/* Logo */
+.brand {
+	color: #eae9e9;
+	margin-right: auto;
+
+	.logo-receipt {
+		font-size: 1.6rem;
+		margin-right: 5px;
+	}
+
+	.logo-text {
+		font-size: 1.6rem;
+		display: inline;
+		font-family: 'Libre Baskerville', serif;
+	}
+}
+
+.brand:hover {
+	color: white;
 }
 
 header {
@@ -55,27 +79,6 @@ header {
 
 	a:hover {
 		text-decoration: none;
-	}
-
-	/* Logo */
-	.brand {
-		color: #eae9e9;
-		margin-right: auto;
-
-		.logo-receipt {
-			font-size: 1.6rem;
-			margin-right: 5px;
-		}
-
-		.logo-text {
-			font-size: 1.6rem;
-			display: inline;
-			font-family: 'Libre Baskerville', serif;
-		}
-	}
-
-	.brand:hover {
-		color: white;
 	}
 
 	/* Hamburguer */
@@ -296,5 +299,77 @@ header {
 				color: white;
 			}
 		}
+	}
+}
+
+footer {
+	padding: 0.2rem 0;
+	max-width: 100%;
+	background-color: #181818;
+
+	.content-container > div.content-item-container {
+		margin-top: 25px;
+	}
+
+	.brand {
+		text-decoration: none;
+	}
+
+	.title-item-footer {
+		font-size: 1.3rem;
+		color: #e0d2d2;
+		-webkit-transition: color 0.3s linear;
+		   -moz-transition: color 0.3s linear;
+		    -ms-transition: color 0.3s linear;
+		     -o-transition: color 0.3s linear;
+		        transition: color 0.3s linear;
+
+		&:hover {
+			color: white;
+		}
+	}
+
+	.list-item-footer {
+	    margin: 0 0 0 15%;
+	    color: white;
+
+	    .item-footer {
+	    	margin-top: 0.5rem;
+
+	    	& > a,
+	    	.link-footer {
+	    		color: #9F8181;
+	    		display: block;
+	    		font-size: 0.9rem;
+	    		text-decoration: none;
+	    		-webkit-transition: color 0.3s linear;
+	    		   -moz-transition: color 0.3s linear;
+	    		    -ms-transition: color 0.3s linear;
+	    		     -o-transition: color 0.3s linear;
+	    		        transition: color 0.3s linear;
+
+	    		&:hover,
+	    		.link-footer {
+	    			color: white;
+	    		}
+
+	    		& .icon-suport-footer {
+	    			font-size: 1.4rem;
+	    			margin-right: 3px;
+	    		}
+	    	}
+	    }
+	}
+
+	.info-add-footer {
+		margin: 1.2rem 0 0 0;
+		padding: 1rem 0;
+
+		font-size: 0.95rem;
+
+		border-top: 2px solid #45454587;
+		color: white;
+
+		text-align: center;
 	}
 }
