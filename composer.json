@@ -3,7 +3,8 @@
 	"license": "GNU v3",
 	"require":{
 		"php": ">= 7.0",
-		"league/oauth2-google": "3.0.*"
+		"league/oauth2-google": "3.0.*",
+		"league/oauth2-facebook": "2.0.*"
 	},
 	"authors": [
 		{

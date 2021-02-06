@@ -29,7 +29,7 @@ private static $installed = array (
     'aliases' => 
     array (
     ),
-    'reference' => 'a7c0ae368e7fc8e1bb453b31509d5dc99640b1ea',
+    'reference' => '3e18ef4de1cb20ea83b8323cf00955e49b656268',
     'name' => 'raikanbrk/recibo-online',
   ),
   'versions' => 
@@ -69,6 +69,15 @@ private static $installed = array (
       array (
       ),
       'reference' => 'badb01e62383430706433191b82506b6df24ad98',
+    ),
+    'league/oauth2-facebook' => 
+    array (
+      'pretty_version' => '2.0.5',
+      'version' => '2.0.5.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '14cead7580cab8caace67f5a61ea5d2a8ff213eb',
     ),
     'league/oauth2-google' => 
     array (
@@ -127,7 +136,7 @@ private static $installed = array (
       'aliases' => 
       array (
       ),
-      'reference' => 'a7c0ae368e7fc8e1bb453b31509d5dc99640b1ea',
+      'reference' => '3e18ef4de1cb20ea83b8323cf00955e49b656268',
     ),
     'ralouphie/getallheaders' => 
     array (
