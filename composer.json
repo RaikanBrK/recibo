@@ -1,7 +1,9 @@
 {
 	"name": "raikanbrk/recibo-online",
+	"license": "GNU v3",
 	"require":{
-		"php": ">= 7.0"
+		"php": ">= 7.0",
+		"league/oauth2-google": "3.0.*"
 	},
 	"authors": [
 		{
@@ -13,6 +15,9 @@
 		"psr-4": {
 			"App\\": "App/",
 			"MF\\": "vendor/MF/"
-		}
+		},
+		"files": [
+			"App/Config.php"
+		]
 	}
 }

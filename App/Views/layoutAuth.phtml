@@ -61,54 +61,8 @@
 			<?= logo() ?>
 
 			<div id="menu-user" class="order-md-1 mr-2 mr-md-0">
-				<?php if ($valid) { ?>
-					<div class="content-user" id="userContentHeader">
-						<!-- <i class="fas fa-user-circle icon-user" title="Ícone do usuário"></i> -->
-						<img src="/img/taylor.jpg" id="img-user">
-						<i class="fas fa-sort-down icon-down"></i>
-					</div>
-
-					<div class="content-suport-user">
-						<div class="menu-suport">
-							<ul class="list-no" id="linksSuport">
-								<li>
-									<a href="/">
-										<i class="fas fa-cog"></i>
-										Minha Conta
-									</a>
-								</li>
-								<li>
-									<a href="/">
-										<!-- <i class="fas fa-star"></i> -->
-										<i class="fas fa-heart"></i>
-										Meus Favoritos
-									</a>
-								</li>
-								<li>
-									<a href="/">
-										<i class="fas fa-archive"></i>
-										Minha Coleção
-									</a>
-								</li>
-								<li>
-									<a href="/">
-										<i class="fas fa-sliders-h"></i>
-										Configurações
-									</a>
-								</li>
-								<li>
-									<a href="/">
-										<i class="fas fa-trophy"></i>
-										Adquirir o Premiew
-									</a>
-								</li>
-							</ul>
-						</div>
-					</div>
-				<?php } else { ?>
-					<a href="/cadastro" class="btn cadastro">Cadastrar-se</a>
-					<a href="/login" class="btn login">Logar-se</a>
-				<?php } ?>
+				<a href="/cadastro" class="btn cadastro">Cadastrar-se</a>
+				<a href="/login" class="btn login">Logar-se</a>
 			</div>
 
 			<div class="navbar-toggler" id="hamburguer" type="button" data-toggle="collapse" data-target="#menu" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -163,7 +117,6 @@
 		require_once($action);
 	?>
 
-	<script src="/js/script.js"></script>
 	<?php
 		if (isset($this->view->js)) {
 			foreach ($this->view->js as $indice => $script) {
