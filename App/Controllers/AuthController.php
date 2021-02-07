@@ -71,5 +71,12 @@ class AuthController extends Action {
 
 		$this->render('cadastro', 'layoutAuth');
 	}
+
+	public function login() {
+		$this->view->css = ['auth'];
+		$this->view->js = ['auth'];
+
+		$this->render('login', 'layoutAuth');
+	}
 }
 ?>
