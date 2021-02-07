@@ -1,0 +1,130 @@
+@import '_variaveis.scss';
+@import '_mixin.scss';
+
+#auth {
+	width: 75%;
+	margin: auto;
+	background: white;
+	padding: 15px;
+
+	.title-auth {
+		font-size: 2rem;
+		color: #443A3A;
+		margin: 0;
+		font-family: 'Lobster', cursive;
+		text-align: center;
+
+		letter-spacing: 5px;
+	    font-weight: 700;
+	    font-style: oblique;
+	}
+
+	.icon-auth-social {
+		@include flex();
+		gap: 5%;
+		margin: 20px 0;
+
+		.icon-social {
+			@include flex();
+			border: 1px solid black;
+		    font-size: 1.6rem;
+		    border-radius: 50%;
+		    width: 50px;
+		    height: 50px;
+		    cursor: pointer;
+		    -webkit-transition: all 0.6s ease-out;
+		       -moz-transition: all 0.6s ease-out;
+		        -ms-transition: all 0.6s ease-out;
+		         -o-transition: all 0.6s ease-out;
+		            transition: all 0.6s ease-out;
+
+		    &:hover {
+		    	background: black;
+		    	color: white;
+		    }
+		}
+	}
+
+	.msg-other-auth {
+		font-size: 1rem;
+		letter-spacing: 0.8px;
+		color: #443A3A;
+		font-family: 'Lobster', cursive;
+		text-align: center;
+	}
+
+	#formAuth {
+		@include flex(center, center, column);
+		margin: 30px 0 20px;
+
+		.form-group	{
+			@include flex();
+			$bg-input: #ECF0F1;
+			$size-input: 1.2rem;
+			$color-input: #AB5454;
+
+			.input-group {
+				background: $bg-input;
+
+				.input-auth {
+					background: $bg-input;
+					font-size: $size-input - 0.2rem;
+					border: none;
+					box-shadow: none;
+					flex: 1;
+					color: $color-input;
+
+					&:focus {
+						border: none;
+						box-shadow: none;
+						outline: none;
+					}
+				}
+
+				.input-group-icon {
+					padding: 10px;
+
+					.input-icon {
+						font-size: $size-input;
+						margin: 0 3px;
+						color: $color-input;
+					}
+				}
+			}
+
+			.focusAuthInput {
+				box-shadow: 1px 1px 3px #857f7f, -1px -1px 3px #857f7f;
+			}
+		}
+
+		#btn-auth {
+			@include flex();
+			color: #ECFAF6;
+			background: #58AF9C;
+			width: 200px;
+			border-radius: 200px;
+			margin-top: 23px;
+			height: 38px;
+
+			&:hover {
+				color: white;
+			}
+		}
+	}
+
+	.auth-other {
+		display: block;
+		text-align: center;
+		margin-top: 2rem;
+
+		.other-link {
+			color: #ccc;
+		}
+	}
+}
+
+@media (max-width: 575.98px) {
+	#auth {
+		width: 100%;
+	}
+}

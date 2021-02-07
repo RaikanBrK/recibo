@@ -1,0 +1,123 @@
+#auth {
+  width: 75%;
+  margin: auto;
+  background: white;
+  padding: 15px;
+}
+#auth .title-auth {
+  font-size: 2rem;
+  color: #443A3A;
+  margin: 0;
+  font-family: "Lobster", cursive;
+  text-align: center;
+  letter-spacing: 5px;
+  font-weight: 700;
+  font-style: oblique;
+}
+#auth .icon-auth-social {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  gap: 5%;
+  margin: 20px 0;
+}
+#auth .icon-auth-social .icon-social {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  border: 1px solid black;
+  font-size: 1.6rem;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  cursor: pointer;
+  -webkit-transition: all 0.6s ease-out;
+  -moz-transition: all 0.6s ease-out;
+  -ms-transition: all 0.6s ease-out;
+  -o-transition: all 0.6s ease-out;
+  transition: all 0.6s ease-out;
+}
+#auth .icon-auth-social .icon-social:hover {
+  background: black;
+  color: white;
+}
+#auth .msg-other-auth {
+  font-size: 1rem;
+  letter-spacing: 0.8px;
+  color: #443A3A;
+  font-family: "Lobster", cursive;
+  text-align: center;
+}
+#auth #formAuth {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin: 30px 0 20px;
+}
+#auth #formAuth .form-group {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+}
+#auth #formAuth .form-group .input-group {
+  background: #ECF0F1;
+}
+#auth #formAuth .form-group .input-group .input-auth {
+  background: #ECF0F1;
+  font-size: 1rem;
+  border: none;
+  box-shadow: none;
+  flex: 1;
+  color: #AB5454;
+}
+#auth #formAuth .form-group .input-group .input-auth:focus {
+  border: none;
+  box-shadow: none;
+  outline: none;
+}
+#auth #formAuth .form-group .input-group .input-group-icon {
+  padding: 10px;
+}
+#auth #formAuth .form-group .input-group .input-group-icon .input-icon {
+  font-size: 1.2rem;
+  margin: 0 3px;
+  color: #AB5454;
+}
+#auth #formAuth .form-group .focusAuthInput {
+  box-shadow: 1px 1px 3px #857f7f, -1px -1px 3px #857f7f;
+}
+#auth #formAuth #btn-auth {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  color: #ECFAF6;
+  background: #58AF9C;
+  width: 200px;
+  border-radius: 200px;
+  margin-top: 23px;
+  height: 38px;
+}
+#auth #formAuth #btn-auth:hover {
+  color: white;
+}
+#auth .auth-other {
+  display: block;
+  text-align: center;
+  margin-top: 2rem;
+}
+#auth .auth-other .other-link {
+  color: #ccc;
+}
+
+@media (max-width: 575.98px) {
+  #auth {
+    width: 100%;
+  }
+}
+
+/*# sourceMappingURL=auth.css.map */

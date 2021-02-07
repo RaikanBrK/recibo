@@ -7,8 +7,8 @@ use League\OAuth2\Client\Provider\Facebook;
 
 class AuthController extends Action {
 	public function cadastro() {
-		$this->view->css = [];
-		$this->view->js = [];
+		$this->view->css = ['auth'];
+		$this->view->js = ['auth'];
 
 		$error = filter_input(INPUT_GET, "error", FILTER_SANITIZE_STRING);
 		$code = filter_input(INPUT_GET, "code", FILTER_SANITIZE_STRING);
@@ -43,31 +43,31 @@ class AuthController extends Action {
 		/**
 		 * Auth Facebook
 		 */
-		$facebook = new Facebook(FACEBOOK);
-		$this->view->authUrlFacebook = $facebook->getAuthorizationUrl([
-			"scope" => ["email"]
-		]);
+		// $facebook = new Facebook(FACEBOOK);
+		// $this->view->authUrlFacebook = $facebook->getAuthorizationUrl([
+		// 	"scope" => ["email"]
+		// ]);
 
-		if ($error) {
-			// Tratar erro
-		}
+		// if ($error) {
+		// 	// Tratar erro
+		// }
 
-		if ($code) {
-			$token = $facebook->getAccessToken("authorization_code", [
-				"code" => $code
-			]);
+		// if ($code) {
+		// 	$token = $facebook->getAccessToken("authorization_code", [
+		// 		"code" => $code
+		// 	]);
 
-			$user = unserialize(serialize($facebook->getResourceOwner($token)));
-			$infoUser = $user->toArray();
+		// 	$user = unserialize(serialize($facebook->getResourceOwner($token)));
+		// 	$infoUser = $user->toArray();
 
-			echo '<pre>';
-				print_r($user);
-			echo '</pre>';
+		// 	echo '<pre>';
+		// 		print_r($user);
+		// 	echo '</pre>';
 
-			echo '<pre>';
-				print_r($infoUser);
-			echo '</pre>';
-		}
+		// 	echo '<pre>';
+		// 		print_r($infoUser);
+		// 	echo '</pre>';
+		// }
 
 		$this->render('cadastro', 'layoutAuth');
 	}
