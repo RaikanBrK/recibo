@@ -12,7 +12,7 @@
 .cards .card-item:hover {
   box-shadow: 2px 2px 7px #3d3d3d;
 }
-.cards .card-item .card-img {
+.cards .card-img {
   width: 90%;
   margin: 0 auto;
   display: block;
@@ -20,14 +20,14 @@
   height: 200px;
   object-fit: fill;
 }
-.cards .card-item .card-item-body .card-item-category a {
+.cards .card-item-body .card-item-category a {
   color: #716e6e;
   font-size: 0.7rem;
 }
-.cards .card-item .card-item-body .card-item-category a:hover {
+.cards .card-item-body .card-item-category a:hover {
   color: #69a648;
 }
-.cards .card-item .card-item-body .card-item-desc .card-item-title {
+.cards .card-item-body .card-item-desc .card-item-title {
   font-size: 0.9rem;
   cursor: pointer;
   padding: 2px 0;
@@ -37,10 +37,10 @@
   text-decoration: none;
   display: block;
 }
-.cards .card-item .card-item-body .card-item-desc .card-item-title:hover {
+.cards .card-item-body .card-item-desc .card-item-title:hover {
   color: #117a8b;
 }
-.cards .card-item .card-item-body .card-item-desc .card-item-title:after {
+.cards .card-item-body .card-item-desc .card-item-title:after {
   content: "";
   background: #c9c9d4;
   margin-top: 4px;
@@ -48,57 +48,53 @@
   display: block;
   position: relative;
 }
-.cards .card-item .card-item-footer {
+.cards .card-item-footer {
   display: flex;
   justify-content: space-between;
   align-items: center;
   flex-direction: row;
   margin-top: 10px;
 }
-.cards .card-item .card-item-footer .icons {
+.cards .card-item-footer .icons {
   display: flex;
   gap: 0.9rem;
 }
-.cards .card-item .card-item-footer .icons .icon-suport {
+.cards .card-item-footer .icons .icon-suport {
   font-size: 1rem;
 }
-.cards .card-item .card-item-footer .icons .evaluation .icon-suport {
+.cards .card-item-footer .icons .evaluation .icon-suport {
   color: #ffc107;
 }
-.cards .card-item .card-item-footer .icons .favorit {
+.cards .card-item-footer .icons .favorit {
   cursor: pointer;
 }
-.cards .card-item .card-item-footer .icons .favorit .icon-suport {
+.cards .card-item-footer .icons .favorit .icon-suport {
   color: red;
 }
-.cards .card-item .card-item-footer .icons .number-suport-icon {
+.cards .card-item-footer .icons .number-suport-icon {
   font-size: 1rem;
 }
-.cards .card-item .card-item-footer .other {
+.cards .card-item-footer .other {
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: row;
 }
-.cards .card-item .card-item-footer .other .other-title {
+.cards .card-item-footer .other .other-title {
   font-size: 0.95rem;
   margin: 0;
   color: #595959;
   text-decoration: none;
 }
-.cards .card-item .card-item-footer .other .other-title:hover {
+.cards .card-item-footer .other .other-title:hover {
   color: black;
 }
-.cards .card-item .card-item-footer .other .other-title > .success-card {
+.cards .card-item-footer .other .other-title > .success-card {
   font-size: 1.25rem;
   color: #28a745;
 }
-.cards .card-item .card-item-footer .other .preco-card {
+.cards .card-item-footer .other .preco-card {
   color: #16ab39;
-}
-
-.cards > * {
-  margin-bottom: 2.3rem;
 }
 
 /*# sourceMappingURL=card.css.map */

@@ -36,10 +36,12 @@ class Card {
 				}
 			}
 
+			$diretorio = '/recibo/' . $this->urlModeloFromTitle($card['title']);
+
 			$query .= "
 				<div class='" . $this->responsividade . "'>
 					<div class='card-item'>
-						<a href='/dashboard'>
+						<a href='" . $diretorio . "'>
 							<img src='/img/" . $card['img'] . "' alt='recibo-1' class='card-img'>
 						</a>
 						<div class='card-item-body'>
@@ -49,7 +51,7 @@ class Card {
 							</div>
 
 							<div class='card-item-desc'>
-								<a href='/teste' class='card-item-title'>" . $card['title'] . "</a>
+								<a href='" . $diretorio . "' class='card-item-title'>" . $card['title'] . "</a>
 							</div>
 						</div>
 
@@ -76,6 +78,12 @@ class Card {
 			// <i class="fas fa-heart"></i>
 		}
 		$this->query = $query;
+	}
+
+	public function urlModeloFromTitle($title) {
+		$title = str_replace(' ', '_', $title);
+		$title = strtolower($title);
+		return urlencode($title);
 	}
 
 	public function renderCards() {

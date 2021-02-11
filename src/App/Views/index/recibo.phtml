@@ -1,0 +1,90 @@
+<div class="container">
+	<div class="content">
+		<div class="row">
+			<div class="col-md-8">
+				<div class="bg-content-box" id="formInput">
+					<form>
+						<div class="form-row">
+							<div class="form-group col-md-6">
+								<label for="numRecibo">Número de recibo</label>
+								<input type="email" class="form-control" id="numRecibo" placeholder="Número do recibo">
+							</div>
+						</div>
+						<div class="form-row">
+							<div class="form-group col-md-6">
+								<label for="valor">Valor</label>
+								<input type="number" class="form-control" id="valor" placeholder="Valor do recibo">
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="recebido_de">Recebi(emos) de</label>
+							<input type="email" class="form-control" id="recebido_de" placeholder="Recebido de">
+						</div>
+						<div class="form-group">
+							<label for="cpf">CPF ou CNPJ</label>
+							<input type="text" class="form-control" id="cpf" placeholder="cpf ou cnpj">
+						</div>
+						<div class="form-group">
+							<label for="inputAddress2">Endereço</label>
+							<input type="text" class="form-control" id="inputAddress2" placeholder="Endereço">
+						</div>
+						<div class="form-row">
+							<div class="form-group col-md-6">
+								<label for="inputCity">Cidade</label>
+								<input type="text" class="form-control" id="inputCity">
+							</div>
+							<div class="form-group col-md-4">
+								<label for="inputEstado">Estado</label>
+								<select id="inputEstado" class="form-control">
+									<option selected>Escolher...</option>
+									<option>...</option>
+								</select>
+							</div>
+							<div class="form-group col-md-2">
+								<label for="inputCEP">CEP</label>
+								<input type="text" class="form-control" id="inputCEP">
+							</div>
+						</div>
+						<button type="submit" class="btn btn-primary">Entrar</button>
+					</form>
+				</div>
+			</div>
+			<div class="col-md-4">
+				<div class="w-100 mb-5" style="height: 160px; background: red;">
+					
+				</div>
+
+				<div class="bg-content-box cards" id="cardDesc">
+					<div class='card-item-body m-0'>
+						<img src="/img/recibo-1.png" alt="" class="img-receipt">
+						<div class='card-item-category'>
+							<a href='/modelos_recibo?category=underline'>Underline,</a>
+							<a href='/modelos_recibo?category=logo'>Com Logo</a>
+						</div>
+
+						<div class='card-item-desc'>
+							<a href='" . $diretorio . "' class='card-item-title'>Recibo simples de serviços</a>
+						</div>
+					</div>
+
+					<div class='card-item-footer'>
+						<div class='icons'>
+							<div class='evaluation'>
+								<i class='fas fa-star icon-suport'></i>
+								<span class='number-suport-icon'>5</span>
+							</div>
+							<div class='favorit'>
+								<i class='far fa-heart icon-suport'></i>
+								<span class='number-suport-icon'>10</span>
+							</div>
+						</div>
+
+						<div class='other'>
+							<a href='/' class='other-title'>Empresa</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

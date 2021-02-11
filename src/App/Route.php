@@ -32,6 +32,12 @@ class Route extends Bootstrap {
 			'action' => 'dashboard'
 		);
 
+		$routes['recibo'] = array(
+			'route' => '/recibo/{}',
+			'controller' => 'IndexController',
+			'action' => 'recibo'
+		);
+
 		/**
 		 * AuthController
 		 */
