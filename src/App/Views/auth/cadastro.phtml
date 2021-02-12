@@ -16,14 +16,14 @@
 
 			<h3 class="msg-other-auth">ou use seu email para criar uma conta</h3>
 
-			<form action="/cadastrar-usuario" id="formAuth">
+			<form action="/cadastrar-usuario" method="POST" id="formAuth">
 				<div class="form-group col-12 col-lg-6">
 					<div class="input-group">
 						<label class="input-group-icon" for="nome">
 							<i class="far fa-user input-icon" title="Ícone do usuário" aria-label="iconUserName"></i>
-							<span class="sr-only" id="iconUserName">Ícone do usuário para inserção do nome</span>
+							<span class="sr-only" id="iconUserName">Ícone do usuário para inserção do nome e sobrenome</span>
 						</label>
-						<input type="text" class="input-auth" id="nome" name="nome" placeholder="Nome"tabindex="3" required>
+						<input type="text" class="input-auth" id="nome" name="nome" placeholder="Nome e sobrenome"tabindex="3" required>
 					</div>
 				</div>
 

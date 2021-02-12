@@ -47,6 +47,12 @@ class Route extends Bootstrap {
 			'action' => 'cadastro'
 		);
 
+		$routes['cadastrarUsuario'] = array(
+			'route' => '/cadastrar-usuario',
+			'controller' => 'AuthController',
+			'action' => 'cadastrarUsuario'
+		);
+
 		$routes['login'] = array(
 			'route' => '/login',
 			'controller' => 'AuthController',
