@@ -24,6 +24,11 @@
 		gap: 5%;
 		margin: 20px 0;
 
+		.auth-item {
+			background: none;
+			border: none;
+		}
+
 		.icon-social {
 			@include flex();
 			border: 1px solid black;
@@ -83,6 +88,7 @@
 
 				.input-group-icon {
 					padding: 10px;
+					margin: 0;
 
 					.input-icon {
 						font-size: $size-input;
