@@ -48,18 +48,18 @@ class AuthController extends Action {
 				]);
 
 				$user = unserialize(serialize($facebook->getResourceOwner($token)));
+				$nome = $user->getFirstName() . ' ' . $user->getLastName();
 
-				echo '<pre>';
-					print_r($user->getFirstName());
-				echo '</pre>';
+				$usuarios = Container::getModel('Usuarios');
+				$usuarios->__set('nome', $nome);
+				$usuarios->__set('email', $user->getEmail());
+				$usuarios->__set('authSocialId', 2);
 
-				echo '<pre>';
-					print_r($user->getLastName());
-				echo '</pre>';
-
-				echo '<pre>';
-					print_r($user->getEmail());
-				echo '</pre>';
+				if ($usuarios->emailNoExist()) {
+					$usuarios->createUserFromSocial();
+				} else {
+					// Email já existe;
+				}
 			}
 
 
@@ -80,26 +80,39 @@ class AuthController extends Action {
 
 				$user = unserialize(serialize($google->getResourceOwner($token)));
 
-				echo '<pre>';
-					print_r($user->getFirstName());
-				echo '</pre>';
+				$nome = $user->getFirstName() . ' ' . $user->getLastName();
 
-				echo '<pre>';
-					print_r($user->getLastName());
-				echo '</pre>';
+				$usuarios = Container::getModel('Usuarios');
+				$usuarios->__set('nome', $nome);
+				$usuarios->__set('email', $user->getEmail());
+				$usuarios->__set('authSocialId', 3);
 
-				echo '<pre>';
-					print_r($user->getEmail());
-				echo '</pre>';
+				if ($usuarios->emailNoExist()) {
+					$usuarios->createUserFromSocial();
+				} else {
+					// Email já existe;
+				}
 			}
 		} else {
 			# Login Email
-			## nome(sobrenome), email, senha e confirmarSenha
 			$valid = $regras->validarAll($_POST);
 
-			echo '<pre>';
-				print_r($regras->__get('fail'));
-			echo '</pre>';
+			if ($valid) {
+				$usuarios = Container::getModel('Usuarios');
+				$usuarios->__set('nome', $regras->__get('nome'));
+				$usuarios->__set('email', $regras->__get('email'));
+				$usuarios->__set('senha', $regras->__get('senha'));
+
+				if ($usuarios->emailNoExist()) {
+					$usuarios->createUserFromEmail();
+				} else {
+					// Email já existe;
+				}
+			} else {
+				echo '<pre>';
+					print_r($regras->__get('fail'));
+				echo '</pre>';
+			}
 		}
 	}
 
