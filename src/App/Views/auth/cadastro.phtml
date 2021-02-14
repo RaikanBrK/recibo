@@ -4,14 +4,14 @@
 			<h1 class="title-auth">Criar Conta</h1>
 
 			<div class="icon-auth-social">
-				<button type="button" class="auth-item" tabindex="1">
+				<a href="<?= $this->view->authUrlFacebook ?>" class="auth-item" tabindex="1">
 					<i class="fab fa-facebook-f icon-social" title="Fazer cadastro pela sua conta do facebook" aria-label="iconFacebook"></i>
 					<span class="sr-only" id="iconFacebook">Ícone para fazer cadastro pela sua conta do facebook</span>
-				</button>
-				<button type="button" class="auth-item" tabindex="2">
+				</a>
+				<a href="<?= $this->view->authUrlGoogle ?>" class="auth-item" tabindex="2">
 					<i class="fab fa-google icon-social" title="Fazer cadastro pela sua conta do google" aria-label="iconGoogle"></i>
 					<span class="sr-only" id="iconGoogle">Ícone para fazer cadastro pela sua conta do google</span>
-				</button>
+				</a>
 			</div>
 
 			<h3 class="msg-other-auth">ou use seu email para criar uma conta</h3>

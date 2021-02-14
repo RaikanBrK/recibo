@@ -27,6 +27,22 @@
 		.auth-item {
 			background: none;
 			border: none;
+			color: black;
+			-webkit-transition: all 0.5s ease;
+			   -moz-transition: all 0.5s ease;
+			    -ms-transition: all 0.5s ease;
+			     -o-transition: all 0.5s ease;
+			        transition: all 0.5s ease;
+
+			&:hover {
+				text-decoration: none;
+			}
+
+			&:focus {
+				border: none;
+				outline: none;
+				color: blue;
+			}
 		}
 
 		.icon-social {
