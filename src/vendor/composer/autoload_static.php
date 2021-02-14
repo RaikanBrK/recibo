@@ -19,6 +19,7 @@ class ComposerStaticInitc388db0f69d16b03d29f553bc1a42f58
         array (
             'Psr\\Http\\Message\\' => 17,
             'Psr\\Http\\Client\\' => 16,
+            'PHPMailer\\PHPMailer\\' => 20,
         ),
         'M' => 
         array (
@@ -49,6 +50,10 @@ class ComposerStaticInitc388db0f69d16b03d29f553bc1a42f58
         array (
             0 => __DIR__ . '/..' . '/psr/http-client/src',
         ),
+        'PHPMailer\\PHPMailer\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/phpmailer/phpmailer/src',
+        ),
         'MF\\' => 
         array (
             0 => __DIR__ . '/..' . '/MF',
@@ -56,8 +61,8 @@ class ComposerStaticInitc388db0f69d16b03d29f553bc1a42f58
         'League\\OAuth2\\Client\\' => 
         array (
             0 => __DIR__ . '/..' . '/league/oauth2-client/src',
-            1 => __DIR__ . '/..' . '/league/oauth2-google/src',
-            2 => __DIR__ . '/..' . '/league/oauth2-facebook/src',
+            1 => __DIR__ . '/..' . '/league/oauth2-facebook/src',
+            2 => __DIR__ . '/..' . '/league/oauth2-google/src',
         ),
         'GuzzleHttp\\Psr7\\' => 
         array (

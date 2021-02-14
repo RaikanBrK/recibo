@@ -6,7 +6,7 @@
     'aliases' => 
     array (
     ),
-    'reference' => '3e18ef4de1cb20ea83b8323cf00955e49b656268',
+    'reference' => '755c5c8b7bd15b6b82a769f902a6058b6208716e',
     'name' => 'raikanbrk/recibo-online',
   ),
   'versions' => 
@@ -74,6 +74,15 @@
       ),
       'reference' => '996434e5492cb4c3edcb9168db6fbb1359ef965a',
     ),
+    'phpmailer/phpmailer' => 
+    array (
+      'pretty_version' => 'v6.2.0',
+      'version' => '6.2.0.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => 'e38888a75c070304ca5514197d4847a59a5c853f',
+    ),
     'psr/http-client' => 
     array (
       'pretty_version' => '1.0.1',
@@ -113,7 +122,7 @@
       'aliases' => 
       array (
       ),
-      'reference' => '3e18ef4de1cb20ea83b8323cf00955e49b656268',
+      'reference' => '755c5c8b7bd15b6b82a769f902a6058b6208716e',
     ),
     'ralouphie/getallheaders' => 
     array (

@@ -1,6 +1,10 @@
+# Dependência
 src/vendor/league
 src/vendor/guzzlehttp
 src/vendor/paragonie
 src/vendor/psr
 src/vendor/ralouphie
+src/vendor/phpmailer
+
+# Files
 src/App/Config.php
