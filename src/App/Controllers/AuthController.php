@@ -3,6 +3,7 @@ namespace App\Controllers;
 use MF\Controller\Action;
 use MF\Model\Container;
 use App\Tools\RegrasCadastroUsuario;
+use App\Tools\SendMail;
 use League\OAuth2\Client\Provider\Google;
 use League\OAuth2\Client\Provider\Facebook;
 
@@ -105,6 +106,10 @@ class AuthController extends Action {
 
 				if ($usuarios->emailNoExist()) {
 					$usuarios->createUserFromEmail();
+					$sendMail = new SendMail();
+					$sendMail->__set('email', $regras->__get('email'));
+					$sendMail->__set('nome', $regras->__get('nome'));
+					$sendMail->send();
 				} else {
 					// Email já existe;
 				}
