@@ -1,58 +1,44 @@
-@media (min-width: 576px) {
-  .container,
-.container-fluid > .content-container {
-    max-width: 620px;
-  }
-}
-@media (min-width: 768px) {
-  .container,
-.container-fluid > .content-container {
-    max-width: 750px;
-  }
-}
-@media (min-width: 992px) {
-  .container,
-.container-fluid > .content-container {
-    max-width: 970px;
-  }
-}
 @media (min-width: 1200px) {
   .container,
 .container-fluid > .content-container {
     max-width: 1290px;
   }
 }
-@media (max-width: 767.98px) {
+@media (max-width: 575.98px) {
+  header #menu-user a.btn {
+    width: auto;
+  }
+
+  header .button-auth {
+    display: flex;
+    justify-content: space-around;
+  }
+}
+@media (max-width: 991.98px) {
   header {
     padding: 0 0.4rem;
   }
-
   header .navbar {
     padding: 0.5rem;
   }
-
-  header #menu .menu-group {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
   header #menu {
     margin-right: 0;
     padding: 0.7rem 0;
   }
-
+  header #menu .menu-group {
+    flex-direction: column;
+    align-items: flex-start;
+  }
   header #menu .item-menu {
     padding: 0;
     margin: 0;
     width: 100%;
   }
-
   header #menu .item-menu a {
     margin: 0.3rem 0.2rem;
     padding: 0 0.1rem;
     display: block;
   }
-
   header #menu .item-menu a.active:before {
     content: "";
     position: absolute;
@@ -62,6 +48,9 @@
     bottom: 0;
     left: 0;
     background: linear-gradient(to right, #369c00, #ecec0e61);
+  }
+  header .button-auth {
+    margin-left: 0;
   }
 
   .icon-select {

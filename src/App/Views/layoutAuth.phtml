@@ -55,13 +55,8 @@
 	<?php $valid = false; ?>
 
 	<header class="container-fluid">
-		<nav class="navbar navbar-expand-md content-container">
+		<nav class="navbar navbar-expand-lg content-container">
 			<?= logo() ?>
-
-			<div id="menu-user" class="order-md-1 mr-2 mr-md-0">
-				<a href="/cadastro" class="btn cadastro">Cadastrar-se</a>
-				<a href="/login" class="btn login">Logar-se</a>
-			</div>
 
 			<div class="navbar-toggler" id="hamburguer" type="button" data-toggle="collapse" data-target="#menu" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
 				<span class="hamburguer"></span>
@@ -104,6 +99,13 @@
 						}
 					?>
 				</ul>
+
+				<?php if (!$valid) { ?>
+					<div class="button-auth mt-4 mt-lg-0">
+						<a href="/cadastro" class="btn cadastro">Cadastrar-se</a>
+						<a href="/login" class="btn login">Logar-se</a>
+					</div>
+				<?php } ?>
 			</div>
 		</nav>
 	</header>

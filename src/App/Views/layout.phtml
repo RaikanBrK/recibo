@@ -51,10 +51,10 @@
 	<?php $valid = false; ?>
 
 	<header class="container-fluid">
-		<nav class="navbar navbar-expand-md content-container">
+		<nav class="navbar navbar-expand-lg content-container">
 			<?= logo() ?>
 
-			<div id="menu-user" class="order-md-1 mr-2 mr-md-0">
+			<div id="menu-user" class="order-lg-1 mr-2 mr-lg-0">
 				<?php if ($valid) { ?>
 					<div class="content-user" id="userContentHeader">
 						<!-- <i class="fas fa-user-circle icon-user" title="Ícone do usuário"></i> -->
@@ -99,9 +99,6 @@
 							</ul>
 						</div>
 					</div>
-				<?php } else { ?>
-					<a href="/cadastro" class="btn cadastro">Cadastrar-se</a>
-					<a href="/login" class="btn login">Logar-se</a>
 				<?php } ?>
 			</div>
 
@@ -146,6 +143,13 @@
 						}
 					?>
 				</ul>
+
+				<?php if (!$valid) { ?>
+					<div class="button-auth mt-4 mt-lg-0">
+						<a href="/cadastro" class="btn cadastro">Cadastrar-se</a>
+						<a href="/login" class="btn login">Logar-se</a>
+					</div>
+				<?php } ?>
 			</div>
 		</nav>
 	</header>

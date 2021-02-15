@@ -43,6 +43,16 @@ body {
 	padding: 10px 15px;
 }
 
+/* Logo */
+.brand {
+	margin-right: auto;
+}
+
+.brand:hover {
+      color: white;
+ }
+
+
 header {
 	background: $header-bg;
 	padding: 0 1rem;
@@ -139,11 +149,8 @@ header {
 		        transform: rotate(90deg);
 	}
 
-	/* Menu adicional do usuario */
-	#menu-user {
-		@include flex();
-		gap: 1rem;
-		position: relative;
+	.button-auth {
+		margin-left: 2rem;
 
 		a.btn {
 			border-radius: 20px;
@@ -152,6 +159,7 @@ header {
 			margin: 0;
 			color: $link-color;
 			font-size: 0.9rem;
+			margin-right: 12px;
 		}
 
 		a.btn:hover {
@@ -179,6 +187,13 @@ header {
 		.login:hover {
 			background: #D6B610;
 		}
+	}
+
+	/* Menu adicional do usuario */
+	#menu-user {
+		@include flex();
+		gap: 1rem;
+		position: relative;
 
 		.content-user {
 		    @include flex();
@@ -250,8 +265,6 @@ header {
 
 	/* Menu */
 	#menu {
-		margin-right: 2rem;
-
 		.menu-group {
 			@include flex();
 			gap: 0.5rem;

@@ -39,6 +39,15 @@ body {
   padding: 10px 15px;
 }
 
+/* Logo */
+.brand {
+  margin-right: auto;
+}
+
+.brand:hover {
+  color: white;
+}
+
 header {
   background: #1d1d1f;
   padding: 0 1rem;
@@ -123,23 +132,19 @@ header .hamburguer.burguerActive:after {
   -o-transform: rotate(90deg);
   transform: rotate(90deg);
 }
-header #menu-user {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: row;
-  gap: 1rem;
-  position: relative;
+header .button-auth {
+  margin-left: 2rem;
 }
-header #menu-user a.btn {
+header .button-auth a.btn {
   border-radius: 20px;
   padding: 6px 10px;
   width: 135px;
   margin: 0;
   color: #ccd3d3;
   font-size: 0.9rem;
+  margin-right: 12px;
 }
-header #menu-user a.btn:hover {
+header .button-auth a.btn:hover {
   color: white;
   -webkit-transition: all 0.5s ease;
   -moz-transition: all 0.5s ease;
@@ -147,17 +152,25 @@ header #menu-user a.btn:hover {
   -o-transition: all 0.5s ease;
   transition: all 0.5s ease;
 }
-header #menu-user .cadastro {
+header .button-auth .cadastro {
   background: #0b07ae;
 }
-header #menu-user .cadastro:hover {
+header .button-auth .cadastro:hover {
   background: #0c0a57;
 }
-header #menu-user .login {
+header .button-auth .login {
   border: 1px solid #D6B610;
 }
-header #menu-user .login:hover {
+header .button-auth .login:hover {
   background: #D6B610;
+}
+header #menu-user {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  gap: 1rem;
+  position: relative;
 }
 header #menu-user .content-user {
   display: flex;
@@ -218,9 +231,6 @@ header #menu-user .content-suport-user .menu-suport #linksSuport li a:focus {
 }
 header #menu-user .content-suport-user .menu-suport #linksSuport li a:active {
   background: #6009a4;
-}
-header #menu {
-  margin-right: 2rem;
 }
 header #menu .menu-group {
   display: flex;
