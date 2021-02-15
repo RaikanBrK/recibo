@@ -39,25 +39,6 @@ body {
   padding: 10px 15px;
 }
 
-/* Logo */
-.brand {
-  color: #eae9e9;
-  margin-right: auto;
-}
-.brand .logo-receipt {
-  font-size: 1.6rem;
-  margin-right: 5px;
-}
-.brand .logo-text {
-  font-size: 1.6rem;
-  display: inline;
-  font-family: "Libre Baskerville", serif;
-}
-
-.brand:hover {
-  color: white;
-}
-
 header {
   background: #1d1d1f;
   padding: 0 1rem;
