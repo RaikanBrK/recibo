@@ -14,8 +14,8 @@ REPLACE INTO `receipt`.`auth_social` (id, social) VALUES (1, 'Email'),
 
 CREATE TABLE IF NOT EXISTS `receipt`.`usuarios` (
 	id INT NOT NULL AUTO_INCREMENT,
-	nome VARCHAR(100) NOT NULL,
-	email VARCHAR(200) NOT NULL UNIQUE,
+	nome VARCHAR(40) NOT NULL,
+	email VARCHAR(100) NOT NULL UNIQUE,
 	senha VARCHAR(50) NULL,
 
 	authSocialId INT NULL DEFAULT 1,

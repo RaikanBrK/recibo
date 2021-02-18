@@ -10,7 +10,7 @@ use League\OAuth2\Client\Provider\Facebook;
 class AuthController extends Action {
 	public function cadastro() {
 		$this->view->css = ['auth'];
-		$this->view->js = ['auth'];
+		$this->view->js = ['auth', 'cadastro'];
 		$this->view->title = 'Cadastrar usuário';
 
 		$facebook = new Facebook(FACEBOOK);

@@ -75,11 +75,14 @@
   flex-direction: column;
   margin: 30px 0 20px;
 }
-#auth #formAuth .form-group {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: row;
+#auth #formAuth .form-group .warning-icon-input {
+  font-style: oblique;
+}
+#auth #formAuth .form-group .msg-is-invalid {
+  display: none;
+  font-size: 0.75rem;
+  text-align: right;
+  color: #6c757d;
 }
 #auth #formAuth .form-group .input-group {
   background: #ECF0F1;
@@ -136,6 +139,9 @@
 @media (max-width: 575.98px) {
   #auth {
     width: 100%;
+  }
+  #auth #formAuth .form-group .msg-is-invalid {
+    font-size: 0.7rem;
   }
 }
 

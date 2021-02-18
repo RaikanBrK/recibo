@@ -17,17 +17,17 @@
 			<h3 class="msg-other-auth">ou use seu email para criar uma conta</h3>
 
 			<form action="/cadastrar-usuario" method="POST" id="formAuth">
-				<div class="form-group col-12 col-lg-6">
+				<div class="form-group col-12 col-lg-8">
 					<div class="input-group">
 						<label class="input-group-icon" for="nome">
 							<i class="far fa-user input-icon" title="Ícone do usuário" aria-label="iconUserName"></i>
 							<span class="sr-only" id="iconUserName">Ícone do usuário para inserção do nome e sobrenome</span>
 						</label>
-						<input type="text" class="input-auth" id="nome" name="nome" placeholder="Nome e sobrenome"tabindex="3" required>
+						<input type="text" class="input-auth is-invalid" id="nome" name="nome" placeholder="Nome e sobrenome"tabindex="3" autocomplete="off" required>
 					</div>
 				</div>
 
-				<div class="form-group col-12 col-lg-6">
+				<div class="form-group col-12 col-lg-8">
 					<div class="input-group">
 						<label class="input-group-icon" for="email">
 							<i class="far fa-envelope input-icon" title="Ícone de email" aria-label="iconUserEmail"></i>
@@ -37,7 +37,7 @@
 					</div>
 				</div>
 
-				<div class="form-group col-12 col-lg-6">
+				<div class="form-group col-12 col-lg-8">
 					<div class="input-group">
 						<label class="input-group-icon" for="senha">
 							<i class="fas fa-unlock input-icon" title="Ícone de um cadeado aberto" aria-label=iconUserSenha></i>
@@ -47,7 +47,7 @@
 					</div>
 				</div>
 
-				<div class="form-group col-12 col-lg-6">
+				<div class="form-group col-12 col-lg-8">
 					<div class="input-group">
 						<label class="input-group-icon" for="confirmSenha">
 							<i class="fas fa-lock input-icon" title="Ícone de um cadeado fechado" aria-label="iconUserConfirmSenha"></i>
