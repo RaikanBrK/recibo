@@ -350,11 +350,11 @@ const senha = controller.__getSenha();
 
 capsLock('#senha');
 
+controller.__setMaxNumSenha(50);
 senha.keypress(e => {
 	controller.__setTextSenha(e.target.value.trim());
 	let text = controller.__getTextSenha();
 
-	controller.__setMaxNumSenha(50);
 	let num = controller.__getMaxNumSenha();
 	if (text.length >= num) {
 		controller.newCiclo(
@@ -398,6 +398,20 @@ const confirmSenha = controller.__getConfirmSenha();
 
 capsLock('#confirmSenha');
 
+confirmSenha.keypress(e => {
+	controller.__setTextConfirmSenha(e.target.value.trim());
+	let text = controller.__getTextConfirmSenha();
+
+	let num = controller.__getMaxNumSenha();
+	if (text.length >= num) {
+		controller.newCiclo(
+			confirmSenha,
+			`Não é permitido senha com mais de ${num} caracteres`,
+		);
+		e.preventDefault();
+	}
+});
+
 function blurConfirmSenha(send = false) {
 	controller.__setTextConfirmSenha(confirmSenha.val().trim());
 	let text = controller.__getTextConfirmSenha();
@@ -422,7 +436,6 @@ function blurConfirmSenha(send = false) {
 confirmSenha.blur(e => {
 	blurConfirmSenha();
 });
-
 
 $('#btn-auth').click(e => {
 	let validNome = blurNome(true);
