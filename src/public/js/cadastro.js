@@ -7,14 +7,6 @@ const icones = {
 		identificador: 'fa-exclamation',
 		classe: 'fas fa-exclamation text-danger warning-icon-input',
 	},
-	view: {
-		identificador: 'fa-eye',
-		classe: 'far fa-eye',
-	},
-	noView: {
-		identificador: 'fa-eye-slash',
-		classe: 'far fa-eye-slash',
-	},
 }
 
 class Controller {
