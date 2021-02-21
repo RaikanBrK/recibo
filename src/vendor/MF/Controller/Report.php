@@ -7,12 +7,13 @@ class Report extends ReportModel {
 		$_SESSION ?? session_start();
 	}
 
-	public function createReport($status = 'error', $nameSession = 'undefined', $mensagemReport = '', $redirection = '/', $modelDefault = true) {
+	public function createReport($status = 'error', $nameSession = 'undefined', $mensagemReport = '', $redirection = '/', $modelDefault = true, $dados = []) {
 
 		$_SESSION['report'][$nameSession] = [
 			'status' => $status,
 			'mensagem' => $mensagemReport,
 			'modelDefault' => $modelDefault,
+			'dados' => $dados,
 		];
 
 		if ($redirection != false) {

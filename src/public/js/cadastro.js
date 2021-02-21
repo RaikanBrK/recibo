@@ -236,13 +236,13 @@ nome.keypress(e => {
 	}
 });
 
-function blurNome(e) {
+function blurNome(send = false) {
 	controller.__setTextNome(nome.val().trim());
 	let text = controller.__getTextNome();
 
 	controller.removeMensagemInput(nome);
 
-	if (text.length < 5 && text.length > 0) {
+	if (text.length < 5 && (text.length > 0 || send) ) {
 		controller.newCiclo(nome, 'Nome muito curto', 'warning');
 
 	} else if(text.length > controller.__getMaxNumNome()) {
@@ -262,7 +262,7 @@ function blurNome(e) {
 }
 
 nome.blur(e => {
-	blurNome(e);
+	blurNome();
 });
 
 /*
@@ -295,14 +295,14 @@ email.keypress(e => {
 	}
 });
 
-function blurEmail(e) {
+function blurEmail(send = false) {
 	controller.__setTextEmail(email.val().trim());
 	let text = controller.__getTextEmail();
 
 	controller.removeMensagemInput(email);
 
 	if (
-		text.length < 5 && text.length > 0
+		text.length < 5 && (text.length > 0 || send)
 	) {
 		controller.newCiclo(email, 'Email muito curto', 'warning');
 	} else if( (text.indexOf('@') === -1 || text.indexOf('.') === -1) && text.length > 0) {
@@ -320,7 +320,7 @@ function blurEmail(e) {
 }
 
 email.blur(e => {
-	blurEmail(e);
+	blurEmail();
 });
 
 /*
@@ -345,13 +345,13 @@ senha.keypress(e => {
 	}
 });
 
-function blurSenha(e) {
+function blurSenha(send = false) {
 	controller.__setTextSenha(senha.val().trim());
 	let text = controller.__getTextSenha();
 	controller.removeMensagemInput(senha);
 
 	if (
-		text.length < 8 && text.length > 0
+		text.length < 8 && (text.length > 0 || send)
 	) {
 		controller.newCiclo(senha, 'Senha muito curta', 'warning');
 	} else if(text.length >= 8) {
@@ -366,7 +366,7 @@ function blurSenha(e) {
 }
 
 senha.blur(e => {
-	blurSenha(e);
+	blurSenha();
 });
 
 /*
@@ -376,14 +376,14 @@ controller.__setConfirmSenha('#confirmSenha');
 
 const confirmSenha = controller.__getConfirmSenha();
 
-function blurConfirmSenha(e) {
+function blurConfirmSenha(send = false) {
 	controller.__setTextConfirmSenha(confirmSenha.val().trim());
 	let text = controller.__getTextConfirmSenha();
 
 	controller.removeMensagemInput(confirmSenha);
 
 	if (
-		text != controller.__getTextSenha() && text.length > 0
+		text != controller.__getTextSenha() && (text.length > 0 || send)
 	) {
 		controller.newCiclo(confirmSenha, 'As senhas não coincidem', 'warning');
 	} else if(text.length >= 8) {
@@ -398,10 +398,35 @@ function blurConfirmSenha(e) {
 }
 
 confirmSenha.blur(e => {
-	blurConfirmSenha(e);
+	blurConfirmSenha();
 });
 
 
 $('#btn-auth').click(e => {
-	let result = blurNome() && blurEmail() && blurSenha() && blurConfirmSenha() && $("#confirmTerms").is(":checked") ? true : e.preventDefault();
+	let validNome = blurNome(true);
+	let validEmail = blurEmail(true);
+	let validSenha = blurSenha(true);
+	let validConfirmSenha = blurConfirmSenha(true);
+	let validChecked = $("#confirmTerms").is(":checked");
+	let result = validNome && validEmail && validSenha && validConfirmSenha && validChecked ? true : e.preventDefault();
+
+	if (validChecked == false) {
+		controller.createMensagemInput('#confirmTerms', 'Você deve aceitar os termos para criar sua conta.');
+	}
 });
+
+$('#confirmTerms').change(function() {
+	let validChecked = $(this).is(":checked");
+
+	if (validChecked) {
+		controller.removeMensagemInput('#confirmTerms');
+	}
+});
+
+
+$(jQuery(document).ready(function($) {
+	if ($('.verifiqueInput').length != 0) {
+		blurNome(true);
+		blurEmail(true);
+	}
+}));

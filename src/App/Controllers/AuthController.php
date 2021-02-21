@@ -113,13 +113,20 @@ class AuthController extends Action {
 					$sendMail->__set('email', $regras->__get('email'));
 					$sendMail->__set('nome', $regras->__get('nome'));
 					$sendMail->send();
+					$this->report->createReport('success', 'email_create_account', 'Conta criada com sucesso. Agora faça seu login.', '/login');
+
 				} else {
 					// Email já existe;
+					$this->report->createReport('warning', 'email_email_exist', 'Seu email já está cadastro no nosso site.', '/cadastro');
 				}
 			} else {
-				echo '<pre>';
-					print_r($regras->__get('fail'));
-				echo '</pre>';
+				$fail = $regras->__get('fail');
+				$dados = [
+					'nome' => $regras->__get('nome'),
+					'email' => $regras->__get('email'),
+				];
+
+				$this->report->createReport('error', 'email_dados_invalid', 'Mensagem de erro', '/cadastro', false, $dados);
 			}
 		}
 	}
@@ -127,8 +134,6 @@ class AuthController extends Action {
 	public function login() {
 		$this->view->css = ['auth'];
 		$this->view->js = ['auth'];
-
-		header('location: /cadastro');
 
 		$this->render('login', 'layoutAuth');
 	}

@@ -1,3 +1,6 @@
+<?php
+	$report = $this->report->getReport('email_dados_invalid');
+?>
 <div class="container">
 	<div class="content">
 		<main id="auth">
@@ -16,14 +19,18 @@
 
 			<h3 class="msg-other-auth">ou use seu email para criar uma conta</h3>
 
-			<form action="/cadastrar-usuario" method="POST" id="formAuth">
+			<form action="/cadastrar-usuario" method="POST" id="formAuth" class="<?=
+				isset($report['dados']) && isset($report['dados']['nome']) && isset($report['dados']['email']) ? 'verifiqueInput' : ''
+			?>">
 				<div class="form-group col-12 col-lg-8">
-					<div class="input-group">
+					<div class="input-group bg-warning-input">
 						<label class="input-group-icon" for="nome">
 							<i class="far fa-user input-icon" title="Ícone do usuário" aria-label="iconUserName"></i>
 							<span class="sr-only" id="iconUserName">Ícone do usuário para inserção do nome e sobrenome</span>
 						</label>
-						<input type="text" class="input-auth is-invalid" id="nome" name="nome" placeholder="Nome e sobrenome"tabindex="3" autocomplete="off" required>
+						<input type="text" class="input-auth is-invalid" id="nome" name="nome" placeholder="Nome e sobrenome"tabindex="3" autocomplete="off" required
+						value="<?= $report['dados']['nome'] ?? '' ?>"
+						>
 					</div>
 				</div>
 
@@ -33,7 +40,9 @@
 							<i class="far fa-envelope input-icon" title="Ícone de email" aria-label="iconUserEmail"></i>
 							<span class="sr-only" id="iconUserEmail">Ícone de uma envelope para inserção do email</span>
 						</label>
-						<input type="email" class="input-auth" id="email" name="email" placeholder="Email" tabindex="4" required>
+						<input type="email" class="input-auth" id="email" name="email" placeholder="Email" tabindex="4" required
+						value="<?= $report['dados']['email'] ?? '' ?>"
+						>
 					</div>
 				</div>
 
@@ -58,10 +67,10 @@
 				</div>
 
 				<div class="form-group form-check col-12 col-lg-8 mt-4">
-					<div>
+					<div class="content-form-group">
 						<input type="checkbox" class="form-check-input" id="confirmTerms" tabindex="7" required>
 						<label class="form-check-label" for="confirmTerms">
-							Ao marcar, você confirma que leu e concorda com os
+							Ao criar sua conta, você confirma que leu e concorda com os
 							<a href="/termos-de-uso" target="_blank" title="Leia os termos de uso" tabindex="10">termos de uso</a>
 							e os
 							<a href="/termos-de-privacidade" target="_blank" title="Leia os termos de privacidade" tabindex="11">termos de privacidade</a>.
