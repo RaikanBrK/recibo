@@ -36,14 +36,16 @@ class Controller {
 		if (msg.length == 0) {
 			formGroup.append(`
 				<div class="msg-is-invalid">
-					${text}
+					<p>${text}</p>
 				</div>
 			`);
 
 			msg = formGroup.find('.msg-is-invalid');
 			msg.slideDown('show');
 		} else {
-			msg.html(text);
+			msg.html(`
+				<p>${text}</p>
+			`);
 		}
 	}
 
@@ -198,6 +200,30 @@ class Controller {
 
 const controller = new Controller();
 
+function capsLock(seletor) {
+	function getAction(seletor) {
+		let action = confirmSenha;
+		if (seletor == '#senha') {
+			action = senha;
+		}
+		return action;
+	}
+
+	var valid = false;
+	let element = document.querySelector(seletor);
+	element.addEventListener('keydown', function(event) {
+		var flag = event.getModifierState && event.getModifierState('CapsLock');
+
+		if (flag) {
+			controller.createMensagemInput(getAction(seletor), 'O Caps Lock está ativo!');
+			valid = true;
+		} else if(valid == true) {
+			controller.removeMensagemInput(getAction(seletor));
+			valid = false;
+		}
+	});
+}
+
 /*
   *** Nome
 */
@@ -322,6 +348,8 @@ controller.__setSenha('#senha');
 
 const senha = controller.__getSenha();
 
+capsLock('#senha');
+
 senha.keypress(e => {
 	controller.__setTextSenha(e.target.value.trim());
 	let text = controller.__getTextSenha();
@@ -367,6 +395,8 @@ senha.blur(e => {
 controller.__setConfirmSenha('#confirmSenha');
 
 const confirmSenha = controller.__getConfirmSenha();
+
+capsLock('#confirmSenha');
 
 function blurConfirmSenha(send = false) {
 	controller.__setTextConfirmSenha(confirmSenha.val().trim());
@@ -414,7 +444,6 @@ $('#confirmTerms').change(function() {
 		controller.removeMensagemInput('#confirmTerms');
 	}
 });
-
 
 $(jQuery(document).ready(function($) {
 	if ($('.verifiqueInput').length != 0) {
