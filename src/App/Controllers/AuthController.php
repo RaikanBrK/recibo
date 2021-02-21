@@ -41,6 +41,7 @@ class AuthController extends Action {
 
 			if ($paramError) {
 				// Tratar erro
+				$this->report->createReport('error', 'facebook_no_permission', 'Não foi possível acessar sua conta do facebook. Conceda permissão para proseguir.', '/cadastro#social');
 			}
 
 			if ($paramCode) {
@@ -58,12 +59,12 @@ class AuthController extends Action {
 
 				if ($usuarios->emailNoExist()) {
 					$usuarios->createUserFromSocial();
+					$this->report->createReport('success', 'facebook_create_account', 'Conta criada com sucesso.', '/dashboard#social');
 				} else {
 					// Email já existe;
+					$this->report->createReport('warning', 'facebook_email_exist', 'Seu email já está cadastro no nosso site.', '/cadastro#social');
 				}
 			}
-
-
 		} else if ($paramGoogle) {
 			/**
 			 * Auth Google
@@ -71,7 +72,7 @@ class AuthController extends Action {
 			$google = new Google(GOOGLE);
 
 			if ($paramError) {
-				// Tratar erro
+				$this->report->createReport('error', 'google_no_permission', 'Não foi possível acessar sua conta do google. Conceda permissão para proseguir.', '/cadastro#social');
 			}
 
 			if ($paramCode) {
@@ -89,9 +90,11 @@ class AuthController extends Action {
 				$usuarios->__set('authSocialId', 3);
 
 				if ($usuarios->emailNoExist()) {
-					$usuarios->createUserFromSocial();
+					// $usuarios->createUserFromSocial();
+					$this->report->createReport('success', 'google_create_account', 'Conta criada com sucesso.', '/dashboard#social');
 				} else {
 					// Email já existe;
+					$this->report->createReport('warning', 'google_email_exist', 'Seu email já está cadastro no nosso site.', '/cadastro#social');
 				}
 			}
 		} else {
@@ -124,6 +127,8 @@ class AuthController extends Action {
 	public function login() {
 		$this->view->css = ['auth'];
 		$this->view->js = ['auth'];
+
+		header('location: /cadastro');
 
 		$this->render('login', 'layoutAuth');
 	}

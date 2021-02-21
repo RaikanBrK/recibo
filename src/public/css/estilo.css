@@ -258,6 +258,37 @@ header #menu .item-menu a.active {
   color: white;
 }
 
+#report {
+  display: none;
+}
+#report .report {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: row;
+  gap: 1rem;
+  background: white;
+}
+#report .report .content-icon-report .icon-report {
+  padding: 15px;
+  font-size: 1.2rem;
+  color: white;
+}
+#report .report .content-icon-report-success {
+  background: #22a122;
+}
+#report .report .content-icon-report-warning {
+  background: #ffc107;
+}
+#report .report .content-icon-report-error {
+  background: #dc3545;
+}
+#report .report .msg-report > p {
+  margin: 0;
+  padding: 0;
+  font-size: 0.9rem;
+}
+
 footer {
   padding: 0.2rem 0;
   max-width: 100%;

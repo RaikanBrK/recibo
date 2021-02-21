@@ -32,5 +32,4 @@ $(document).ready(() => {
 			burguer.addClass('burguerActive');
 		}
 	});
-
 });

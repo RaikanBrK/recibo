@@ -295,6 +295,47 @@ header {
 	}
 }
 
+$iconContent: 'content-icon-report';
+
+#report {
+	display: none;
+
+	.report {
+		@include flex(flex-start, center);
+		gap: 1rem;
+		background: white;
+
+		.#{$iconContent} {
+			.icon-report {
+				padding: 15px;
+				font-size: 1.2rem;
+				color: white;
+			}
+		}
+
+		.#{$iconContent}-success {
+			background: #22a122;
+		}
+
+		.#{$iconContent}-warning {
+			background: #ffc107;
+		}
+
+		.#{$iconContent}-error {
+			background: #dc3545;
+		}
+
+		.msg-report {
+			& > p {
+				margin: 0;
+				padding: 0;
+				font-size: 0.9rem;
+			}
+		}
+	}
+}
+
+
 footer {
 	padding: 0.2rem 0;
 	max-width: 100%;

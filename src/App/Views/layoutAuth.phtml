@@ -110,6 +110,11 @@
 		</nav>
 	</header>
 
+	<?php
+		$action = 'action/renderReportDefault.php';
+		require_once($action);
+	?>
+
 	<?= $this->content() ?>
 
 	<?php
@@ -117,6 +122,7 @@
 		require_once($action);
 	?>
 
+	<script src="/js/urlSocial.js"></script>
 	<?php
 		if (isset($this->view->js)) {
 			foreach ($this->view->js as $indice => $script) {

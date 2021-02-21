@@ -1,12 +1,15 @@
-<?php 
+<?php
 
 namespace MF\Controller;
+use MF\Controller\Report;
 
-abstract class Action {
+abstract class Action{
 	protected $view;
+	protected $report;
 
 	public function __construct() {
 		$this->view = new \stdClass();
+		$this->report = new Report();
 	}
 
 	public function __set($attr, $value) {

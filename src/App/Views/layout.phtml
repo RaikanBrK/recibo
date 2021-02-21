@@ -154,6 +154,11 @@
 		</nav>
 	</header>
 
+	<?php
+		$action = 'action/renderReportDefault.php';
+		require_once($action);
+	?>
+
 	<?= $this->content() ?>
 
 	<?php
@@ -162,6 +167,7 @@
 	?>
 
 	<script src="/js/script.js"></script>
+	<script src="/js/urlSocial.js"></script>
 	<?php
 		if (isset($this->view->js)) {
 			foreach ($this->view->js as $indice => $script) {

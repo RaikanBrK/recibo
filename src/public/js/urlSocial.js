@@ -1,0 +1,1 @@
+window.history.pushState('Object', 'Remove Social', window.location.href.replace('#social', ''));
