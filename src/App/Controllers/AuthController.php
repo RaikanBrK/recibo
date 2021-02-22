@@ -4,6 +4,7 @@ use MF\Controller\Action;
 use MF\Model\Container;
 use App\Tools\RegrasCadastroUsuario;
 use App\Tools\SendMail;
+use App\Tools\Crypt;
 use League\OAuth2\Client\Provider\Google;
 use League\OAuth2\Client\Provider\Facebook;
 
@@ -90,7 +91,7 @@ class AuthController extends Action {
 				$usuarios->__set('authSocialId', 3);
 
 				if ($usuarios->emailNoExist()) {
-					// $usuarios->createUserFromSocial();
+					$usuarios->createUserFromSocial();
 					$this->report->createReport('success', 'google_create_account', 'Conta criada com sucesso.', '/dashboard#social');
 				} else {
 					// Email já existe;
@@ -102,10 +103,14 @@ class AuthController extends Action {
 			$valid = $regras->validarAll($_POST);
 
 			if ($valid) {
+				$crypt = new Crypt();
+				$crypt->__set('text', $regras->__get('senha'));
+				$senhaCriptografada = $crypt->encryptSenhaComplet();
+
 				$usuarios = Container::getModel('Usuarios');
 				$usuarios->__set('nome', $regras->__get('nome'));
 				$usuarios->__set('email', $regras->__get('email'));
-				$usuarios->__set('senha', $regras->__get('senha'));
+				$usuarios->__set('senha', $senhaCriptografada);
 
 				if ($usuarios->emailNoExist()) {
 					$usuarios->createUserFromEmail();
@@ -114,7 +119,6 @@ class AuthController extends Action {
 					$sendMail->__set('nome', $regras->__get('nome'));
 					$sendMail->send();
 					$this->report->createReport('success', 'email_create_account', 'Conta criada com sucesso. Agora faça seu login.', '/login');
-
 				} else {
 					// Email já existe;
 					$this->report->createReport('warning', 'email_email_exist', 'Seu email já está cadastro no nosso site.', '/cadastro');
