@@ -59,6 +59,12 @@ class Route extends Bootstrap {
 			'action' => 'login'
 		);
 
+		$routes['logarUsuario'] = array(
+			'route' => '/logar-usuario',
+			'controller' => 'AuthController',
+			'action' => 'logarUsuario'
+		);
+
 		$this->setRoutes($routes);
 	}
 }

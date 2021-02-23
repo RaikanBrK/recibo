@@ -14,12 +14,12 @@ class AuthController extends Action {
 		$this->view->js = ['auth', 'cadastro'];
 		$this->view->title = 'Cadastrar usuário';
 
-		$facebook = new Facebook(FACEBOOK);
+		$facebook = new Facebook(FACEBOOK_CADASTRO);
 		$this->view->authUrlFacebook = $facebook->getAuthorizationUrl([
 			"scope" => ["email"]
 		]);
 
-		$google = new Google(GOOGLE);
+		$google = new Google(GOOGLE_CADASTRO);
 		$this->view->authUrlGoogle = $google->getAuthorizationUrl();
 
 		$this->render('cadastro', 'layoutAuth');
@@ -38,7 +38,7 @@ class AuthController extends Action {
 			/**
 			 * Auth Facebook
 			 */
-			$facebook = new Facebook(FACEBOOK);
+			$facebook = new Facebook(FACEBOOK_CADASTRO);
 
 			if ($paramError) {
 				// Tratar erro
@@ -70,7 +70,7 @@ class AuthController extends Action {
 			/**
 			 * Auth Google
 			 */
-			$google = new Google(GOOGLE);
+			$google = new Google(GOOGLE_CADASTRO);
 
 			if ($paramError) {
 				$this->report->createReport('error', 'google_no_permission', 'Não foi possível acessar sua conta do google. Conceda permissão para proseguir.', '/cadastro#social');
@@ -139,7 +139,163 @@ class AuthController extends Action {
 		$this->view->css = ['auth'];
 		$this->view->js = ['auth'];
 
+		$facebook = new Facebook(FACEBOOK_LOGIN);
+		$this->view->authUrlFacebook = $facebook->getAuthorizationUrl([
+			"scope" => ["email"]
+		]);
+
+		$google = new Google(GOOGLE_LOGIN);
+		$this->view->authUrlGoogle = $google->getAuthorizationUrl();
+
 		$this->render('login', 'layoutAuth');
+	}
+
+	public function logarUsuario() {
+		$regras = new RegrasCadastroUsuario();
+
+		$paramFacebook = filter_input(INPUT_GET, 'facebook', FILTER_SANITIZE_STRING);
+		$paramGoogle = filter_input(INPUT_GET, 'google', FILTER_SANITIZE_STRING);
+
+		$paramError = filter_input(INPUT_GET, 'error', FILTER_SANITIZE_STRING);
+		$paramCode = filter_input(INPUT_GET, 'code', FILTER_SANITIZE_STRING);
+
+		if ($paramFacebook) {
+			/**
+			 * Auth Facebook
+			 */
+			$facebook = new Facebook(FACEBOOK_LOGIN);
+
+			if ($paramError) {
+				// Tratar erro
+				$this->report->createReport('error', 'facebook_login_no_permission', 'Não foi possível acessar sua conta do facebook. Conceda permissão para proseguir.', '/login#social');
+			}
+
+			if ($paramCode) {
+			    $token = $facebook->getAccessToken("authorization_code", [
+					"code" => $paramCode
+				]);
+
+				$user = unserialize(serialize($facebook->getResourceOwner($token)));
+
+				$usuarios = Container::getModel('Usuarios');
+				$usuarios->__set('email', $user->getEmail());
+				$usuarios->__set('authSocialId', 2);
+
+				if ($usuarios->emailNoExist()) {
+					// Email não existe
+					$this->report->createReport('error', 'facebook_login_email_no_exist', 'Seu email ainda não foi cadastrado no site.', '/login#social');
+				} else {
+					// Logar usuario;
+					$this->logarUsuarioSocial($usuarios->__get('email'), $usuarios->__get('authSocialId'));
+					$this->report->createReport('success', 'login_success', 'Logado com sucesso.', '/#social');
+				}
+			}
+		} else if ($paramGoogle) {
+			/**
+			 * Auth Google
+			 */
+			$google = new Google(GOOGLE_LOGIN);
+
+			if ($paramError) {
+				$this->report->createReport('error', 'google_login_no_permission', 'Não foi possível acessar sua conta do google. Conceda permissão para proseguir.', '/cadastro#social');
+			}
+
+			if ($paramCode) {
+				$token = $google->getAccessToken("authorization_code", [
+					"code" => $paramCode
+				]);
+
+				$user = unserialize(serialize($google->getResourceOwner($token)));
+
+				$usuarios = Container::getModel('Usuarios');
+				$usuarios->__set('email', $user->getEmail());
+				$usuarios->__set('authSocialId', 3);
+
+				if ($usuarios->emailNoExist()) {
+					// Email não existe
+					$this->report->createReport('error', 'google_email_no_exist', 'Seu email ainda não foi cadastrado no site.', '/login#social');
+				} else {
+					// Logar usuario;
+					$this->logarUsuarioSocial($usuarios->__get('email'), $usuarios->__get('authSocialId'));
+					$this->report->createReport('success', 'login_success', 'Logado com sucesso.', '/#social');
+				}
+			}
+		} else {
+			$usuarios = Container::getModel('Usuarios');
+			$usuarios->__set('email', trim($_POST['email']));
+
+			if ($usuarios->emailNoExist()) {
+				// Email já existe;
+				$this->report->createReport('error', 'email_no_exist_login', 'Seu email não está cadastrado.', '/login');
+			} else {
+				// Logar usuario;
+				$validSenha = $this->logarUsuarioEmail($usuarios->__get('email'), trim($_POST['senha']));
+
+				if ($validSenha) {
+					$this->report->createReport('success', 'login_success', 'Logado com sucesso.', '/dashboard');
+				} else {
+					$this->report->createReport('error', 'login_senha_error', 'Senha inválida.', '/login');
+				}
+			}
+		}
+	}
+
+	public function logarUsuarioSocial($email, $authSocialId) {
+		$crypt = new Crypt();
+
+		$usuarios = Container::getModel('Usuarios');
+
+		$usuarios->__set('email', $email);
+		$usuarios->__set('authSocialId', $authSocialId);
+
+		$user = $usuarios->getUserSocial();
+
+		$crypt->__set('text', $user['id']);
+		$id = $crypt->encrypt();
+
+		$dados = [
+			'id' => $id,
+			'authSocialId' => $user['authSocialId'],
+		];
+		setcookie("remember_user", json_encode($dados), time()+259200);
+		$_SESSION['user'] = $dados;
+	}
+
+	public function logarUsuarioEmail($email, $senha) {
+		$crypt = new Crypt();
+
+		$usuarios = Container::getModel('Usuarios');
+		$usuarios->__set('email', $email);
+
+		$user = $usuarios->getSenhaUserEmail();
+		$userSenhaCriptografada = $user['senha'];
+
+		$crypt->__set('text', $userSenhaCriptografada);
+		$userSenha = $crypt->decrypt();
+
+		$validSenha = password_verify($senha, $userSenha);
+
+		if($validSenha) {
+			$crypt->__set('text', $user['id']);
+			$id = $crypt->encrypt();
+
+			$dados = [
+				'id' => $id,
+				'authSocialId' => $user['authSocialId'],
+			];
+			setcookie("remember_user", json_encode($dados), time()+259200);
+			$_SESSION['user'] = $dados;
+		}
+
+		return $validSenha;
+	}
+
+	public function logout() {
+		unset($_SESSION['user']);
+		unset($_COOKIE['remember_user']);
+		setcookie('remember_user', null, -1, '/');
+
+		$this->report->createReport('success', 'logout', 'Deslogado com sucesso!');
 	}
 }
 ?>

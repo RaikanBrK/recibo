@@ -23,7 +23,7 @@
 				isset($report['dados']) && isset($report['dados']['nome']) && isset($report['dados']['email']) ? 'verifiqueInput' : ''
 			?>">
 				<div class="form-group col-12 col-lg-8">
-					<div class="input-group bg-warning-input">
+					<div class="input-group">
 						<label class="input-group-icon" for="nome">
 							<i class="far fa-user input-icon" title="Ícone do usuário" aria-label="iconUserName"></i>
 							<span class="sr-only" id="iconUserName">Ícone do usuário para inserção do nome e sobrenome</span>
@@ -38,7 +38,7 @@
 					<div class="input-group">
 						<label class="input-group-icon" for="email">
 							<i class="far fa-envelope input-icon" title="Ícone de email" aria-label="iconUserEmail"></i>
-							<span class="sr-only" id="iconUserEmail">Ícone de uma envelope para inserção do email</span>
+							<span class="sr-only" id="iconUserEmail">Ícone de um envelope para inserção do email</span>
 						</label>
 						<input type="email" class="input-auth" id="email" name="email" placeholder="Email" tabindex="4" required
 						value="<?= $report['dados']['email'] ?? '' ?>"

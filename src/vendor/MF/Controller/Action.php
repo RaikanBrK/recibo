@@ -2,14 +2,16 @@
 
 namespace MF\Controller;
 use MF\Controller\Report;
+use MF\Controller\User;
 
-abstract class Action{
+abstract class Action {
 	protected $view;
 	protected $report;
 
 	public function __construct() {
 		$this->view = new \stdClass();
 		$this->report = new Report();
+		$this->userLogado = User::verificarLogin();
 	}
 
 	public function __set($attr, $value) {

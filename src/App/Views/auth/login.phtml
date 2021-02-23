@@ -4,39 +4,43 @@
 			<h1 class="title-auth">Faça seu login</h1>
 
 			<div class="icon-auth-social">
-				<div class="auth-item">
-					<i class="fab fa-facebook-f icon-social"></i>
-				</div>
-				<div class="auth-item">
-					<i class="fab fa-google icon-social"></i>
-				</div>
+				<a href="<?= $this->view->authUrlFacebook ?>" class="auth-item" tabindex="1">
+					<i class="fab fa-facebook-f icon-social" title="Fazer cadastro pela sua conta do facebook" aria-label="iconFacebook"></i>
+					<span class="sr-only" id="iconFacebook">Ícone para fazer cadastro pela sua conta do facebook</span>
+				</a>
+				<a href="<?= $this->view->authUrlGoogle ?>" class="auth-item" tabindex="2">
+					<i class="fab fa-google icon-social" title="Fazer cadastro pela sua conta do google" aria-label="iconGoogle"></i>
+					<span class="sr-only" id="iconGoogle">Ícone para fazer cadastro pela sua conta do google</span>
+				</a>
 			</div>
 
 			<h2 class="msg-other-auth">ou use seu email para fazer seu login</h2>
 
-			<form action="" id="formAuth">
-				<div class="form-group col-12 col-lg-6">
+			<form action="/logar-usuario" id="formAuth" method="POST">
+				<div class="form-group col-12 col-lg-8">
 					<div class="input-group">
-						<div class="input-group-icon">
-							<i class="far fa-envelope input-icon"></i>
-						</div>
-						<input type="email" class="input-auth" placeholder="Email" aria-label="Email" aria-describedby="email para cadastro">
+						<label class="input-group-icon" for="email">
+							<i class="far fa-envelope input-icon" title="Ícone de email" aria-label="iconUserEmail"></i>
+							<span class="sr-only" id="iconUserEmail">Ícone de um envelope para inserção do email</span>
+						</label>
+						<input type="email" class="input-auth" id="email" name="email" placeholder="Email" tabindex="3" required>
 					</div>
 				</div>
 
-				<div class="form-group col-12 col-lg-6">
+				<div class="form-group col-12 col-lg-8">
 					<div class="input-group">
-						<div class="input-group-icon">
-							<i class="fas fa-lock input-icon"></i>
-						</div>
-						<input type="password" class="input-auth" placeholder="Senha" aria-label="senha" aria-describedby="senha para cadastro">
+						<label class="input-group-icon" for="senha">
+							<i class="fas fa-lock input-icon" title="Ícone de um cadeado" aria-label="iconUserSenha"></i>
+							<span class="sr-only" id="iconUserSenha">Ícone de um cadeado para inserção da senha</span>
+						</label>
+						<input type="password" class="input-auth" id="senha" name="senha" placeholder="Senha" tabindex="4" required>
 					</div>
 				</div>
 
-				<button class="btn" id="btn-auth">Logar</button>
+				<button class="btn" id="btn-auth" tabindex="5">Logar</button>
 			</form>
 
-			<p class="auth-other">Não tem uma conta? <a href="/cadastro" class="other-link">Crie sua conta</a></p>
+			<p class="auth-other">Não tem uma conta? <a href="/cadastro" tabindex="6" class="other-link">Crie sua conta</a></p>
 		</div>
 	</div>
 </div>

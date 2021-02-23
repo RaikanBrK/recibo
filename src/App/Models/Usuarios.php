@@ -47,5 +47,27 @@ class Usuarios extends Model {
 		$stmt->execute();
 		return $stmt->rowCount() == 0;
 	}
+
+	public function getUserSocial() {
+		$query = '
+			SELECT id, authSocialId FROM usuarios WHERE email = :email AND (authSocialId between 2 AND 3);
+		';
+
+		$stmt = $this->db->prepare($query);
+		$stmt->bindValue(':email', $this->__get('email'));
+		$stmt->execute();
+		return $stmt->fetch(\PDO::FETCH_ASSOC);
+	}
+
+	public function getSenhaUserEmail() {
+		$query = '
+			SELECT id, authSocialId, senha FROM usuarios WHERE email = :email AND authSocialId = 1
+		';
+
+		$stmt = $this->db->prepare($query);
+		$stmt->bindValue(':email', $this->__get('email'));
+		$stmt->execute();
+		return $stmt->fetch(\PDO::FETCH_ASSOC);
+	}
 }
 ?>

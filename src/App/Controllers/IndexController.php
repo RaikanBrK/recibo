@@ -4,6 +4,9 @@ use MF\Controller\Action;
 use MF\Model\Container;
 use App\Tools\Card;
 
+use League\OAuth2\Client\Provider\Google;
+use League\OAuth2\Client\Provider\Facebook;
+
 class IndexController extends Action {
 	public function index() {
 		$this->view->css = [];
