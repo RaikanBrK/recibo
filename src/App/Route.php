@@ -65,6 +65,18 @@ class Route extends Bootstrap {
 			'action' => 'logarUsuario'
 		);
 
+		$routes['logarUsuarioSocialAutomaticamente'] = array(
+			'route' => '/logar-usuario-social-automaticamente',
+			'controller' => 'AuthController',
+			'action' => 'logarUsuarioSocialAutomaticamente'
+		);
+
+		$routes['logout'] = array(
+			'route' => '/logout',
+			'controller' => 'AuthController',
+			'action' => 'logout'
+		);
+
 		$this->setRoutes($routes);
 	}
 }
