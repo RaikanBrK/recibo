@@ -35,6 +35,29 @@ class AuthController extends Action {
 		$paramError = filter_input(INPUT_GET, 'error', FILTER_SANITIZE_STRING);
 		$paramCode = filter_input(INPUT_GET, 'code', FILTER_SANITIZE_STRING);
 
+		$emailExist = function($authSocialId, $reportSession = 'email_cadastro_exist', $redirection = '/cadastro#social') {
+			switch ($authSocialId) {
+				case 1:
+					//Email
+					$authSocial = 'sistema de cadastro do site';
+					break;
+				case 2:
+					// Facebook
+					$authSocial = 'facebook';
+					break;
+				case 3:
+					// Google
+					$authSocial = 'google';
+					break;
+				default:
+					$authSocial = 'novo recurso';
+					break;
+			}
+			$this->report->createReport('warning', $reportSession,
+				'Seu email já foi cadastrado anteriomente usando o '.$authSocial.'. Faça seu <a href="/login" title="link para login">login</a>',
+			$redirection);
+		};
+
 		if ($paramFacebook) {
 			/**
 			 * Auth Facebook
@@ -81,7 +104,7 @@ class AuthController extends Action {
 						$this->report->createReport('success', 'facebook_create_account', 'Conta criada com sucesso. Faça login automaticamente, <a href="/logar-usuario-social-automaticamente?facebook=true">login automático</a>', '/dashboard#social');
 					} else {
 						// Email já existe;
-						$this->report->createReport('warning', 'facebook_email_exist', 'Seu email já foi cadastrado anteriomente. Faça seu <a href="/login" title="link para login">login</a>', '/cadastro#social');
+						$emailExist($usuarios->verificarAuthSocialId()['authSocialId'], 'facebook_cadastro_exist');
 					}
 				}
 			}
@@ -120,7 +143,7 @@ class AuthController extends Action {
 						$this->report->createReport('success', 'google_create_account', 'Conta criada com sucesso. Faça login automaticamente, <a href="/logar-usuario-social-automaticamente?google=true">login automático</a>', '/dashboard#social');
 					} else {
 						// Email já existe;
-						$this->report->createReport('warning', 'google_email_exist', 'Seu email já foi cadastrado anteriomente. Faça seu <a href="/login" title="link para login">login</a>', '/cadastro#social');
+						$emailExist($usuarios->verificarAuthSocialId()['authSocialId'], 'google_cadastro_exist');
 					}
 				}
 			}
@@ -147,7 +170,7 @@ class AuthController extends Action {
 					$this->report->createReport('success', 'email_create_account', 'Conta criada com sucesso. Agora faça seu <a href="/login" title="link para login">login</a>', '/cadastro');
 				} else {
 					// Email já existe;
-					$this->report->createReport('warning', 'email_email_exist', 'Seu email já foi cadastrado anteriomente. Faça seu <a href="/login" title="link para login">login</a>', '/cadastro');
+					$emailExist($usuarios->verificarAuthSocialId()['authSocialId'], 'email_email_exist', '/cadastro');
 				}
 			} else {
 				$fail = $regras->__get('fail');
