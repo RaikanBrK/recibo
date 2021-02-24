@@ -258,9 +258,10 @@ header #menu .item-menu a.active {
   color: white;
 }
 
-#report {
+#containerReport {
   display: none;
 }
+
 #report .report {
   display: flex;
   justify-content: flex-start;

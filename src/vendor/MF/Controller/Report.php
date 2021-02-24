@@ -1,43 +1,56 @@
 <?php
 namespace MF\Controller;
-use App\Tools\ReportModel;
+use App\Tools\Reportando;
 
-class Report extends ReportModel {
-	public function __construct() {
-		$_SESSION ?? session_start();
+class Report extends Reportando {
+	protected $msg;
+	protected $query;
+
+	public function __get($attr) {
+		return $this->$attr;
 	}
 
-	public function createReport($status = 'error', $nameSession = 'undefined', $mensagemReport = '', $redirection = '/', $modelDefault = true, $dados = []) {
+	public function __set($attr, $value) {
+		$this->$attr = $value;
+	}
 
-		$_SESSION['report'][$nameSession] = [
-			'status' => $status,
-			'mensagem' => $mensagemReport,
-			'modelDefault' => $modelDefault,
-			'dados' => $dados,
-		];
+	public function setMsg(Array $msg) {
+		$msgAmazenada = $this->__get('msg');
+		$msgAmazenada[$msg['name']] = $msg;
+		$this->__set('msg', $msgAmazenada);
+	}
 
-		if ($redirection != false) {
-			header('location: '. $redirection);
+	public function alertReport($name, $dados = []) {
+		$msg = $this->__get('msg')[$name];
+
+		$msg['valid'] = $msg['status'] != 'ERROR';
+
+		$_SESSION['report'][$name] = $msg;
+		$_SESSION['report'][$name]['dados'] = $dados;
+
+		if ($msg['redirection'] != false) {
+			header('location: '.$msg['redirection']);
 			exit();
 		}
 	}
 
-	public function getReport($nameSession = 'undefined', $status = '') {
-
-		// Validando retorno
+	public function getReport($name) {
 		$retorno = false;
-		if ($status != '') {
-			$retorno = (isset($_SESSION['report'][$nameSession]) && $_SESSION['report'][$nameSession]['status'] == $status) ? $_SESSION['report'][$nameSession] : false;
-		} else {
-			$retorno = $_SESSION['report'][$nameSession] ?? false;
-		}
 
-		// Verificando retorno;
+		$retorno = $_SESSION['report'][$name] ?? false;
+
 		if ($retorno) {
-			echo "<script src='/js/report.js'></script>";
-			unset($_SESSION['report'][$nameSession]);
+			unset($_SESSION['report'][$name]);
 		}
 
 		return $retorno;
+	}
+
+	public function link($redirection = '/', $text = 'Home', $title = 'Receipts') {
+		return '<a href="'.$redirection.'" title="'.$title.'">'.$text.'</a>';
+	}
+
+	public function renderModel() {
+		echo $this->__get('query');
 	}
 }

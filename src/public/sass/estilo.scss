@@ -297,9 +297,11 @@ header {
 
 $iconContent: 'content-icon-report';
 
-#report {
+#containerReport {
 	display: none;
+}
 
+#report {
 	.report {
 		@include flex(flex-start, center);
 		gap: 1rem;

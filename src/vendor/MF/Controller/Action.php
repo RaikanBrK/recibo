@@ -9,6 +9,8 @@ abstract class Action {
 	protected $report;
 
 	public function __construct() {
+		$_SESSION ?? session_start();
+
 		$this->view = new \stdClass();
 		$this->report = new Report();
 		$this->userLogado = User::verificarLogin();
