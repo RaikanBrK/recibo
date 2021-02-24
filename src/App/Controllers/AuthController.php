@@ -54,7 +54,7 @@ class AuthController extends Action {
 					break;
 			}
 			$this->report->createReport('warning', $reportSession,
-				'Seu email já foi cadastrado anteriomente usando o '.$authSocial.'. Faça seu <a href="/login" title="link para login">login</a>',
+				'Seu email já foi cadastrado anteriormente usando o '.$authSocial.'. Faça seu <a href="/login" title="link para login">login</a>',
 			$redirection);
 		};
 
@@ -67,7 +67,7 @@ class AuthController extends Action {
 			if ($paramError) {
 				// Tratar erro
 				$this->report->createReport('error', 'facebook_no_permission', '
-					Não foi possível criar sua conta. Permita a <a href="/" title="Home">Receipts</a> suas informações <a href="/termos-de-privacidade" title="termos de privacidade">(veja nossos termos de privacidade)</a> ou escolha outros meios
+					Não foi possível criar sua conta. Permita a <a href="/" title="Home">Receipts</a> suas informações <a href="/termos-de-privacidade" title="termos de privacidade">(veja nossos termos de privacidade)</a> ou escolha outros meios de cadastro
 				', '/cadastro#social');
 			}
 
@@ -101,7 +101,7 @@ class AuthController extends Action {
 							"token" => $token,
 							"user" => $user->toArray(),
 						];
-						$this->report->createReport('success', 'facebook_create_account', 'Conta criada com sucesso. Faça login automaticamente, <a href="/logar-usuario-social-automaticamente?facebook=true">login automático</a>', '/dashboard#social');
+						$this->report->createReport('success', 'facebook_create_account', 'Conta criada com sucesso. Faça login automaticamente, <a href="/logar-usuario-social-automaticamente?facebook=true">login automático</a>', '/cadastro#social');
 					} else {
 						// Email já existe;
 						$emailExist($usuarios->verificarAuthSocialId()['authSocialId'], 'facebook_cadastro_exist');
@@ -140,7 +140,7 @@ class AuthController extends Action {
 							"token" => $token,
 							"user" => $user->toArray(),
 						];
-						$this->report->createReport('success', 'google_create_account', 'Conta criada com sucesso. Faça login automaticamente, <a href="/logar-usuario-social-automaticamente?google=true">login automático</a>', '/dashboard#social');
+						$this->report->createReport('success', 'google_create_account', 'Conta criada com sucesso. Faça login automaticamente, <a href="/logar-usuario-social-automaticamente?google=true">login automático</a>', '/cadastro#social');
 					} else {
 						// Email já existe;
 						$emailExist($usuarios->verificarAuthSocialId()['authSocialId'], 'google_cadastro_exist');
@@ -216,7 +216,9 @@ class AuthController extends Action {
 
 			if ($paramError) {
 				// Tratar erro
-				$this->report->createReport('error', 'facebook_login_no_permission', 'Não foi possível acessar sua conta do facebook. Conceda permissão para proseguir.', '/login#social');
+				$this->report->createReport('error', 'facebook_no_permission', '
+					Não foi possível criar sua conta. Permita a <a href="/" title="Home">Receipts</a> suas informações <a href="/termos-de-privacidade" title="termos de privacidade">(veja nossos termos de privacidade)</a> ou escolha outros meios de login
+				', '/login#social');
 			}
 
 			if ($paramCode) {
@@ -226,17 +228,34 @@ class AuthController extends Action {
 
 				$user = unserialize(serialize($facebook->getResourceOwner($token)));
 
-				$usuarios = Container::getModel('Usuarios');
-				$usuarios->__set('email', $user->getEmail());
-				$usuarios->__set('authSocialId', 2);
-
-				if ($usuarios->emailNoExist()) {
-					// Email não existe
-					$this->report->createReport('error', 'facebook_login_email_no_exist', 'Seu email ainda não foi cadastrado no site.', '/login#social');
+				if ($user->getEmail() == null) {
+					// Sem permissão para acessar o email;
+					$urlFacebook = $facebook->getAuthorizationUrl([
+						"scope" => ["email"],
+						'auth_type' => 'rerequest',
+					]);
+					$this->report->createReport('error', 'facebook_no_permission', '
+						Não foi possível acessar sua conta. Permita a <a href="/" title="Home">Receipts</a> ter acesso ao seu email para continuar.
+						<a href="'.$urlFacebook.'" title="Autorizar email do facebook">Autorizar email</a>
+					', '/login#social');
 				} else {
-					// Logar usuario;
-					$this->logarUsuarioSocial($usuarios->__get('email'), $usuarios->__get('authSocialId'));
-					$this->report->createReport('success', 'login_success', 'Logado com sucesso.', '/#social');
+					// Com permissão para acessar o email;
+					$usuarios = Container::getModel('Usuarios');
+					$usuarios->__set('email', $user->getEmail());
+					$usuarios->__set('authSocialId', 2);
+
+					if ($usuarios->emailNoExist()) {
+						// Email não existe
+						$_SESSION['tokenUserSocialCadastroAutomatico'] = [
+							"token" => $token,
+							"user" => $user->toArray(),
+						];
+						$this->report->createReport('success', 'facebook_create_account', 'Seu email ainda não foi cadastrado no site. Faça seu cadastro automaticamente, <a href="/cadastrar-usuario-social-automaticamente?facebook=true">cadastro automático</a>', '/login#social');
+					} else {
+						// Logar usuario;
+						$this->logarUsuarioSocial($usuarios->__get('email'), $usuarios->__get('authSocialId'));
+						$this->report->createReport('success', 'login_success', 'Logado com sucesso.', '/dashboard#social');
+					}
 				}
 			}
 		} else if ($paramGoogle) {
@@ -246,7 +265,9 @@ class AuthController extends Action {
 			$google = new Google(GOOGLE_LOGIN);
 
 			if ($paramError) {
-				$this->report->createReport('error', 'google_login_no_permission', 'Não foi possível acessar sua conta do google. Conceda permissão para proseguir.', '/cadastro#social');
+				$this->report->createReport('error', 'google_login_no_permission', '
+					Não foi possível criar sua conta. Permita a <a href="/" title="Home">Receipts</a> suas informações <a href="/termos-de-privacidade" title="termos de privacidade">(veja nossos termos de privacidade)</a> ou escolha outros meios de login
+				', '/login#social');
 			}
 
 			if ($paramCode) {
@@ -256,17 +277,33 @@ class AuthController extends Action {
 
 				$user = unserialize(serialize($google->getResourceOwner($token)));
 
-				$usuarios = Container::getModel('Usuarios');
-				$usuarios->__set('email', $user->getEmail());
-				$usuarios->__set('authSocialId', 3);
-
-				if ($usuarios->emailNoExist()) {
-					// Email não existe
-					$this->report->createReport('error', 'google_email_no_exist', 'Seu email ainda não foi cadastrado no site.', '/login#social');
+				if ($user->getEmail() == null) {
+					// Sem permissão para acessar o email;
+					$urlGoogle = $google->getAuthorizationUrl([
+						"scope" => ["email"],
+						'auth_type' => 'rerequest',
+					]);
+					$this->report->createReport('error', 'google_no_permission', '
+						Não foi possível acessar sua conta. Permita a <a href="/" title="Home">Receipts</a> ter acesso ao seu email para continuar.
+						<a href="'.$urlGoogle.'" title="Autorizar email do google">Autorizar email</a>
+					', '/login#social');
 				} else {
-					// Logar usuario;
-					$this->logarUsuarioSocial($usuarios->__get('email'), $usuarios->__get('authSocialId'));
-					$this->report->createReport('success', 'login_success', 'Logado com sucesso.', '/#social');
+					$usuarios = Container::getModel('Usuarios');
+					$usuarios->__set('email', $user->getEmail());
+					$usuarios->__set('authSocialId', 3);
+
+					if ($usuarios->emailNoExist()) {
+						// Email não existe
+						$_SESSION['tokenUserSocialCadastroAutomatico'] = [
+							"token" => $token,
+							"user" => $user->toArray(),
+						];
+						$this->report->createReport('success', 'google_create_account', 'Seu email ainda não foi cadastrado no site. Faça seu cadastro automaticamente, <a href="/cadastrar-usuario-social-automaticamente?google=true">cadastro automático</a>', '/login#social');
+					} else {
+						// Logar usuario;
+						$this->logarUsuarioSocial($usuarios->__get('email'), $usuarios->__get('authSocialId'));
+						$this->report->createReport('success', 'login_success', 'Logado com sucesso.', '/dashboard#social');
+					}
 				}
 			}
 		} else {
@@ -312,13 +349,60 @@ class AuthController extends Action {
 					return false;
 				}
 
-				$this->report->createReport('success', 'facebook_success_login', 'Login realizado com sucesso.', '/dashboard#social');
+				$this->report->createReport('success', 'success_login', 'Login realizado com sucesso.', '/dashboard#social');
 			} else {
 				$this->report->createReport('error', 'login_automatico_fail_dados', 'Login automático inválido.', '/login');
 				return false;
 			}
 		} else {
 			$this->report->createReport('error', 'login_automatico_fail_session', 'Login automático inválido.', '/login');
+		}
+	}
+
+	public function cadastrarUsuarioSocialAutomaticamente() {
+		if (isset($_SESSION['tokenUserSocialCadastroAutomatico'])) {
+			$user = $_SESSION['tokenUserSocialCadastroAutomatico'];
+
+			if (isset($_GET['facebook'])) {
+				$authSocialId = 2;
+				$nome = $user['user']['first_name'] . ' ' . $user['user']['last_name'];
+				$email = $user['user']['email'];
+			} else if (isset($_GET['google'])) {
+				$authSocialId = 3;
+				$nome = $user['user']['given_name'] . ' ' . $user['user']['family_name'];
+				$email = $user['user']['email'];
+			} else {
+				$this->report->createReport('error', 'cadastro_automatico_fail_auth', 'Cadastro automático inválido.', '/cadastro');
+				return false;
+			}
+
+			$email = $user['user']['email'] ?? false;
+
+			if ($email && $authSocialId) {
+				$usuarios = Container::getModel('Usuarios');
+
+				$usuarios->__set('nome', $nome);
+				$usuarios->__set('email', $email);
+				$usuarios->__set('authSocialId', $authSocialId);
+
+				if ($usuarios->emailNoExist()) {
+					$usuarios->createUserFromSocial();
+					$_SESSION['tokenUserSocialLoginAutomatico'] = [
+						"token" => $user['token'],
+						"user" => $user['user'],
+					];
+					$this->report->createReport('success', 'facebook_create_account', 'Conta criada com sucesso. Faça login automaticamente, <a href="/logar-usuario-social-automaticamente?facebook=true">login automático</a>', '/cadastro#social');
+				} else {
+					// Email já existe;
+					$this->report->createReport('error', 'cadastro_automatico_fail_email_exist', 'Cadastro automático inválido', '/login');
+					return false;
+				}
+			} else {
+				$this->report->createReport('error', 'cadastro_automatico_fail_email_exist', 'Sem permissão para acesar o email.', '/login');
+				return false;
+			}
+		} else {
+			$this->report->createReport('error', 'cadastro_automatico_fail_session', 'Cadastro automático inválido', '/login');
 		}
 	}
 
