@@ -20,6 +20,12 @@ class Report extends Reportando {
 		$this->__set('msg', $msgAmazenada);
 	}
 
+	public function updateMsg($name, $msg) {
+		$msgAmazenada = $this->__get('msg');
+		$msgAmazenada[$name]['msg'] = $msg;
+		$this->__set('msg', $msgAmazenada);
+	}
+
 	public function alertReport($name, $dados = []) {
 		$msg = $this->__get('msg')[$name];
 

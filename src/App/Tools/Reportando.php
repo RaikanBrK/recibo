@@ -16,24 +16,92 @@ class Reportando {
 	 * @attr array 'dados'
 	 */
 	public function criandoMensagens() {
+		// Cadastro
+		$this->setMsg([
+			'name' => 'create_account',
+			'status' => 'OK',
+			'time' => 12000,
+			'redirection' => '/cadastro#social',
+			'msg' => 'Conta criada com sucesso.',
+		]);
+
+		$this->setMsg([
+			'name' => 'cadastro_social_dados_fail',
+			'status' => 'ERROR',
+			'redirection' => '/cadastro#social',
+			'msg' => 'Não foi possível criar sua conta, tivemos problemas em acessar seus dados. Tente novamente mais tarde.',
+		]);
+
+		$this->setMsg([
+			'name' => 'cadastro_email_exist',
+			'status' => 'WARNING',
+			'redirection' => '/cadastro#social',
+			'msg' => 'Seu email já foi cadastrado anteriormente',
+		]);
+
+		$this->setMsg([
+			'name' => 'cadastro_email_exist_no_exist',
+			'status' => 'ERROR',
+			'redirection' => '/cadastro#social',
+			'msg' => 'Algo deu errado ao cadastrar seu email. Tente novamente mais tarde.',
+		]);
+
+		// Facebook Cadastro
 		$this->setMsg([
 			'name' => 'facebook_cadastro_no_permission',
-			'time' => 9800,
-			'status' => 'OK',
-			'redirection' => '/dashboard',
-			'msg' => 'Erro facebook',
-			'modelo' => 1,
+			'status' => 'ERROR',
+			'redirection' => '/cadastro#social',
+			'msg' => 'Não foi possível criar sua conta. Permita o acesso a sua conta do facebook.',
 		]);
+
+		$this->setMsg([
+			'name' => 'facebook_cadastro_no_permission_email',
+			'status' => 'ERROR',
+			'redirection' => '/cadastro#social',
+			'msg' => 'Não foi possível criar sua conta. Permita o acesso a seu email do facebook.',
+		]);
+
+		// Google Cadastro
+		$this->setMsg([
+			'name' => 'google_cadastro_no_permission',
+			'status' => 'ERROR',
+			'redirection' => '/cadastro#social',
+			'msg' => 'Não foi possível criar sua conta. Permita o acesso a sua conta do google.',
+		]);
+
+		$this->setMsg([
+			'name' => 'google_cadastro_no_permission_email',
+			'status' => 'ERROR',
+			'redirection' => '/cadastro#social',
+			'msg' => 'Não foi possível criar sua conta. Permita o acesso a seu email do google.',
+		]);
+
+		// Email Cadastro
+		$this->setMsg([
+			'name' => 'email_dados_invalid',
+			'status' => 'ERROR',
+			'redirection' => '/cadastro',
+			'modelo' => false,
+		]);
+
+		$this->setMsg([
+			'name' => 'email_create_account',
+			'status' => 'OK',
+			'redirection' => '/cadastro',
+			'msg' => 'Conta criada com sucesso. Agora faça seu '.$this->link('/login', 'login', 'link para login'),
+		]);
+
+		// 
 	}
 
 	public function modelo1(Array $array) {
         $dados = [];
         switch ($array['status']) {
-			case 'success':
+			case 'OK':
 				$dados['status'] = 'content-icon-report-success';
 				$dados['icon'] = '<i class="fas fa-check-circle icon-report"></i>';
 				break;
-			case 'warning':
+			case 'WARNING':
 				$dados['status'] = 'content-icon-report-warning';
 				$dados['icon'] = '<i class="fas fa-info-circle icon-report"></i> ';
 				break;

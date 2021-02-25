@@ -80,5 +80,18 @@ class Usuarios extends Model {
 		$stmt->execute();
 		return $stmt->fetch(\PDO::FETCH_ASSOC);
 	}
+
+	public function getTextSocialEmail() {
+		$query = '
+			SELECT us.authSocialId, auth.social
+			FROM usuarios as us LEFT JOIN auth_social as auth ON(us.authSocialId = auth.id)
+			WHERE email = :email
+		';
+
+		$stmt = $this->db->prepare($query);
+		$stmt->bindValue(':email', $this->__get('email'));
+		$stmt->execute();
+		return $stmt->fetch(\PDO::FETCH_ASSOC);
+	}
 }
 ?>
