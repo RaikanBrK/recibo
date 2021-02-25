@@ -50,7 +50,7 @@ class Usuarios extends Model {
 
 	public function getUserSocial() {
 		$query = '
-			SELECT id, authSocialId FROM usuarios WHERE email = :email AND (authSocialId between 2 AND 3);
+			SELECT id, nome, email, authSocialId FROM usuarios WHERE email = :email AND (authSocialId between 2 AND 3);
 		';
 
 		$stmt = $this->db->prepare($query);

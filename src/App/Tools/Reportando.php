@@ -91,7 +91,83 @@ class Reportando {
 			'msg' => 'Conta criada com sucesso. Agora faça seu '.$this->link('/login', 'login', 'link para login'),
 		]);
 
+		// Login
+		$this->setMsg([
+			'name' => 'login_email_no_exist',
+			'status' => 'ERROR',
+			'redirection' => '/login#social',
+			'msg' => '',
+		]);
+
+		$this->setMsg([
+			'name' => 'login_success',
+			'status' => 'OK',
+			'redirection' => '/dashboard#social',
+			'msg' => 'Logado com sucesso',
+		]);
+		
+		$this->setMsg([
+			'name' => 'login_dados_fail',
+			'status' => 'ERROR',
+			'redirection' => '/login#social',
+			'msg' => 'Tivemos problemas ao recuperar os dados da sua conta. Tente mais tarde',
+		]);
+
+		$this->setMsg([
+			'name' => 'login_senha_invalid',
+			'status' => 'ERROR',
+			'redirection' => '/login#social',
+			'msg' => 'Senha inválida',
+		]);
+
+		// Facebook Login
+		$this->setMsg([
+			'name' => 'facebook_login_no_permission',
+			'status' => 'ERROR',
+			'redirection' => '/login#social',
+			'msg' => 'Não foi possível realizar o login. Permita o acesso a sua conta do facebook.',
+		]);
+
+		$this->setMsg([
+			'name' => 'facebook_login_no_permission_email',
+			'status' => 'ERROR',
+			'redirection' => '/login#social',
+			'msg' => 'Não foi possível realizar o login. Permita o acesso a seu email do facebook.',
+		]);
+
+		// Google Login
+		$this->setMsg([
+			'name' => 'google_login_no_permission',
+			'status' => 'ERROR',
+			'redirection' => '/login#social',
+			'msg' => 'Não foi possível realizar o login. Permita o acesso a sua conta do google.',
+		]);
+
+		$this->setMsg([
+			'name' => 'google_login_no_permission_email',
+			'status' => 'ERROR',
+			'redirection' => '/login#social',
+			'msg' => 'Não foi possível realizar o login. Permita o acesso a seu email do google.',
+		]);
+
+		$this->setMsg([
+			'name' => 'email_login_email_no_exist',
+			'status' => 'ERROR',
+			'redirection' => '/login#social',
+			'msg' => 'Seu email ainda não foi cadastrado no site.',
+		]);
+
+
 		// 
+
+
+		// Auth
+		$this->setMsg([
+			'name' => 'logout',
+			'status' => 'OK',
+			'redirection' => '/dashboard',
+			'msg' => 'Deslogado com sucesso',
+		]);
 	}
 
 	public function modelo1(Array $array) {
