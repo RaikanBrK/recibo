@@ -167,6 +167,22 @@ class AuthController extends Action {
 		}
 	}
 
+	public function retorno(String $status, String $name = '', Array $dados = []) {
+		$array = [
+			'status' => $status,
+		];
+
+		if ($name) {
+			$array['name'] = $name;
+		}
+
+		if ($dados) {
+			$array['dados'] = $dados;
+		}
+
+		return $array;
+	}
+
 	/**
 	 * @param string $attr;
 	 * @param string $prefix;
@@ -179,10 +195,7 @@ class AuthController extends Action {
 
 		if ($paramError) {
 			// Error
-			return [
-				'name' => $prefix.'_no_permission',
-				'status' => 'ERROR',
-			];
+			return $this->retorno('ERROR', $prefix.'_no_permission');
 		}
 
 		if ($paramCode) {
@@ -203,10 +216,7 @@ class AuthController extends Action {
 			}
 
 			if ($user->getEmail() == null) {
-				return [
-					'name' => $prefix.'_no_permission_email',
-					'status' => 'ERROR',
-				];
+				return $this->retorno('ERROR', $prefix.'_no_permission_email');
 			}
 
 			$this->__set('user', $user);
@@ -218,10 +228,7 @@ class AuthController extends Action {
 				'email' => $user->getEmail(),
 			];
 
-			return [
-				'status' => 'OK',
-				'dados' => $dados,
-			];
+			return $this->retorno('OK', 'authGetDadosSuccess', $dados);
 		}
 	}
 
@@ -251,23 +258,14 @@ class AuthController extends Action {
 					"token" => $this->__get('token'),
 					"user" => $this->__get('user')->toArray(),
 				];
-				return [
-					'status' => 'OK',
-					'name' => 'create_account',
-				];
+				return $this->retorno('OK', 'create_account');
 			} else {
 				// Email para cadastro já existe
-				return [
-					'name' => 'cadastro_email_exist',
-					'status' => 'ERROR',
-				];
+				return $this->retorno('ERROR', 'cadastro_email_exist');
 			}
 		} else {
 			// Dados inválidos
-			return [
-				'name' => 'cadastro_social_dados_fail',
-				'status' => 'ERROR',
-			];
+			return $this->retorno('ERROR', 'cadastro_social_dados_fail');
 		}
 	}
 
