@@ -17,6 +17,7 @@ CREATE TABLE IF NOT EXISTS `receipt`.`usuarios` (
 	nome VARCHAR(40) NOT NULL,
 	email VARCHAR(100) NOT NULL UNIQUE,
 	senha VARCHAR(150) NULL,
+	img VARCHAR(300) NULL,
 
 	authSocialId INT NULL DEFAULT 1,
 	FOREIGN KEY(authSocialId) REFERENCES auth_social(id),
