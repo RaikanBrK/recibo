@@ -7,6 +7,7 @@ class Usuarios extends Model {
 	protected $nome;
 	protected $email;
 	protected $senha;
+	protected $img;
 	protected $authSocialId;
 
 	public function createUserFromEmail() {
@@ -25,8 +26,8 @@ class Usuarios extends Model {
 
 	public function createUserFromSocial() {
 		$query = '
-			INSERT INTO usuarios(nome, email, authSocialId) VALUES(
-				:nome, :email, :authSocialId
+			INSERT INTO usuarios(nome, email, authSocialId, img) VALUES(
+				:nome, :email, :authSocialId, :img
 			);
 		';
 
@@ -34,6 +35,7 @@ class Usuarios extends Model {
 		$stmt->bindValue(':nome', $this->__get('nome'));
 		$stmt->bindValue(':email', $this->__get('email'));
 		$stmt->bindValue(':authSocialId', $this->__get('authSocialId'), \PDO::PARAM_INT);
+		$stmt->bindValue(':img', $this->__get('img'));
 		$stmt->execute();
 	}
 

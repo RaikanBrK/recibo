@@ -52,7 +52,11 @@
 
 </head>
 <body>
-	<?php $valid = $this->userLogado; ?>
+	<?php
+		if ($this->userLogado) {
+			header('location: /dashboard');
+		}
+	?>
 
 	<header class="container-fluid">
 		<nav class="navbar navbar-expand-lg content-container">
@@ -74,17 +78,11 @@
 								"dir" => "/modelos_recibo",
 								"text" => "Modelos de Recibo",
 								"title" => "Todos os modelos do recibo",
-							],
-							[
-								"dir" => "/recibos",
-								"text" => "Últimos Recibos",
-								"login" => true,
-							],
+							]
 						];
 
 						$url = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 						foreach ($itensMenu as $item) {
-							if ($valid || !isset($item['login'])) {
 				 			?>
 							    <li class="item-menu">
 									<a
@@ -95,17 +93,15 @@
 									<?= $item['text'] ?>
 									</a>
 								</li>
-							<?php }
+							<?php
 						}
 					?>
 				</ul>
 
-				<?php if (!$valid) { ?>
-					<div class="button-auth mt-4 mt-lg-0">
-						<a href="/cadastro" class="btn cadastro">Cadastrar-se</a>
-						<a href="/login" class="btn login">Logar-se</a>
-					</div>
-				<?php } ?>
+				<div class="button-auth mt-4 mt-lg-0">
+					<a href="/cadastro" class="btn cadastro">Cadastrar-se</a>
+					<a href="/login" class="btn login">Logar-se</a>
+				</div>
 			</div>
 		</nav>
 	</header>

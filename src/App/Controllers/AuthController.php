@@ -47,29 +47,6 @@ class AuthController extends Action {
 		$paramFacebook = filter_input(INPUT_GET, 'facebook', FILTER_SANITIZE_STRING);
 		$paramGoogle = filter_input(INPUT_GET, 'google', FILTER_SANITIZE_STRING);
 
-		$emailExist = function($authSocialId, $reportSession = 'email_cadastro_exist', $redirection = '/cadastro#social') {
-			switch ($authSocialId) {
-				case 1:
-					//Email
-					$authSocial = 'sistema de cadastro do site';
-					break;
-				case 2:
-					// Facebook
-					$authSocial = 'facebook';
-					break;
-				case 3:
-					// Google
-					$authSocial = 'google';
-					break;
-				default:
-					$authSocial = 'novo recurso';
-					break;
-			}
-			/*$this->report->createReport('warning', $reportSession,
-				'Seu email já foi cadastrado anteriormente usando o '.$authSocial.'. Faça seu <a href="/login" title="link para login">login</a>',
-			$redirection);*/
-		};
-
 		if ($paramFacebook) {
 			/**
 			 * Auth Facebook
@@ -202,14 +179,16 @@ class AuthController extends Action {
 
 			$user = unserialize(serialize($class->getResourceOwner($token)));
 
-			if ($prefix == 'facebook_cadastro') {
+			if (strpos($prefix, 'google') === false) {
 				try {
 				    $tokenLong = $class->getLongLivedAccessToken($token);
 				} catch (Exception $e) {
 				    $tokenLong = $token;
 				}
+				$img = $user->getPictureUrl();
 			} else {
 				$tokenLong = $token;
+				$img = $user->getAvatar();
 			}
 
 			if ($user->getEmail() == null) {
@@ -223,6 +202,7 @@ class AuthController extends Action {
 			$dados = [
 				'nome' => $nome,
 				'email' => $user->getEmail(),
+				'img' => $img,
 			];
 
 			return $this->retorno('OK', 'authGetDadosSuccess', $dados);
@@ -243,6 +223,7 @@ class AuthController extends Action {
 			$usuarios = Container::getModel('Usuarios');
 			$usuarios->__set('nome', $dados['nome']);
 			$usuarios->__set('email', $dados['email']);
+			$usuarios->__set('img', $dados['img']);
 			$usuarios->__set('authSocialId', (INT) $authSocialId['id']);
 
 			if ($usuarios->emailNoExist()) {
@@ -339,12 +320,15 @@ class AuthController extends Action {
 				$this->report->alertReport($valid['name']);
 			}
 		} else {
-			$retorno = $this->authLogin([
-				'email' => trim($_POST['email']),
-				'senha' => trim($_POST['senha']),
-			], 'email');
+			if(isset($_POST['email']) && isset($_POST['senha'])) {
+				$retorno = $this->authLogin([
+					'email' => trim($_POST['email']),
+					'senha' => trim($_POST['senha']),
+				], 'email');
 
-			$this->report->alertReport($retorno['name']);
+				$this->report->alertReport($retorno['name']);
+			}
+			$this->report->alertReport('not_dados_login_user_url');
 		}
 	}
 
@@ -356,9 +340,8 @@ class AuthController extends Action {
 
 			$usuarios = Container::getModel('Usuarios');
 			$usuarios->__set('email', $dados['email']);
-			$authSocial = $usuarios->getTextSocialEmail();
 
-			if ($prefix) {
+			if ($usuarios->emailNoExist() == false) {
 
 				if ($prefix != 'email') {
 					// Login Social
@@ -377,6 +360,7 @@ class AuthController extends Action {
 				}
 				return $this->retorno('OK', 'login_success');
 			}
+
 			// Email não existe
 			if ($prefix != 'email') {
 				$_SESSION['tokenUserSocialCadastroAutomatico'] = [
@@ -392,7 +376,6 @@ class AuthController extends Action {
 			} else {
 				$msg = ' '.$this->report->link('/cadastro', 'Faça o cadastro primeiro', 'Cadastrar conta');
 			}
-
 
 			$this->report->updateMsg('login_email_no_exist', 'O email <i class="text-info">'.$dados['email'].'</i> ainda não foi cadastrado no site.'.$msg);
 			return $this->retorno('ERROR', 'login_email_no_exist');
@@ -464,11 +447,14 @@ class AuthController extends Action {
 	}
 
 	public function logout() {
-		unset($_SESSION['user']);
-		unset($_COOKIE['remember_user']);
-		setcookie('remember_user', null, -1, '/');
+		if (isset($_SESSION['user'])) {
+			unset($_SESSION['user']);
+			unset($_COOKIE['remember_user']);
+			setcookie('remember_user', null, -1, '/');
 
-		$this->report->alertReport('logout');
+			$this->report->alertReport('logout');
+		}
+		$this->report->alertReport('logout_error_no_login');
 	}
 
 	public function logarUsuarioSocialAutomaticamente() {
@@ -506,11 +492,6 @@ class AuthController extends Action {
 		if (isset($_SESSION['tokenUserSocialCadastroAutomatico'])) {
 			$user = $_SESSION['tokenUserSocialCadastroAutomatico']['user'];
 			$token = $_SESSION['tokenUserSocialCadastroAutomatico']['token'];
-			$nome = $user->getFirstName() . ' ' . $user->getLastName();
-			$dados = [
-				'nome' => $nome,
-				'email' => $user->getEmail(),
-			];
 
 			if ($paramFacebook) {
 				$title = 'facebook';
@@ -520,10 +501,19 @@ class AuthController extends Action {
 				} catch (Exception $e) {
 				    $tokenLong = $token;
 				}
+				$img = $user->getPictureUrl();
 			} else {
 				$title = 'google';
 				$tokenLong = $token;
+				$img = $user->getAvatar();
 			}
+
+			$nome = $user->getFirstName() . ' ' . $user->getLastName();
+			$dados = [
+				'nome' => $nome,
+				'email' => $user->getEmail(),
+				'img' => $img,
+			];
 
 			$this->__set('user', $user);
 			$this->__set('token', $tokenLong);

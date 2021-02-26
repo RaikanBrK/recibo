@@ -120,6 +120,13 @@ class Reportando {
 			'msg' => 'Senha inválida',
 		]);
 
+		$this->setMsg([
+			'name' => 'not_dados_login_user_url',
+			'status' => 'ERROR',
+			'redirection' => '/login',
+			'msg' => 'Tivemos problemas em recuperar seus dados para efetuar o login',
+		]);
+
 		// Facebook Login
 		$this->setMsg([
 			'name' => 'facebook_login_no_permission',
@@ -164,16 +171,20 @@ class Reportando {
 			'msg' => 'Esse email pertence a uma conta social.',
 		]);
 
-
-		// 
-
-
 		// Auth
 		$this->setMsg([
 			'name' => 'logout',
 			'status' => 'OK',
 			'redirection' => '/dashboard',
 			'msg' => 'Deslogado com sucesso',
+		]);
+
+		$this->setMsg([
+			'name' => 'logout_error_no_login',
+			'status' => 'WARNING',
+			'redirection' => '/dashboard',
+			'msg' => '',
+			'modelo' => false,
 		]);
 	}
 
