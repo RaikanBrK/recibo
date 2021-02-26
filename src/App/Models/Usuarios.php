@@ -95,5 +95,22 @@ class Usuarios extends Model {
 		$stmt->execute();
 		return $stmt->fetch(\PDO::FETCH_ASSOC);
 	}
+
+	public function getUserId() {
+		$query = '
+			SELECT
+				us.id, us.authSocialId, us.nome, us.email, auth.social, us.img, us.senha
+			FROM
+				usuarios as us
+				LEFT JOIN auth_social as auth ON(us.authSocialId = auth.id)
+			WHERE
+				us.id = :id
+		';
+
+		$stmt = $this->db->prepare($query);
+		$stmt->bindValue(':id', $this->__get('id'), \PDO::PARAM_INT);
+		$stmt->execute();
+		return $stmt->fetch(\PDO::FETCH_ASSOC);
+	}
 }
 ?>

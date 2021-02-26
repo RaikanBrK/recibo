@@ -57,8 +57,11 @@
 			<div id="menu-user" class="order-lg-1 mr-2 mr-lg-0">
 				<?php if ($valid) { ?>
 					<div class="content-user" id="userContentHeader">
-						<!-- <i class="fas fa-user-circle icon-user" title="Ícone do usuário"></i> -->
-						<img src="/img/taylor.jpg" id="img-user">
+						<?php if ($this->view->user['img']) { ?>
+							<img src="<?= $this->view->user['img'] ?>" id="img-user" alt="avatar" title="Avatar do usuário <?= $this->view->user['nome'] ?>">
+						<?php } else { ?>
+							<i class="fas fa-user-circle icon-user" title="Avatar do usuário"></i>
+						<?php } ?>
 						<i class="fas fa-sort-down icon-down"></i>
 					</div>
 

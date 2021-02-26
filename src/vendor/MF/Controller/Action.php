@@ -3,6 +3,8 @@
 namespace MF\Controller;
 use MF\Controller\Report;
 use MF\Controller\User;
+use MF\Model\Container;
+use App\Tools\Crypt;
 
 abstract class Action {
 	protected $view;
@@ -14,6 +16,7 @@ abstract class Action {
 		$this->view = new \stdClass();
 		$this->report = new Report();
 		$this->userLogado = User::verificarLogin();
+		$this->getDadosUser();
 	}
 
 	public function __set($attr, $value) {
@@ -22,6 +25,22 @@ abstract class Action {
 
 	public function __get($attr) {
 		return $this->$attr;
+	}
+
+	protected function getDadosUser() {
+		if ($this->userLogado) {
+			$usuarios = Container::getModel('Usuarios');
+
+			if (isset($_SESSION['user']['id'])) {
+				$crypt = new Crypt();
+				$crypt->__set('text', $_SESSION['user']['id']);
+				$id = $crypt->decrypt();
+
+				$usuarios->__set('id', (INT) $id);
+				$dados = $usuarios->getUserId();
+				$this->view->user = $dados;
+			}
+		}
 	}
 
 	protected function render($view, $layout = 'layout') {
