@@ -105,7 +105,7 @@ class Reportando {
 			'redirection' => '/dashboard#social',
 			'msg' => 'Logado com sucesso',
 		]);
-		
+
 		$this->setMsg([
 			'name' => 'login_dados_fail',
 			'status' => 'ERROR',
@@ -155,6 +155,13 @@ class Reportando {
 			'status' => 'ERROR',
 			'redirection' => '/login#social',
 			'msg' => 'Seu email ainda não foi cadastrado no site.',
+		]);
+
+		$this->setMsg([
+			'name' => 'login_email_para_conta_social',
+			'status' => 'ERROR',
+			'redirection' => '/login#social',
+			'msg' => 'Esse email pertence a uma conta social.',
 		]);
 
 

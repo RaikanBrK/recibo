@@ -61,7 +61,7 @@ class Usuarios extends Model {
 
 	public function getSenhaUserEmail() {
 		$query = '
-			SELECT id, authSocialId, senha FROM usuarios WHERE email = :email AND authSocialId = 1
+			SELECT id, authSocialId, senha FROM usuarios WHERE email = :email
 		';
 
 		$stmt = $this->db->prepare($query);

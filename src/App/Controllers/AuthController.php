@@ -358,9 +358,9 @@ class AuthController extends Action {
 			$usuarios->__set('email', $dados['email']);
 			$authSocial = $usuarios->getTextSocialEmail();
 
-			if ($authSocial) {
+			if ($prefix) {
 
-				if ($authSocial['social'] != 'Email') {
+				if ($prefix != 'email') {
 					// Login Social
 					$retorno = $this->logarUsuarioSocial($dados['email']);
 
@@ -371,8 +371,8 @@ class AuthController extends Action {
 					// Login email
 					$retorno = $this->logarUsuarioEmail($dados['email'], $dados['senha']);
 
-					if ($retorno == false) {
-						return $this->retorno('ERROR', 'login_senha_invalid');
+					if ($retorno['status'] == 'ERROR') {
+						return $this->retorno('ERROR', $retorno['name']);
 					}
 				}
 				return $this->retorno('OK', 'login_success');
@@ -433,28 +433,34 @@ class AuthController extends Action {
 
 		$usuarios = Container::getModel('Usuarios');
 		$usuarios->__set('email', $email);
-
 		$user = $usuarios->getSenhaUserEmail();
-		$userSenhaCriptografada = $user['senha'];
 
-		$crypt->__set('text', $userSenhaCriptografada);
-		$userSenha = $crypt->decrypt();
+		if ($user) {
+			if ($user['authSocialId'] == 1) {
+				$userSenhaCriptografada = $user['senha'];
 
-		$validSenha = password_verify($senha, $userSenha);
+				$crypt->__set('text', $userSenhaCriptografada);
+				$userSenha = $crypt->decrypt();
 
-		if($validSenha) {
-			$crypt->__set('text', $user['id']);
-			$id = $crypt->encrypt();
+				$validSenha = password_verify($senha, $userSenha);
 
-			$dados = [
-				'id' => $id,
-				'authSocialId' => $user['authSocialId'],
-			];
-			setcookie("remember_user", json_encode($dados), time()+259200);
-			$_SESSION['user'] = $dados;
+				if($validSenha) {
+					$crypt->__set('text', $user['id']);
+					$id = $crypt->encrypt();
+
+					$dados = [
+						'id' => $id,
+						'authSocialId' => $user['authSocialId'],
+					];
+					setcookie("remember_user", json_encode($dados), time()+259200);
+					$_SESSION['user'] = $dados;
+					return $this->retorno('OK');
+				}
+				return $this->retorno('ERROR', 'login_senha_invalid');
+			}
+			return $this->retorno('ERROR', 'login_email_para_conta_social');
 		}
-
-		return $validSenha;
+		return $this->retorno('ERROR', 'email_login_email_no_exist');
 	}
 
 	public function logout() {
