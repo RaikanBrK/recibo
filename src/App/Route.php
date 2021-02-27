@@ -77,6 +77,12 @@ class Route extends Bootstrap {
 			'action' => 'logarUsuarioSocialAutomaticamente'
 		);
 
+		$routes['forgotPassword'] = array(
+			'route' => '/forgot-password',
+			'controller' => 'AuthController',
+			'action' => 'forgotPassword'
+		);
+
 		$routes['logout'] = array(
 			'route' => '/logout',
 			'controller' => 'AuthController',

@@ -1,8 +1,6 @@
 #auth {
   width: 75%;
   margin: auto;
-  background: white;
-  padding: 15px;
 }
 #auth .title-auth {
   font-size: 2rem;
@@ -88,6 +86,17 @@
   color: #6c757d;
 }
 #auth #formAuth .form-group .msg-is-invalid > p {
+  margin: 0;
+  padding: 0;
+}
+#auth #formAuth .form-group .msg-senha {
+  display: block;
+  text-align: right;
+  margin-top: 0.3rem;
+  font-size: 0.8rem;
+  color: #4b10aca8;
+}
+#auth #formAuth .form-group .msg-senha > p {
   margin: 0;
   padding: 0;
 }

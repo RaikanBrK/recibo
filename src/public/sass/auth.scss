@@ -4,8 +4,6 @@
 #auth {
 	width: 75%;
 	margin: auto;
-	background: white;
-	padding: 15px;
 
 	.title-auth {
 		font-size: 2rem;
@@ -96,6 +94,19 @@
 				font-size: 0.75rem;
 				text-align: right;
 				color: #6c757d;
+
+				& > p {
+					margin: 0;
+					padding: 0;
+				}
+			}
+
+			.msg-senha {
+				display: block;
+				text-align: right;
+				margin-top: 0.3rem;
+				font-size: 0.8rem;
+				color: #4b10aca8;
 
 				& > p {
 					margin: 0;

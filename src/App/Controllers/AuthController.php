@@ -449,6 +449,13 @@ class AuthController extends Action {
 		return $this->retorno('ERROR', 'email_login_email_no_exist');
 	}
 
+	public function forgotPassword() {
+		$this->view->css = ['forgotPassword'];
+		$this->view->js = ['forgotPassword'];
+
+		$this->render('forgotPassword', 'layoutAuth');
+	}
+
 	public function logout() {
 		if (isset($_SESSION['user'])) {
 			unset($_SESSION['user']);
