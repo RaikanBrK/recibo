@@ -324,6 +324,7 @@ class AuthController extends Action {
 				$retorno = $this->authLogin([
 					'email' => trim($_POST['email']),
 					'senha' => trim($_POST['senha']),
+					'manterConectado' => isset($_POST['manterConectado']),
 				], 'email');
 
 				$this->report->alertReport($retorno['name']);
@@ -352,7 +353,7 @@ class AuthController extends Action {
 					}
 				} else {
 					// Login email
-					$retorno = $this->logarUsuarioEmail($dados['email'], $dados['senha']);
+					$retorno = $this->logarUsuarioEmail($dados['email'], $dados['senha'], $dados['manterConectado']);
 
 					if ($retorno['status'] == 'ERROR') {
 						return $this->retorno('ERROR', $retorno['name']);
@@ -411,7 +412,7 @@ class AuthController extends Action {
 		return false;
 	}
 
-	public function logarUsuarioEmail($email, $senha) {
+	public function logarUsuarioEmail($email, $senha, $manterConectado) {
 		$crypt = new Crypt();
 
 		$usuarios = Container::getModel('Usuarios');
@@ -435,7 +436,9 @@ class AuthController extends Action {
 						'id' => $id,
 						'authSocialId' => $user['authSocialId'],
 					];
-					setcookie("remember_user", json_encode($dados), time()+259200);
+					if ($manterConectado) {
+						setcookie("remember_user", json_encode($dados), time()+259200);
+					}
 					$_SESSION['user'] = $dados;
 					return $this->retorno('OK');
 				}
