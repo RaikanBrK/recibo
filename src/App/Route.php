@@ -83,6 +83,18 @@ class Route extends Bootstrap {
 			'action' => 'forgotPassword'
 		);
 
+		$routes['forgotPasswordCode'] = array(
+			'route' => '/forgot-password-code',
+			'controller' => 'AuthController',
+			'action' => 'forgotPasswordCode'
+		);
+
+		$routes['email_exist'] = array(
+			'route' => '/email_exist',
+			'controller' => 'AuthController',
+			'action' => 'email_exist'
+		);
+
 		$routes['logout'] = array(
 			'route' => '/logout',
 			'controller' => 'AuthController',

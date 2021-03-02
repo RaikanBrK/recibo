@@ -450,10 +450,76 @@ class AuthController extends Action {
 	}
 
 	public function forgotPassword() {
-		$this->view->css = ['forgotPassword'];
-		$this->view->js = ['forgotPassword'];
+		$this->view->css = ['auth', 'forgotPassword'];
+		$this->view->js = ['auth', 'forgotPassword'];
+
+		unset($_SESSION['forgotPasswordCode']);
 
 		$this->render('forgotPassword', 'layoutAuth');
+	}
+
+	public function forgotPasswordCode() {
+		$this->view->css = ['auth', 'forgotPassword'];
+		$this->view->js = ['auth', 'forgotPasswordCode'];
+
+		if (isset($_POST['email'])) {
+			$_SESSION['forgotPasswordCode']['email'] = $_POST['email'];
+		}
+
+		if (isset($_POST['email']) || isset($_SESSION['forgotPasswordCode']['email'])) {
+			$this->view->email = $_POST['email'] ?? $_SESSION['forgotPasswordCode']['email'];
+
+			$valid = $this->tool_email_exist($this->view->email);
+
+			if ($valid['status'] == 'ERROR') {
+				$this->report->updateMsg('error_msg', $valid['msg']);
+				$this->report->alertReport('error_msg');
+			}
+			$this->render('forgotPasswordCode', 'layoutAuth');
+		} else {
+			$this->report->alertReport('forgot_password_code_invalid_dados');
+		}
+	}
+
+	public function tool_email_exist($email) {
+		if ($email) {
+			$usuarios = Container::getModel('Usuarios');
+			$usuarios->__set('email', $email);
+			$user = $usuarios->getUserEmail();
+
+			if ($user) {
+				if ($user['social'] == 'Email') {
+					$retorno = [
+						'status' => 'OK'
+					];
+				} else {
+					$retorno = [
+						'status' => 'ERROR',
+						'msg' => 'Este email está associado a uma conta social.'
+					];
+				}
+			} else {
+				$retorno = [
+					'status' => 'ERROR',
+					'msg' => 'Este email não existe.'
+				];
+			}
+		} else {
+			$retorno = [
+				'status' => 'ERROR',
+				'msg' => 'Tivemos problemas ao acessar o email fornecido.'
+			];
+		}
+		return $retorno;
+	}
+
+	public function email_exist($email = '') {
+		if ($email == '') {
+			$email = $_GET['email'] ?? false;
+		}
+		$retorno = $this->tool_email_exist($email);
+
+		echo json_encode($retorno);
 	}
 
 	public function logout() {

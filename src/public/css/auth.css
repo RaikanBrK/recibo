@@ -66,44 +66,62 @@
   font-family: "Lobster", cursive;
   text-align: center;
 }
-#auth #formAuth {
+#auth .auth-other {
+  display: block;
+  text-align: center;
+  margin-top: 2rem;
+}
+#auth .auth-other .other-link {
+  color: #ccc;
+}
+
+#formAuth,
+.formController {
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
   margin: 30px 0 20px;
 }
-#auth #formAuth .form-group .form-check label {
+#formAuth .form-group .form-check label,
+.formController .form-group .form-check label {
   font-size: 0.93rem;
 }
-#auth #formAuth .form-group .warning-icon-input {
+#formAuth .form-group .warning-icon-input,
+.formController .form-group .warning-icon-input {
   font-style: oblique;
 }
-#auth #formAuth .form-group .msg-is-invalid {
+#formAuth .form-group .msg-is-invalid,
+.formController .form-group .msg-is-invalid {
   display: none;
   font-size: 0.75rem;
   text-align: right;
   color: #6c757d;
 }
-#auth #formAuth .form-group .msg-is-invalid > p {
+#formAuth .form-group .msg-is-invalid > p,
+.formController .form-group .msg-is-invalid > p {
   margin: 0;
   padding: 0;
 }
-#auth #formAuth .form-group .msg-senha {
+#formAuth .form-group .msg-senha,
+.formController .form-group .msg-senha {
   display: block;
   text-align: right;
   margin-top: 0.3rem;
   font-size: 0.8rem;
   color: #4b10aca8;
 }
-#auth #formAuth .form-group .msg-senha > p {
+#formAuth .form-group .msg-senha > p,
+.formController .form-group .msg-senha > p {
   margin: 0;
   padding: 0;
 }
-#auth #formAuth .form-group .input-group {
+#formAuth .form-group .input-group,
+.formController .form-group .input-group {
   background: #ECF0F1;
 }
-#auth #formAuth .form-group .input-group .input-auth {
+#formAuth .form-group .input-group .input-auth,
+.formController .form-group .input-group .input-auth {
   background: #ECF0F1;
   font-size: 1rem;
   border: none;
@@ -112,24 +130,29 @@
   width: 100%;
   color: #AB5454;
 }
-#auth #formAuth .form-group .input-group .input-auth:focus {
+#formAuth .form-group .input-group .input-auth:focus,
+.formController .form-group .input-group .input-auth:focus {
   border: none;
   box-shadow: none;
   outline: none;
 }
-#auth #formAuth .form-group .input-group .input-group-icon {
+#formAuth .form-group .input-group .input-group-icon,
+.formController .form-group .input-group .input-group-icon {
   padding: 10px;
   margin: 0;
 }
-#auth #formAuth .form-group .input-group .input-group-icon .input-icon {
+#formAuth .form-group .input-group .input-group-icon .input-icon,
+.formController .form-group .input-group .input-group-icon .input-icon {
   font-size: 1.2rem;
   margin: 0 3px;
   color: #AB5454;
 }
-#auth #formAuth .form-group .focusAuthInput {
+#formAuth .form-group .focusAuthInput,
+.formController .form-group .focusAuthInput {
   box-shadow: 1px 1px 3px #857f7f, -1px -1px 3px #857f7f;
 }
-#auth #formAuth #btn-auth {
+#formAuth #btn-auth,
+.formController #btn-auth {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -141,16 +164,9 @@
   margin-top: 23px;
   height: 38px;
 }
-#auth #formAuth #btn-auth:hover {
+#formAuth #btn-auth:hover,
+.formController #btn-auth:hover {
   color: white;
-}
-#auth .auth-other {
-  display: block;
-  text-align: center;
-  margin-top: 2rem;
-}
-#auth .auth-other .other-link {
-  color: #ccc;
 }
 
 @media (max-width: 575.98px) {

@@ -186,6 +186,21 @@ class Reportando {
 			'msg' => '',
 			'modelo' => false,
 		]);
+
+		// Forgot Password
+		$this->setMsg([
+			'name' => 'forgot_password_code_invalid_dados',
+			'status' => 'ERROR',
+			'redirection' => '/forgot-password',
+			'msg' => 'Não foi possível acessar o seu email',
+		]);
+
+		$this->setMsg([
+			'name' => 'error_msg',
+			'status' => 'ERROR',
+			'redirection' => '/forgot-password',
+			'msg' => '',
+		]);
 	}
 
 	public function modelo1(Array $array) {

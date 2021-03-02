@@ -1,4 +1,4 @@
-<?php 
+<?php
 namespace App\Models;
 use MF\Model\Model;
 
@@ -64,6 +64,23 @@ class Usuarios extends Model {
 	public function getSenhaUserEmail() {
 		$query = '
 			SELECT id, authSocialId, senha FROM usuarios WHERE email = :email
+		';
+
+		$stmt = $this->db->prepare($query);
+		$stmt->bindValue(':email', $this->__get('email'));
+		$stmt->execute();
+		return $stmt->fetch(\PDO::FETCH_ASSOC);
+	}
+
+	public function getUserEmail() {
+		$query = '
+			SELECT
+				us.id, us.authSocialId, us.nome, us.email, auth.social, us.img, us.senha
+			FROM
+				usuarios as us
+				LEFT JOIN auth_social as auth ON(us.authSocialId = auth.id)
+			WHERE
+				us.email = :email
 		';
 
 		$stmt = $this->db->prepare($query);
