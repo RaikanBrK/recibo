@@ -31,12 +31,17 @@ class Report extends Reportando {
 			$msg = $this->__get('msg')[$name];
 			$msg['valid'] = $msg['status'] != 'ERROR';
 
-			$_SESSION['report'][$name] = $msg;
-			$_SESSION['report'][$name]['dados'] = $dados;
+			if (isset($msg['ajax'])) {
+				echo json_encode($msg);
+				die();
+			} else {
+				$_SESSION['report'][$name] = $msg;
+				$_SESSION['report'][$name]['dados'] = $dados;
 
-			if ($msg['redirection'] != false) {
-				header('location: '.$msg['redirection']);
-				exit();
+				if ($msg['redirection'] != false) {
+					header('location: '.$msg['redirection']);
+					exit();
+				}
 			}
 		}
 	}

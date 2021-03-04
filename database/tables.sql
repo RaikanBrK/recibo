@@ -24,3 +24,29 @@ CREATE TABLE IF NOT EXISTS `receipt`.`usuarios` (
 
 	PRIMARY KEY(`id`)
 ) ENGINE = InnoDB;
+
+CREATE TABLE IF NOT EXISTS `receipt`.`codigos_password_status` (
+	id INT NOT NULL AUTO_INCREMENT,
+	status CHAR(30) NOT NULL,
+
+	PRIMARY KEY(`id`)
+) ENGINE = InnoDB;
+
+REPLACE INTO `receipt`.`codigos_password_status` (id, status) VALUES (1, 'Pendente'),
+(3, 'Expirado');
+
+CREATE TABLE IF NOT EXISTS `receipt`.`codigos_password` (
+	id INT NOT NULL AUTO_INCREMENT,
+	ip VARCHAR(70) NOT NULL,
+	codigo CHAR(6) NOT NULL UNIQUE,
+
+	status_id INT NOT NULL DEFAULT 1,
+	FOREIGN KEY(status_id) REFERENCES codigos_password_status(id),
+
+	usuario_id INT NOT NULL,
+	FOREIGN KEY(usuario_id) REFERENCES usuarios(id),
+
+	data_create DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+
+	PRIMARY KEY(`id`)
+) ENGINE = InnoDB;

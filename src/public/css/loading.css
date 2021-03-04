@@ -1,0 +1,40 @@
+.loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.loading .loading-spinner {
+  font-size: 3rem;
+  animation: animation-loading-spinner 0.9s infinite linear forwards;
+  color: #230957;
+}
+.loading .spinner-sm {
+  font-size: 1.2rem;
+}
+.loading .spinner-md {
+  font-size: 1.8rem;
+}
+.loading .spinner-lg {
+  font-size: 2.4rem;
+}
+.loading .spinner-xl {
+  font-size: 3.5rem;
+}
+@keyframes animation-loading-spinner {
+  0% {
+    -webkit-transform: rotate(0deg);
+    -moz-transform: rotate(0deg);
+    -ms-transform: rotate(0deg);
+    -o-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+    -moz-transform: rotate(360deg);
+    -ms-transform: rotate(360deg);
+    -o-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+
+/*# sourceMappingURL=loading.css.map */

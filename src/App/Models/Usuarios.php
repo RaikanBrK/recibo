@@ -89,6 +89,22 @@ class Usuarios extends Model {
 		return $stmt->fetch(\PDO::FETCH_ASSOC);
 	}
 
+	public function getIdAndNameWithEmail() {
+		$query = '
+			SELECT
+				id, nome
+			FROM
+				usuarios
+			WHERE
+				email = :email
+		';
+
+		$stmt = $this->db->prepare($query);
+		$stmt->bindValue(':email', $this->__get('email'));
+		$stmt->execute();
+		return $stmt->fetch(\PDO::FETCH_ASSOC);
+	}
+
 	public function verificarAuthSocialId() {
 		$query = '
 			SELECT authSocialId FROM usuarios WHERE email = :email

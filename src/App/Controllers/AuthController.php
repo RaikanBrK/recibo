@@ -5,6 +5,7 @@ use MF\Model\Container;
 use App\Tools\RegrasCadastroUsuario;
 use App\Tools\SendMail;
 use App\Tools\Crypt;
+use App\Tools\getIp;
 use League\OAuth2\Client\Provider\Google;
 use League\OAuth2\Client\Provider\Facebook;
 
@@ -479,6 +480,140 @@ class AuthController extends Action {
 		} else {
 			$this->report->alertReport('forgot_password_code_invalid_dados');
 		}
+	}
+
+	public function sendCodeMail() {
+		# Pegar ip;
+		$ip = getIp::getIpUser();
+
+		# Verificar quantos código foi requisitado pelo ip no período de 2 horas;
+
+		// 2 horas antes;
+		$data = Date('Y-m-d H:i:s', strtotime('-2 hours'));
+
+		// Pegando id do usuário com base no email;
+		$usuarios = Container::getModel('Usuarios');
+		$usuarios->__set('email', $_SESSION['forgotPasswordCode']['email']);
+		$user = $usuarios->getIdAndNameWithEmail();
+
+		$usuarios->__set('id', $user['id']);
+
+		$codePassword = Container::getModel('CodePassword');
+		$codePassword->__set('usuario_id', $usuarios->__get('id'));
+		$codePassword->__set('ip', $ip);
+		$codePassword->__set('data_create', $data);
+		$validQtdCode = $codePassword->verificarQtdCode();
+		$qtdCode = $validQtdCode['qtd'] ?? 0;
+
+		if ($qtdCode < 3) {
+			// Verificando horário do último código gerado;
+			$ultCode = $codePassword->ultimoCodeUser();
+
+			if (isset($ultCode['data_create'])) {
+				$time = strtotime($ultCode['data_create']);
+
+				$diferenciaTime = abs(time() - $time);
+				$diferenciaMinutos = floor($diferenciaTime / 60);
+
+				if ($diferenciaMinutos < 5) {
+					$this->report->updateMsg('ajax-error', 'Espere os 5 minutos para pedir outro código de recuperação da sua conta.');
+					$this->report->alertReport('ajax-error');
+				}
+			}
+
+			# Gerar código;
+			$code = $codePassword->gerarCode();
+
+			# Setando nome do usuário;
+			$usuarios->__set('nome', $user['nome']);
+
+			# Enviar o código por email;
+			$mail = new SendMail();
+			$mail->__set('nome', $usuarios->__get('nome'));
+			$mail->__set('email', $usuarios->__get('email'));
+			$mail->modelForgotPassword([
+				'code' => $code,
+			]);
+			$mail->send();
+
+			# Inserir na tabela o código e o ip associado ao código da conta (email);
+			$codePassword->__set('codigo', $code);
+			$codePassword->criarCodigoPassword();
+
+			$_SESSION['forgotPasswordCode']['codePassword'] = true;
+			echo json_encode([
+				'status' => 'OK',
+			]);
+		} else {
+			$this->report->updateMsg('ajax-error', 'Você ultrapasso o limite de três códigos no período de duas horas.');
+			$this->report->alertReport('ajax-error');
+		}
+	}
+
+	public function captcha($array) {
+		if (isset($array['g-recaptcha-response'])) {
+			$captcha = $array['g-recaptcha-response'];
+		}
+
+		if (!isset($captcha) && empty($captcha)) {
+			return false;
+		}
+
+		$secretKey = RECAPTCHA_GOOGLE['secretKey'];
+
+		$url = 'https://www.google.com/recaptcha/api/siteverify?secret='.urlencode($secretKey).'&response='.urlencode($captcha);
+
+		$response = file_get_contents($url);
+		$responseKeys = json_decode($response);
+
+		if (isset($responseKeys->success) && !empty($responseKeys->success)) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	public function validCode() {
+		$validCaptcha = $this->captcha($_POST);
+
+		if (isset($_POST['code']) && strlen($_POST['code']) == 6) {
+			if ($validCaptcha) {
+				// Validar código;
+				$ip = getIp::getIpUser();
+				$email = $_SESSION['forgotPasswordCode']['email'];
+
+				$usuarios = Container::getModel('Usuarios');
+				$usuarios->__set('email', $email);
+				$user = $usuarios->getIdAndNameWithEmail();
+
+				$usuario_id = $user['id'];
+				$code = $_POST['code'];
+
+				$codePassword = Container::getModel('CodePassword');
+				$codePassword->__set('ip', $ip);
+				$codePassword->__set('usuario_id', $usuario_id);
+				$codePassword->__set('codigo', $code);
+
+				$retorno = $codePassword->verificarCode();
+
+				if ($retorno) {
+					$id = $retorno['id'];
+					$dataDiff = $retorno['data_diff_minutos'];
+
+					if ($dataDiff < 10) {
+						// Certo!
+						$codePassword->__set('id', $id);
+						$codePassword->excluirCode();
+
+						$this->report->alertReport('code_success');
+					}
+					$this->report->alertReport('error_code_time_invalid');
+				}
+				$this->report->alertReport('error_code_invalid');
+			}
+			$this->report->alertReport('error_captcha_google');
+		}
+		$this->report->alertReport('error_dados_code_fail');
 	}
 
 	public function tool_email_exist($email) {

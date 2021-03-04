@@ -34,6 +34,8 @@ class SendMail {
 		    $mail->Password   = MAILER['password'];
 		    $mail->SMTPSecure = MAILER['smtpSecure'];
 		    $mail->Port       = MAILER['port'];
+		    $mail->CharSet = 'UTF-8';
+		    $mail->Encoding = 'base64';
 
 		    //Recipients
 		    $nameMailer = $this->__get('nameMailer') ?? '';
@@ -65,5 +67,14 @@ class SendMail {
 
 	public function altBodyDefault() {
 		return 'This is the body in plain text for non-HTML mail clients';
+	}
+
+	public function modelForgotPassword($dados) {
+		$this->__set('subject', "Código de recuperação de conta");
+		$this->__set('body', "
+			<p>Olá ".$this->__get('nome')."!</p>
+			<p>Recebemos um pedido de recuperação da conta com o email <i>".$this->__get('email')."</i></p>
+			<p>Seu código para recuperar a sua conta é ".$dados['code']."</p>
+		");
 	}
 }

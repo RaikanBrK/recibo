@@ -201,6 +201,50 @@ class Reportando {
 			'redirection' => '/forgot-password',
 			'msg' => '',
 		]);
+
+		$this->setMsg([
+			'name' => 'error_captcha_google',
+			'status' => 'ERROR',
+			'redirection' => '/forgot-password-code',
+			'msg' => 'Falha na validação do recaptcha',
+		]);
+
+		$this->setMsg([
+			'name' => 'error_dados_code_fail',
+			'status' => 'ERROR',
+			'redirection' => '/forgot-password-code',
+			'msg' => 'Falha ao recuperar o código.',
+		]);
+
+		$this->setMsg([
+			'name' => 'error_code_invalid',
+			'status' => 'ERROR',
+			'redirection' => '/forgot-password-code',
+			'msg' => 'Código inválido',
+		]);
+
+		$this->setMsg([
+			'name' => 'error_code_time_invalid',
+			'status' => 'ERROR',
+			'redirection' => '/forgot-password-code',
+			'msg' => 'Esse código expirou. Período de 10 minutos ultrapassado.',
+		]);
+
+		$this->setMsg([
+			'name' => 'code_success',
+			'status' => 'OK',
+			'redirection' => '/forgot-password-code',
+			'msg' => 'Verificação bem-sucedida. Agora você pode alterar sua senha',
+		]);
+
+		// Ajax Forgot Password Code
+		$this->setMsg([
+			'name' => 'ajax-error',
+			'status' => 'ERROR',
+			'redirection' => false,
+			'ajax' => true,
+			'msg' => '',
+		]);
 	}
 
 	public function modelo1(Array $array) {
