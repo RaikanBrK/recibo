@@ -63,6 +63,7 @@ class CodePassword extends Model {
 		$stmt->bindValue(':codigo', $this->__get('codigo'));
 		$stmt->bindValue(':usuario_id', $this->__get('usuario_id'));
 		$stmt->execute();
+		return $this->db->lastInsertId();
 	}
 
 	public function ultimoCodeUser() {

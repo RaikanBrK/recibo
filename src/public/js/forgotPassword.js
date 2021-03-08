@@ -17,8 +17,8 @@ $('#email').blur(e => {
 					controller.removeMensagemInput($('#email'));
 				}
 			},
-			error: $error => {
-				console.log($error);
+			error: error => {
+				console.log(error);
 			}
 		});
 	}

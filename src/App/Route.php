@@ -89,10 +89,10 @@ class Route extends Bootstrap {
 			'action' => 'forgotPasswordCode'
 		);
 
-		$routes['sendCodeMail'] = array(
-			'route' => '/forgot-password-code/sendCodeMail',
+		$routes['email_exist'] = array(
+			'route' => '/email_exist',
 			'controller' => 'AuthController',
-			'action' => 'sendCodeMail'
+			'action' => 'email_exist'
 		);
 
 		$routes['sendCodeMail'] = array(

@@ -454,7 +454,9 @@ class AuthController extends Action {
 		$this->view->css = ['auth', 'forgotPassword'];
 		$this->view->js = ['auth', 'forgotPassword'];
 
-		unset($_SESSION['forgotPasswordCode']);
+		echo '<pre>';
+			print_r($_SESSION);
+		echo '</pre>';
 
 		$this->render('forgotPassword', 'layoutAuth');
 	}
@@ -463,7 +465,9 @@ class AuthController extends Action {
 		$this->view->css = ['auth', 'forgotPassword'];
 		$this->view->js = ['auth', 'forgotPasswordCode'];
 
+		// Verificando se o foi enviado o email;
 		if (isset($_POST['email'])) {
+			// Amazenando email;
 			$_SESSION['forgotPasswordCode']['email'] = $_POST['email'];
 		}
 
@@ -472,10 +476,49 @@ class AuthController extends Action {
 
 			$valid = $this->tool_email_exist($this->view->email);
 
+			// Verificando se o email existe;
 			if ($valid['status'] == 'ERROR') {
 				$this->report->updateMsg('error_msg', $valid['msg']);
 				$this->report->alertReport('error_msg');
 			}
+
+			$validCodePassword = isset($_SESSION['forgotPasswordCode']['codePassword']);
+			
+			if ($validCodePassword) {
+				$usuarios = Container::getModel('Usuarios');
+				$usuarios->__set('email', $_SESSION['forgotPasswordCode']['email']);
+				$user = $usuarios->getIdAndNameWithEmail();
+
+				$codePassword = Container::getModel('CodePassword');
+				$codePassword->__set('ip', getIp::getIpUser());
+				$codePassword->__set('usuario_id', $user['id']);
+
+				$session = $_SESSION['forgotPasswordCode']['codePassword'];
+				$ultCode = $codePassword->ultimoCodeUser();
+				if ($session['id_user'] == $codePassword->__get('usuario_id') && $ultCode) {
+					$validCodePassword = true;
+				} else {
+					$validCodePassword = false;
+				}
+
+				if ($validCodePassword) {
+
+					$cooldown = 5 * 60;
+					$expired = 10 * 60;
+					$time = (time() - strtotime($ultCode['data_create']));
+
+					$data = Date('Y-m-d H:i:s', strtotime('-2 hours'));
+
+					$codePassword->__set('data_create', $data);
+					$validQtdCode = $codePassword->verificarQtdCode();
+					$qtdCode = $validQtdCode['qtd'] ?? 0;
+
+					$this->view->diff =  $qtdCode < 3 ? $cooldown - $time : 'limite';
+					$this->view->codeExpiredSeg = $expired - $time;	
+				}
+			}
+			$this->view->codePassword = $validCodePassword;
+
 			$this->render('forgotPasswordCode', 'layoutAuth');
 		} else {
 			$this->report->alertReport('forgot_password_code_invalid_dados');
@@ -517,7 +560,9 @@ class AuthController extends Action {
 
 				if ($diferenciaMinutos < 5) {
 					$this->report->updateMsg('ajax-error', 'Espere os 5 minutos para pedir outro código de recuperação da sua conta.');
-					$this->report->alertReport('ajax-error');
+					$this->report->alertReport('ajax-error', ['msgAdd' => '
+						<a href="/forgot-password-code" title="Inserir código" class="btn btn-outline-primary back-error">Voltar para inserir o código</a>
+					']);
 				}
 			}
 
@@ -538,15 +583,20 @@ class AuthController extends Action {
 
 			# Inserir na tabela o código e o ip associado ao código da conta (email);
 			$codePassword->__set('codigo', $code);
-			$codePassword->criarCodigoPassword();
+			$idCode = $codePassword->criarCodigoPassword();
 
-			$_SESSION['forgotPasswordCode']['codePassword'] = true;
+			$_SESSION['forgotPasswordCode']['codePassword'] = ['id' => $idCode, 'id_user' => $codePassword->__get('usuario_id')];
 			echo json_encode([
 				'status' => 'OK',
 			]);
 		} else {
-			$this->report->updateMsg('ajax-error', 'Você ultrapasso o limite de três códigos no período de duas horas.');
-			$this->report->alertReport('ajax-error');
+			$this->report->updateMsg('ajax-error', 'Você ultrapasso o limite de 3 códigos no período de 2 horas.');
+			$this->report->alertReport('ajax-error', ['msgAdd' => '
+				<div class="d-flex justify-content-between flex-column flex-md-row" style="gap: 20px">
+					<a href="/login" title="Voltar para o login" class="btn btn-outline-primary back-error">Voltar para o login</a>
+					<a href="/forgot-password-code" title="Inserir código" class="btn btn-dark back-error">Voltar para inserir o código</a>
+				</div>				
+			']);
 		}
 	}
 

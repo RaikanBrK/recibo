@@ -32,6 +32,7 @@ class Report extends Reportando {
 			$msg['valid'] = $msg['status'] != 'ERROR';
 
 			if (isset($msg['ajax'])) {
+				$msg['dados'] = $dados;
 				echo json_encode($msg);
 				die();
 			} else {

@@ -33,7 +33,6 @@ class Controller {
 		let formGroup = input.closest('.form-group');
 		let msg = formGroup.find('.msg-is-invalid');
 
-		console.log(msg);
 		if (msg.length == 0) {
 			formGroup.append(`
 				<div class="msg-is-invalid">
